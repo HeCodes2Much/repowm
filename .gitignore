@@ -1,0 +1,8 @@
+config.h
+drw.o
+util.o
+instamenu
+instamenu.o
+itest
+itest.o
+tags
