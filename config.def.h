@@ -4,7 +4,7 @@
 /* appearance */
 static const unsigned int borderpx = 3;		  /* border pixel of windows */
 static const unsigned int snap = 32;		  /* snap pixel */
-static const unsigned int startmenusize = 30;		  /* snap pixel */
+static const unsigned int startmenusize = 24;		  /* snap pixel */
 static const unsigned int systraypinning = 0; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 0; /* systray spacing */
 static const int systraypinningfailfirst = 1; /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -72,12 +72,12 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
 /* ffox, programming1, term, music, steam, folder, play icon, document, message  */
 static const char *tagsalt[] = { "", "{}", "$", "", "", "", "", "", "" };
 
-static const char *upvol[] = {"/usr/share/instantassist/utils/p.sh", "+", NULL};
-static const char *downvol[] = {"/usr/share/instantassist/utils/p.sh", "-", NULL};
-static const char *mutevol[] = {"/usr/share/instantassist/utils/p.sh", "m", NULL};
+static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
+static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
+static const char *mutevol[] = {"amixer", "sset", "Master", "toggle", NULL};
 
-static const char *upbright[] = {"/usr/share/instantassist/utils/b.sh", "+", NULL};
-static const char *downbright[] = {"/usr/share/instantassist/utils/b.sh", "-", NULL};
+static const char *upbright[] = {"xbacklight", "+10", NULL};
+static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -138,7 +138,7 @@ static const char *editorcmd[] = { ".config/instantos/default/editor", NULL };
 static const char *filemanagercmd[] = {".config/instantos/default/filemanager", NULL};
 static const char *systemmonitorcmd[] = {".config/instantos/default/systemmonitor", NULL};
 
-static const char *instasettings[] = { "instantsettings", NULL};
+static const char *instasettings[] = { "instamenue_settings", NULL};
 
 static const char *playernext[] = { "playerctl", "next", NULL};
 static const char *playerprevious[] = { "playerctl", "previous", NULL};
@@ -193,18 +193,21 @@ static Xcommand commands[] = {
 	{ "layout",                 commandlayout,                { .ui = 0 }, 1 },
 	{ "prefix",                 commandprefix,                { .ui = 1 }, 1 },
 	{ "alttag",                 togglealttag,                 { .ui = 0 }, 1 },
-	{ "hidetags",               toggleshowtags,               { .ui = 0 }, 1 },
+	{ "hidetags",               toggleshowtags,               { .ui = 2 }, 1 },
 	{ "specialnext",            setspecialnext,               { .ui = 0 }, 3 },
 };
 
 static Key dkeys[] = {
 	/* modifier  key        function     argument */
+	{0,          XK_space,  spawn,       {.v = instamenucmd } },
 	{0,          XK_e,      spawn,       {.v = editorcmd } },
 	{0,          XK_n,      spawn,       {.v = filemanagercmd } },
 	{0,          XK_f,      spawn,       {.v = browsercmd} },
 	{0,          XK_Return, spawn,       {.v = terminalcmd} },
-	{0,          XK_plus,   spawn,       {.v = upvol} },
-	{0,          XK_minus,  spawn,       {.v = downvol} },
+	{0,          XK_plus,	spawn,       {.v = upvol} },
+	{0,          XK_minus,	spawn,       {.v = downvol} },
+	{0,          XK_u,	spawn,       {.v = upbright} },
+	{0,          XK_d,	spawn,       {.v = downbright} },
 	{0,          XK_y,      spawn,       {.v = smartcmd} },
 
 	{0,          XK_h,      viewtoleft,  {0}},
@@ -279,7 +282,7 @@ static Key keys[] = {
 	{MODKEY,                                XK_Tab,             lastview,             {0}},
 	{MODKEY|ShiftMask,                      XK_Tab,             focuslastclient,      {0}},
 	{MODKEY|Mod1Mask,                       XK_Tab,             followview,           {0}},
-	{Mod1Mask,                              XK_F4,              killclient,           {0}},
+	{MODKEY|ShiftMask,                      XK_c,								killclient,           {0}},
 	{MODKEY,                                XK_F2,              toggleprefix,         {0}},
 	{MODKEY,                                XK_t,               setlayout,            {.v = &layouts[0]}},
 	{MODKEY,                                XK_f,               setlayout,            {.v = &layouts[2]}},
@@ -407,3 +410,4 @@ static Button buttons[] = {
 	{ ClkStartMenu,   ShiftMask,          Button1, toggleprefix,      {0}},
 	{ ClkStartMenu,   0,                  Button1, spawn,             {.v = instamenucmd}},
 };
+
