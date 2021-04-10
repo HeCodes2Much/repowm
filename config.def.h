@@ -401,4 +401,5 @@ static Button buttons[] = {
 	{ ClkTagBar,      MODKEY,             Button3, toggletag,         {0} },
 	{ ClkSideBar,     0,                  Button1, gesturemouse,      {0} },
 	{ ClkStartMenu,   ShiftMask,          Button1, toggleprefix,      {0}},
+	{ ClkStartMenu,   0,                  Button1, spawn,             {.v = instamenucmd}},
 };
