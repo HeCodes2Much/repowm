@@ -282,7 +282,7 @@ static Key keys[] = {
 	{MODKEY,                                XK_Tab,             lastview,             {0}},
 	{MODKEY|ShiftMask,                      XK_Tab,             focuslastclient,      {0}},
 	{MODKEY|Mod1Mask,                       XK_Tab,             followview,           {0}},
-	{MODKEY|ShiftMask,                      XK_c,								killclient,           {0}},
+	{MODKEY|ShiftMask,                      XK_c,		    killclient,           {0}},
 	{MODKEY,                                XK_F2,              toggleprefix,         {0}},
 	{MODKEY,                                XK_t,               setlayout,            {.v = &layouts[0]}},
 	{MODKEY,                                XK_f,               setlayout,            {.v = &layouts[2]}},
@@ -302,8 +302,8 @@ static Key keys[] = {
 	{MODKEY|ControlMask,                    XK_Up,              directionfocus,            {.ui = 0 }},
 	{MODKEY|ControlMask,                    XK_Down,            directionfocus,            {.ui = 2 }},
 
-	{MODKEY|ShiftMask|ControlMask,                    XK_Right,           shiftview,            {.i = +1 }},
-	{MODKEY|ShiftMask|ControlMask,                    XK_Left,           shiftview,            {.i = -1 }},
+	{MODKEY|ShiftMask|ControlMask,          XK_Right,           shiftview,            {.i = +1 }},
+	{MODKEY|ShiftMask|ControlMask,          XK_Left,           shiftview,            {.i = -1 }},
 
 	{MODKEY|Mod1Mask,                       XK_Left,            moveleft,             {0}},
 	{MODKEY|Mod1Mask,                       XK_Right,           moveright,            {0}},
@@ -340,7 +340,7 @@ static Key keys[] = {
 	TAGKEYS(XK_7, 6)
 	TAGKEYS(XK_8, 7)
 	TAGKEYS(XK_9, 8)
-    {MODKEY|ShiftMask|ControlMask, XK_q,                     quit,    {0}},
+    	{MODKEY|ShiftMask|ControlMask, XK_q,                     quit,    {0}},
 	{0,                            XF86XK_MonBrightnessUp,   spawn,   {.v = upbright}},
 	{0,                            XF86XK_MonBrightnessDown, spawn,   {.v = downbright}},
 	{0,                            XF86XK_AudioLowerVolume,  spawn,   {.v = downvol}},
