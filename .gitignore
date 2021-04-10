@@ -3,4 +3,5 @@ drw.o
 util.o
 instawm
 instawm.o
+layout.o
 tags
