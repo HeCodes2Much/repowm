@@ -145,7 +145,7 @@ static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
  /* Do not remove */
-static const char *instapowermenucmd[] = {"instamenue_powermenu", NULL};
+static const char *powermenucmd[] = {"instamenue_powermenu", NULL};
 
 #include "push.c"
 
@@ -388,7 +388,7 @@ static Button buttons[] = {
 	{ ClkRootWin,     0,                  Button3, spawn,             {.v = smartcmd } },
 	{ ClkRootWin,     0,                  Button5, showoverlay,       {0} },
 	{ ClkRootWin,     0,                  Button4, hideoverlay,       {0} },
-	{ ClkShutDown,    0,                  Button1, spawn,             {.v = instapowermenucmd } },
+	{ ClkShutDown,    0,                  Button1, spawn,             {.v = powermenucmd } },
 	{ ClkClientWin,   MODKEY,             Button1, movemouse,         {0} },
 	{ ClkClientWin,   MODKEY,             Button2, togglefloating,    {0} },
 	{ ClkClientWin,   MODKEY,             Button3, resizemouse,       {0} },
