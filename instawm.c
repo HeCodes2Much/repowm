@@ -5412,7 +5412,7 @@ void
 updatestatus(void)
 {
 	if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-		strcpy(stext, "instawm-"VERSION);
+		strcpy(stext, VERSION);
 	drawbar(selmon);
 	updatesystray();
 }
