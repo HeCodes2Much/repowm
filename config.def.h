@@ -13,11 +13,11 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static const int showsystray        = 1;     	/* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const int useinstabar 		= 1;  		/* 0 means don't use instabar script */
-static const int user_bh            = 28;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int useinstabar 		= 0;  		/* 0 means don't use instabar script */
+static const int user_bh            = 28;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[] = {
     "Misc Termsyn:size=12",
     "Siji:size=14",
@@ -206,16 +206,16 @@ static Key dkeys[] = {
 	{MODKEY,          	XK_d,			spawn,       {.v = downbright} },
 	{MODKEY,          	XK_y,      		spawn,       {.v = smartcmd} },
 
-	{MODKEY,          	XK_1,      		view,        {.ui = 1 << 0}},
-	{MODKEY,          	XK_2,     		view,        {.ui = 1 << 1}},
-	{MODKEY,          	XK_3,      		view,        {.ui = 1 << 2}},
-	{MODKEY,          	XK_4,      		view,        {.ui = 1 << 3}},
-	{MODKEY,          	XK_5,      		view,        {.ui = 1 << 4}},
-	{MODKEY,          	XK_6,      		view,        {.ui = 1 << 5}},
-	{MODKEY,          	XK_7,      		view,        {.ui = 1 << 6}},
-	{MODKEY,          	XK_8,      		view,        {.ui = 1 << 7}},
-	{MODKEY,          	XK_9,      		view,        {.ui = 1 << 8}},
-	{MODKEY,          	XK_0,      		view,        {.ui = 1 << 9}},
+	{Mod1Mask,          	XK_1,      		view,        {.ui = 1 << 0}},
+	{Mod1Mask,          	XK_2,     		view,        {.ui = 1 << 1}},
+	{Mod1Mask,          	XK_3,      		view,        {.ui = 1 << 2}},
+	{Mod1Mask,          	XK_4,      		view,        {.ui = 1 << 3}},
+	{Mod1Mask,          	XK_5,      		view,        {.ui = 1 << 4}},
+	{Mod1Mask,          	XK_6,      		view,        {.ui = 1 << 5}},
+	{Mod1Mask,          	XK_7,      		view,        {.ui = 1 << 6}},
+	{Mod1Mask,          	XK_8,      		view,        {.ui = 1 << 7}},
+	{Mod1Mask,          	XK_9,      		view,        {.ui = 1 << 8}},
+	{Mod1Mask,          	XK_0,      		view,        {.ui = 1 << 9}},
 };
 
 #include "movestack.c"

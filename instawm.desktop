@@ -3,5 +3,5 @@ Encoding=UTF-8
 Name=instawm
 Comment=insta window manager
 Icon=instawm
-Exec=instawm
+Exec=startinstawm
 Type=XSession
