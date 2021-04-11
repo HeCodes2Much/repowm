@@ -237,7 +237,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_a,      		togglegaps,     {0} },
 	{ MODKEY|ShiftMask,				XK_a,      		defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    		view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      		killclient,     {0} },
+	{ MODKEY,             			XK_q,      		killclient,     {0} },
 	{ MODKEY,						XK_t,			setlayout,		{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,				XK_t,			setlayout,		{.v = &layouts[1]} }, /* bstack */
 	{ MODKEY,						XK_y,			setlayout,		{.v = &layouts[2]} }, /* spiral */
