@@ -34,9 +34,45 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	/* class                        instance  		title  			tags mask  		isfloating  	monitor */
+	{ "Pavucontrol",                NULL,     		NULL,  			0,         		1,          	-1},
+	{ "Onboard",                    NULL,     		NULL,  			0,         		1,          	-1},
+	{ "Pamac-installer",            NULL,     		NULL,  			0,         		1,          	-1},
+	{ "floatmenu",		            NULL,     		NULL,  			0,         		1,          	-1},
+	{ "Firefox",					NULL,     		NULL,  			1,         		0,          	-1},
+	{ "Chromium-browser",			NULL,	  		NULL,  			1,         		0,				-1},
+	{ "Brave-browser",				NULL,	  		NULL,  			1,         		0,				-1},
+	{ "dissenter-browser",			NULL,	  		NULL,  			1,         		0,				-1},
+	{ "Waterfox",					NULL,     		NULL,	 		1,         		0,				-1},
+	//
+	{ "Dragon",						NULL,     		NULL,  			0,         		1,        		-1},
+	{ "St",							NULL,     		NULL,  			  0,      		0,        		-1},
+	{ "Pcmanfm",					NULL,     		NULL,  			1 << 2,    		0,        		-1},
+	// Development
+	{ "Subl",						NULL,     		NULL, 			1 << 3,    		0,        		-1},
+	// Messaging
+	{ "walc",						NULL,     		NULL, 			1 << 4,    		0, 				-1},
+	{ "TelegramDesktop",			NULL,			NULL, 			1 << 4,    		0, 				-1},
+	{ "Element",					NULL,     		NULL, 			1 << 4,    		0, 				-1},
+	{ "discord",					NULL,     		NULL, 			1 << 4,    		0, 				-1},
+	{ "mirage",						NULL,     		NULL, 			1 << 4,    		0, 				-1},
+	{ "Spectral",					NULL,     		NULL, 			1 << 4,    		0, 				-1},
+	// Game
+	{ "Lutris",						NULL,     		NULL, 			1 << 5,    		0, 				-1},
+	// Utils
+	{ "stacer",						NULL,     		NULL, 			1 << 6,    		0, 				-1},
+	{ "St",							NULL,   		"htop", 		1 << 6,    		0, 				-1},
+	{ "St",							NULL, 			"AlsaMixer",	1 << 6,	 		0, 				-1},
+	{ "St",							NULL,   		"nmTUI",		1 << 6,    		0, 				-1},
+	// Edit
+	{ NULL,							"libreoffice",	NULL, 			1 << 7,    		0, 				-1}, // LibreOffice
+	{ "kdenlive",					"kdenlive",		NULL, 			1 << 7,    		0, 				-1},
+	{ "Gimp",						NULL,			NULL, 			1 << 8,    		1, 				-1},
+	{ "Ld-linux-x86-64.so.2",		NULL,			NULL, 			1 << 8,    		1, 				-1}, // Inkscape
+	//
+	{ "trayer",						NULL,			NULL, 			0,         		1, 				-1},
+	{ NULL,							NULL,     		"Event Tester", 0,  			1,      		-1}, /* xev */
+
 };
 
 /* layout(s) */
