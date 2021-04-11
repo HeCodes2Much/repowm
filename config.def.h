@@ -7,7 +7,8 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int useinstabar 		= 1;  		/* 0 means don't use instabar script */
-static const int user_bh            = 28;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int showsystray 		= 1;		/* 0 means no systray */
+static const int user_bh            = 28;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[] = {
     "Misc Termsyn:size=12",
     "Siji:size=14",
@@ -54,14 +55,17 @@ static char col_hover[] = "#596377";/*focused instamenu or topbar d */
 static char col_hover_shadow[] = "#475166";/*focused instamenu or topbar d */
 
 static const char *colors[][4] = {
-	/*                    		fg              bg              		border 	           		float*/
-	[SchemeNorm]      	= { 	col_white,      col_background, 		col_pastel_blue,    	col_green },
-	[SchemeSel]       	= { 	col_white,      col_blue,       		col_light_blue,     	col_green },
-	[SchemeStatus]  	= { 	col_gray3, 		col_light_blue,  		col_pastel_blue,    	col_green }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagsSel]  	= { 	col_gray4, 		col_blue,  				col_pastel_blue,    	col_green }, // Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm]  	= { 	col_gray3, 		col_light_blue,  		col_pastel_blue,    	col_green }, // Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  	= { 	col_gray4, 		col_blue,  				col_pastel_blue,    	col_green }, // infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm]  	= { 	col_gray3, 		col_light_blue,  		col_pastel_blue,    	col_green }, // infobar middle  unselected {text,background,not used but cannot be empty}
+	/*                    		fg              		bg              		border 	           		float*/
+	[SchemeNorm]      = { col_white,       col_background, col_pastel_blue,    col_green },
+	[SchemeSel]       = { col_white,       col_blue,       col_light_blue,     col_green },
+	[SchemeHid]       = { col_pastel_blue, col_background, col_pastel_blue,    col_green },
+	[SchemeTags]      = { col_white,       col_blue,       col_light_blue,     col_dark_blue },
+	[SchemeActive]    = { col_white,       col_green,      col_light_blue,     col_dark_green },
+	[SchemeAddActive] = { col_white,       col_orange,     col_light_blue,     col_dark_orange },
+	[SchemeEmpty]     = { col_white,       col_red,        col_light_blue,     col_dark_red },
+	[SchemeHover]     = { col_white,       col_hover,      col_light_blue,     col_hover_shadow },
+	[SchemeClose]     = { col_hover_red,   col_red,        col_hover_dark_red, col_dark_red },
+	[SchemeHoverTags] = { col_white,       col_hover_blue, col_light_blue,     col_hover_dark_blue },
 };
 
 /* tagging */
