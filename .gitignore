@@ -5,4 +5,5 @@ instamenu
 instamenu.o
 itest
 itest.o
-tags
+configs/
+patches/
