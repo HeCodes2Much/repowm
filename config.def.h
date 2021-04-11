@@ -157,7 +157,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -194,29 +194,28 @@ static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
 static Key dkeys[] = {
-	/* modifier  key        	function     argument */
-	{0,          XK_space,  	spawn,       {.v = instamenucmd } },
-	{0,          XK_e,      	spawn,       {.v = editorcmd } },
-	{0,          XK_n,      	spawn,       {.v = filemanagercmd } },
-	{0,          XK_f,      	spawn,       {.v = browsercmd} },
-	{0,          XK_Return, 	spawn,       {.v = terminalcmd} },
-	{0,          XK_plus,		spawn,       {.v = upvol} },
-	{0,          XK_minus,		spawn,       {.v = downvol} },
-	{0,          XK_u,			spawn,       {.v = upbright} },
-	{0,          XK_d,			spawn,       {.v = downbright} },
-	{0,          XK_y,      	spawn,       {.v = smartcmd} },
+	/* modifier  		key        		function     argument */
+	{MODKEY,          	XK_space,  		spawn,       {.v = instamenucmd } },
+	{MODKEY,          	XK_e,      		spawn,       {.v = editorcmd } },
+	{MODKEY,          	XK_n,      		spawn,       {.v = filemanagercmd } },
+	{MODKEY,          	XK_f,      		spawn,       {.v = browsercmd} },
+	{MODKEY,          	XK_Return, 		spawn,       {.v = terminalcmd} },
+	{MODKEY,          	XK_plus,		spawn,       {.v = upvol} },
+	{MODKEY,          	XK_minus,		spawn,       {.v = downvol} },
+	{MODKEY,          	XK_u,			spawn,       {.v = upbright} },
+	{MODKEY,          	XK_d,			spawn,       {.v = downbright} },
+	{MODKEY,          	XK_y,      		spawn,       {.v = smartcmd} },
 
-	{0,          XK_1,      	view,        {.ui = 1 << 0}},
-	{0,          XK_2,     		view,        {.ui = 1 << 1}},
-	{0,          XK_3,      	view,        {.ui = 1 << 2}},
-	{0,          XK_4,      	view,        {.ui = 1 << 3}},
-	{0,          XK_5,      	view,        {.ui = 1 << 4}},
-	{0,          XK_6,      	view,        {.ui = 1 << 5}},
-	{0,          XK_7,      	view,        {.ui = 1 << 6}},
-	{0,          XK_8,      	view,        {.ui = 1 << 7}},
-	{0,          XK_9,      	view,        {.ui = 1 << 8}},
-	{0,          XK_0,      	view,        {.ui = 1 << 9}},
-
+	{MODKEY,          	XK_1,      		view,        {.ui = 1 << 0}},
+	{MODKEY,          	XK_2,     		view,        {.ui = 1 << 1}},
+	{MODKEY,          	XK_3,      		view,        {.ui = 1 << 2}},
+	{MODKEY,          	XK_4,      		view,        {.ui = 1 << 3}},
+	{MODKEY,          	XK_5,      		view,        {.ui = 1 << 4}},
+	{MODKEY,          	XK_6,      		view,        {.ui = 1 << 5}},
+	{MODKEY,          	XK_7,      		view,        {.ui = 1 << 6}},
+	{MODKEY,          	XK_8,      		view,        {.ui = 1 << 7}},
+	{MODKEY,          	XK_9,      		view,        {.ui = 1 << 8}},
+	{MODKEY,          	XK_0,      		view,        {.ui = 1 << 9}},
 };
 
 #include "movestack.c"
@@ -260,6 +259,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	TAGKEYS(                        XK_0,                      9)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 

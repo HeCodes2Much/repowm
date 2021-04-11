@@ -10,7 +10,7 @@
 backlight() {
 	BACKLIGHT=$(xbacklight -get | cut -d. -f1)
 	if [ "$BACKLIGHT" ]; then
-		printf '%s\n' "  $BACKLIGHT"
+		printf '%s\n' "  $BACKLIGHT"
 	fi
 }
 
@@ -36,7 +36,7 @@ wireless() {
 layout() {
 	klayout=$(setxkbmap -query | awk '/layout/{print $2}')
 	if [ "$klayout" ]; then
-		printf '%s\n' " |   $klayout"
+		printf '%s\n' " |   $klayout"
 	fi
 }
 

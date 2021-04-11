@@ -54,6 +54,6 @@ install: all
 .PHONY: uninstall
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/instawm\
-		${DESTDIR}${MANPREFIX}/bin/instabar\
+		${DESTDIR}${PREFIX}/bin/instabar\
 		${DESTDIR}${MANPREFIX}/man1/instawm.1\
 		${DESTDIR}/usr/share/xsessions/instawm.desktop\
