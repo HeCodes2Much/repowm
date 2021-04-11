@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <X11/Xlib.h>
-
 #include <X11/Xft/Xft.h>
 
 #include "drw.h"
@@ -204,8 +203,6 @@ drw_clr_create(Drw *drw, Clr *dest, const char *clrname)
 	                       DefaultColormap(drw->dpy, drw->screen),
 	                       clrname, dest))
 		die("error, cannot allocate color '%s'", clrname);
-
-	dest->pixel |= 0xff << 24;
 }
 
 /* Wrapper to create color schemes. The caller has to call free(3) on the
@@ -251,20 +248,8 @@ drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int
 		XDrawRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w - 1, h - 1);
 }
 
-void
-drw_circ(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int invert)
-{
-	if (!drw || !drw->scheme)
-		return;
-	XSetForeground(drw->dpy, drw->gc, invert ? drw->scheme[ColBg].pixel : drw->scheme[ColFg].pixel);
-	if (filled)
-		XFillArc(drw->dpy, drw->drawable, drw->gc, x, y, w, h, 0, 360*64);
-	else
-		XDrawArc(drw->dpy, drw->drawable, drw->gc, x, y, w - 1, h - 1, 0, 360*64);
-}
-
 int
-drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert, int rounded)
+drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert)
 {
 	char buf[1024];
 	int ty;
@@ -288,16 +273,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 		w = ~w;
 	} else {
 		XSetForeground(drw->dpy, drw->gc, drw->scheme[invert ? ColFg : ColBg].pixel);
-
-		if (rounded) {
-			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h - rounded);
-			XSetForeground(drw->dpy, drw->gc, drw->scheme[ColFloat].pixel);
-			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y + h - rounded, w, rounded);
-
-		} else {
-			XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
-		}
-
+		XFillRectangle(drw->dpy, drw->drawable, drw->gc, x, y, w, h);
 		d = XftDrawCreate(drw->dpy, drw->drawable,
 		                  DefaultVisual(drw->dpy, drw->screen),
 		                  DefaultColormap(drw->dpy, drw->screen));
@@ -312,21 +288,17 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 		nextfont = NULL;
 		while (*text) {
 			utf8charlen = utf8decode(text, &utf8codepoint, UTF_SIZ);
-			while (!charexists) {
-				for (curfont = drw->fonts; curfont; curfont = curfont->next) {
-					charexists = charexists || XftCharExists(drw->dpy, curfont->xfont, utf8codepoint);
-					if (charexists) {
-						if (curfont == usedfont) {
-							utf8strlen += utf8charlen;
-							text += utf8charlen;
-						} else {
-							nextfont = curfont;
-						}
-						break;
+			for (curfont = drw->fonts; curfont; curfont = curfont->next) {
+				charexists = charexists || XftCharExists(drw->dpy, curfont->xfont, utf8codepoint);
+				if (charexists) {
+					if (curfont == usedfont) {
+						utf8strlen += utf8charlen;
+						text += utf8charlen;
+					} else {
+						nextfont = curfont;
 					}
+					break;
 				}
-				if (!charexists)
-					utf8charlen = utf8decode("a", &utf8codepoint, UTF_SIZ);
 			}
 
 			if (!charexists || nextfont)
@@ -349,7 +321,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 						; /* NOP */
 
 				if (render) {
-					ty = y + (h - usedfont->h) / 2 + usedfont->xfont->ascent - (rounded ? (rounded / 2) : 0);
+					ty = y + (h - usedfont->h) / 2 + usedfont->xfont->ascent;
 					XftDrawStringUtf8(d, &drw->scheme[invert ? ColBg : ColFg],
 					                  usedfont->xfont, x, ty, (XftChar8 *)buf, len);
 				}
@@ -364,7 +336,6 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 			charexists = 0;
 			usedfont = nextfont;
 		} else {
-			//utf8codepoint = utf8decode('s', &utf8codepoint, UTF_SIZ);
 			/* Regardless of whether or not a fallback font is found, the
 			 * character must be drawn. */
 			charexists = 1;
@@ -409,28 +380,6 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
 }
 
 void
-drw_arrow(Drw *drw, int x, int y, unsigned int w, unsigned int h, int direction, int slash)
-{
-        if (!drw)
-                return;
-
-        /* direction=1 draws right arrow */
-        x = direction ? x : x + w;
-        w = direction ? w : -w;
-        /* slash=1 draws slash instead of arrow */
-        unsigned int hh = slash ? (direction ? 0 : h) : h/2;
-
-        XPoint points[] = {
-                {x    , y      },
-                {x + w, y + hh },
-                {x    , y + h  },
-        };
-
-        XSetForeground(drw->dpy, drw->gc, drw->scheme[ColBg].pixel);
-        XFillPolygon(drw->dpy, drw->drawable, drw->gc, points, 3, Nonconvex, CoordModeOrigin);
-}
-
-void
 drw_map(Drw *drw, Window win, int x, int y, unsigned int w, unsigned int h)
 {
 	if (!drw)
@@ -445,7 +394,7 @@ drw_fontset_getwidth(Drw *drw, const char *text)
 {
 	if (!drw || !drw->fonts || !text)
 		return 0;
-	return drw_text(drw, 0, 0, 0, 0, 0, text, 0, 0);
+	return drw_text(drw, 0, 0, 0, 0, 0, text, 0);
 }
 
 void

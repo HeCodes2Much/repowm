@@ -29,6 +29,7 @@ please refer to the documentation.
   * tag system
   * overview mode
   * overlays
+  * instabar script
 - Graphical Features
   * Animations
   * Hover indicators
