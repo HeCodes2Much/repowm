@@ -221,8 +221,8 @@ static Key dkeys[] = {
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = startmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = terminalcmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = instamenucmd } },
+	{ MODKEY,												XK_Return, spawn,          {.v = terminalcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -233,17 +233,23 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,												XK_z,		incrgaps,	{.i = +3 } },
-	{ MODKEY,												XK_x,		incrgaps,	{.i = -3 } },
+	{ MODKEY,												XK_z,			 incrgaps,			 {.i = +3 } },
+	{ MODKEY,												XK_x,			 incrgaps,			 {.i = -3 } },
 	{ MODKEY,												XK_a,      togglegaps,     {0} },
 	{ MODKEY|ShiftMask,							XK_a,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,												XK_t,			 setlayout,			 {.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,							XK_t,			 setlayout,			 {.v = &layouts[1]} }, /* bstack */
+	{ MODKEY,												XK_y,			 setlayout,			 {.v = &layouts[2]} }, /* spiral */
+	{ MODKEY|ShiftMask,							XK_y,			 setlayout,			 {.v = &layouts[3]} }, /* dwindle */
+	{ MODKEY,												XK_u,			 setlayout,			 {.v = &layouts[4]} }, /* deck */
+	{ MODKEY|ShiftMask,							XK_u,			 setlayout,			 {.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,												XK_i,			 setlayout,			 {.v = &layouts[6]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,							XK_i,			 setlayout,			 {.v = &layouts[7]} }, /* centeredfloatingmaster */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
