@@ -247,6 +247,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_u,			setlayout,		{.v = &layouts[5]} }, /* monocle */
 	{ MODKEY,						XK_i,			setlayout,		{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,				XK_i,			setlayout,		{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY|ControlMask,			XK_comma,		cyclelayout,	{.i = -1 } },
+	{ MODKEY|ControlMask,			XK_period,		cyclelayout,	{.i = +1 } },
 	{ MODKEY,                       XK_space,  		setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  		togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      		togglefullscr,  {0} },
@@ -272,17 +274,18 @@ static Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = terminalcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	/* click                event mask      button          function        	argument */
+	{ ClkLtSymbol,    		0,				Button1, 		cyclelayout,       	{.i = -1 } },
+	{ ClkLtSymbol,    		0,				Button3, 		cyclelayout,       	{.i = +1 } },
+	{ ClkLtSymbol,    		0,				Button2, 		setlayout,         	{.v = &layouts[0]} },
+	{ ClkWinTitle,          0,              Button2,        zoom,           	{0} },
+	{ ClkStatusText,        0,              Button2,        spawn,          	{.v = terminalcmd } },
+	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      	{0} },
+	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, 	{0} },
+	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    	{0} },
+	{ ClkTagBar,            0,              Button1,        view,           	{0} },
+	{ ClkTagBar,            0,              Button3,        toggleview,     	{0} },
+	{ ClkTagBar,            MODKEY,         Button1,        tag,            	{0} },
+	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      	{0} },
 };
 
