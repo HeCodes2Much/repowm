@@ -54,9 +54,14 @@ static char col_hover[] = "#596377";/*focused instamenu or topbar d */
 static char col_hover_shadow[] = "#475166";/*focused instamenu or topbar d */
 
 static const char *colors[][4] = {
-	/*                    fg               bg              border 	           float*/
-	[SchemeNorm]      = { col_white,       col_background, col_pastel_blue,    col_green },
-	[SchemeSel]       = { col_white,       col_blue,       col_light_blue,     col_green },
+	/*                    		fg              bg              		border 	           		float*/
+	[SchemeNorm]      	= { 	col_white,      col_background, 		col_pastel_blue,    	col_green },
+	[SchemeSel]       	= { 	col_white,      col_blue,       		col_light_blue,     	col_green },
+	[SchemeStatus]  	= { 	col_gray3, 		col_light_blue,  		col_pastel_blue,    	col_green }, // Statusbar right {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  	= { 	col_gray4, 		col_blue,  				col_pastel_blue,    	col_green }, // Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm]  	= { 	col_gray3, 		col_light_blue,  		col_pastel_blue,    	col_green }, // Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  	= { 	col_gray4, 		col_blue,  				col_pastel_blue,    	col_green }, // infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm]  	= { 	col_gray3, 		col_light_blue,  		col_pastel_blue,    	col_green }, // infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
