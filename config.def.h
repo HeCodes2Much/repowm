@@ -14,20 +14,53 @@ static const char *fonts[] = {
     "JoyPixels:pixelsize=20:antialias=true:autohint=true",
     "MaterialIcons:size=10",
     "xos4 Terminus:size=12"};
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+
+
+// empty background
+static char col_background[] = "#292f3a"; /* top bar dark background*/
+// fonts
+static char col_white[] = "#ffffff";/*white for fonts*/
+
+// border active and inactive
+static char col_pastel_blue[] = "#747c90";/*unsaturated for focused border*/
+static char col_light_blue[] = "#4dadd4";/*focused windows d */
+
+// blue window indicator
+static char col_blue[] = "#5294E2";/*focused instamenu or topbar d */
+static char col_dark_blue[] = "#3579CB";/*focused instamenu or topbar d */
+
+// hover over blue window indicator
+static char col_hover_blue[] = "#7CA8DC";/*focused instamenu or topbar d */
+static char col_hover_dark_blue[] = "#578BC9";/*focused instamenu or topbar d */
+
+// sticky window indicator
+static char col_green[] = "#52E167";/*focused instamenu or topbar d */
+static char col_dark_green[] = "#35CB4B";/*focused instamenu or topbar d */
+
+// unfocused sticky indicator
+static char col_orange[] = "#E1A052";/*focused instamenu or topbar d */
+static char col_dark_orange[] = "#CB8735";/*focused instamenu or topbar d */
+
+// close button
+static char col_red[] = "#E1527E";/*focused instamenu or topbar d */
+static char col_dark_red[] = "#CB3563";/*focused instamenu or topbar d */
+
+// hover over close button
+static char col_hover_red[] = "#D37492";/*focused instamenu or topbar d */
+static char col_hover_dark_red[] = "#CE577C";/*focused instamenu or topbar d */
+
+// hover over empty tag
+static char col_hover[] = "#596377";/*focused instamenu or topbar d */
+static char col_hover_shadow[] = "#475166";/*focused instamenu or topbar d */
+
+static const char *colors[][4] = {
+	/*                    fg               bg              border 	           float*/
+	[SchemeNorm]      = { col_white,       col_background, col_pastel_blue,    col_green },
+	[SchemeSel]       = { col_white,       col_blue,       col_light_blue,     col_green },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1:", "2:", "3:", "4:", "5:", "6:", "7:util", "8:edit", "9:" };
 
 static const Rule rules[] = {
 	/* xprop(1):

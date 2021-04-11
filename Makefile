@@ -1,4 +1,4 @@
-# instawm - dynamic window manager
+# instawm - window manager for linux
 # See LICENSE file for copyright and license details.
 
 include config.mk
@@ -6,13 +6,19 @@ include config.mk
 SRC = drw.c instawm.c util.c
 OBJ = ${SRC:.c=.o}
 
+.PHONY: all
 all: options instawm
 
+.PHONY: options
 options:
-	@echo instawm build options:
-	@echo "CFLAGS   = ${CFLAGS}"
-	@echo "LDFLAGS  = ${LDFLAGS}"
-	@echo "CC       = ${CC}"
+	${info instawm build options}
+	${info CFLAGS   = ${CFLAGS}}
+	${info LDFLAGS  = ${LDFLAGS}}
+	${info DESTDIR  = ${DESTDIR}}
+	${info PREFIX   = ${PREFIX}}
+	${info CC       = ${CC}}
+	${info VERSION  = ${VERSION}}
+	@true
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
@@ -25,27 +31,29 @@ config.h:
 instawm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
+.PHONY: clean
 clean:
-	rm -f instawm ${OBJ} instawm-${VERSION}.tar.gz
+	rm -f instawm ${OBJ} instawm-${CMS_VERSION}.tar.gz
 
+.PHONY: dist
 dist: clean
-	mkdir -p instawm-${VERSION}
-	cp -R LICENSE Makefile README config.def.h config.mk\
-		instawm.1 drw.h util.h ${SRC} instawm.png transient.c instawm-${VERSION}
-	tar -cf instawm-${VERSION}.tar instawm-${VERSION}
-	gzip instawm-${VERSION}.tar
-	rm -rf instawm-${VERSION}
+	tar --transform 's|^|instawm-${CMS_VERSION}/|' \
+		-czf instawm-${CMS_VERSION}.tar.gz \
+		LICENSE Makefile README.md config.def.h config.mk\
+		instawm.1 drw.h util.h ${SRC}
 
+.PHONY: install
 install: all
-	mkdir -p ${DESTDIR}${PREFIX}/bin
-	cp -f instawm ${DESTDIR}${PREFIX}/bin
-	chmod 755 ${DESTDIR}${PREFIX}/bin/instawm
-	mkdir -p ${DESTDIR}${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < instawm.1 > ${DESTDIR}${MANPREFIX}/man1/instawm.1
-	chmod 644 ${DESTDIR}${MANPREFIX}/man1/instawm.1
+	install -d ${DESTDIR}{${PREFIX}/bin,/usr/share/xsessions,${MANPREFIX}/man1}
+	install -m  755 -s instawm ${DESTDIR}${PREFIX}/bin/
+	install -Dm  755 instabar.sh ${DESTDIR}${PREFIX}/bin/instabar
+	install -m  644 instawm.1 ${DESTDIR}${MANPREFIX}/man1/
+	sed -i 's/VERSION/${VERSION}/g' ${DESTDIR}${MANPREFIX}/man1/instawm.1
+	install -m  644 instawm.desktop ${DESTDIR}/usr/share/xsessions
 
+.PHONY: uninstall
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/instawm\
-		${DESTDIR}${MANPREFIX}/man1/instawm.1
-
-.PHONY: all options clean dist install uninstall
+		${DESTDIR}${MANPREFIX}/bin/instabar\
+		${DESTDIR}${MANPREFIX}/man1/instawm.1\
+		${DESTDIR}/usr/share/xsessions/instawm.desktop\

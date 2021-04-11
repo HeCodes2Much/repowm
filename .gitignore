@@ -1,8 +1,8 @@
 config.h
 drw.o
 util.o
-instamenu
-instamenu.o
+instawm
+instawm.o
 itest
 itest.o
 configs/
