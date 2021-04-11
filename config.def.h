@@ -62,6 +62,13 @@ static const char *colors[][4] = {
 /* tagging */
 static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: VirtualBox", " 9: Chat" , " 10: Settings" };
 
+static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
+static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
+static const char *mutevol[] = {"amixer", "sset", "Master", "toggle", NULL};
+
+static const char *upbright[] = {"xbacklight", "+10", NULL};
+static const char *downbright[] = {"xbacklight", "-10", NULL};
+
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -151,6 +158,32 @@ static const char *gitcmd[] = { "instawm-schemas", "gitbrowser", NULL};
 static const char *playernext[] = { "playerctl", "next", NULL};
 static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
+
+static Key dkeys[] = {
+	/* modifier  key        	function     argument */
+	{0,          XK_space,  	spawn,       {.v = instamenucmd } },
+	{0,          XK_e,      	spawn,       {.v = editorcmd } },
+	{0,          XK_n,      	spawn,       {.v = filemanagercmd } },
+	{0,          XK_f,      	spawn,       {.v = browsercmd} },
+	{0,          XK_Return, 	spawn,       {.v = terminalcmd} },
+	{0,          XK_plus,		spawn,       {.v = upvol} },
+	{0,          XK_minus,		spawn,       {.v = downvol} },
+	{0,          XK_u,			spawn,       {.v = upbright} },
+	{0,          XK_d,			spawn,       {.v = downbright} },
+	{0,          XK_y,      	spawn,       {.v = smartcmd} },
+
+	{0,          XK_1,      	view,        {.ui = 1 << 0}},
+	{0,          XK_2,     		view,        {.ui = 1 << 1}},
+	{0,          XK_3,      	view,        {.ui = 1 << 2}},
+	{0,          XK_4,      	view,        {.ui = 1 << 3}},
+	{0,          XK_5,      	view,        {.ui = 1 << 4}},
+	{0,          XK_6,      	view,        {.ui = 1 << 5}},
+	{0,          XK_7,      	view,        {.ui = 1 << 6}},
+	{0,          XK_8,      	view,        {.ui = 1 << 7}},
+	{0,          XK_9,      	view,        {.ui = 1 << 8}},
+	{0,          XK_0,      	view,        {.ui = 1 << 9}},
+
+};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */

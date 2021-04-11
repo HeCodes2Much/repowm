@@ -260,6 +260,9 @@ static const char configdir[] = ".config";
 static const char instawmdir[] = "instawm";
 static const char localshare[] = ".local/share";
 static char stext[256];
+
+static int freealttab = 0;
+
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh, blw = 0;      /* bar geometry */
@@ -1037,11 +1040,27 @@ grabkeys(void)
 		KeyCode code;
 
 		XUngrabKey(dpy, AnyKey, AnyModifier, root);
-		for (i = 0; i < LENGTH(keys); i++)
+		for (i = 0; i < LENGTH(keys); i++) {
 			if ((code = XKeysymToKeycode(dpy, keys[i].keysym)))
-				for (j = 0; j < LENGTH(modifiers); j++)
+				for (j = 0; j < LENGTH(modifiers); j++) {
+					if (freealttab && keys[i].mod == Mod1Mask)
+						continue;
 					XGrabKey(dpy, code, keys[i].mod | modifiers[j], root,
 						True, GrabModeAsync, GrabModeAsync);
+				}
+		}
+
+		if(!selmon->sel){
+			for (i = 0; i < LENGTH(dkeys); i++) {
+				if ((code = XKeysymToKeycode(dpy, dkeys[i].keysym)))
+					for (j = 0; j < LENGTH(modifiers); j++)
+						XGrabKey(dpy, code, dkeys[i].mod | modifiers[j], root,
+							True, GrabModeAsync, GrabModeAsync);
+			}
+
+		}
+
+
 	}
 }
 
@@ -1067,17 +1086,33 @@ isuniquegeom(XineramaScreenInfo *unique, size_t n, XineramaScreenInfo *info)
 void
 keypress(XEvent *e)
 {
+
 	unsigned int i;
 	KeySym keysym;
 	XKeyEvent *ev;
 
 	ev = &e->xkey;
 	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
-	for (i = 0; i < LENGTH(keys); i++)
+	for (i = 0; i < LENGTH(keys); i++) {
 		if (keysym == keys[i].keysym
 		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
-		&& keys[i].func)
+		&& keys[i].func) {
 			keys[i].func(&(keys[i].arg));
+		}
+
+	}
+
+	if (!selmon->sel) {
+		for (i = 0; i < LENGTH(dkeys); i++) {
+			if (keysym == dkeys[i].keysym
+			&& CLEANMASK(dkeys[i].mod) == CLEANMASK(ev->state)
+			&& dkeys[i].func)
+				dkeys[i].func(&(dkeys[i].arg));
+
+		}
+
+	}
+
 }
 
 void
