@@ -195,16 +195,16 @@ static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
 static Key dkeys[] = {
 	/* modifier  			key        		function     argument */
-	{MODKEY,          		XK_space,  		spawn,       {.v = instamenucmd } },
-	{MODKEY,          		XK_e,      		spawn,       {.v = editorcmd } },
-	{MODKEY,          		XK_n,      		spawn,       {.v = filemanagercmd } },
-	{MODKEY,          		XK_f,      		spawn,       {.v = browsercmd} },
-	{MODKEY,          		XK_Return, 		spawn,       {.v = terminalcmd} },
-	{MODKEY,         	 	XK_plus,		spawn,       {.v = upvol} },
-	{MODKEY,          		XK_minus,		spawn,       {.v = downvol} },
-	{MODKEY,          		XK_u,			spawn,       {.v = upbright} },
-	{MODKEY,          		XK_d,			spawn,       {.v = downbright} },
-	{MODKEY,          		XK_y,      		spawn,       {.v = smartcmd} },
+	{Mod1Mask,          	XK_space,  		spawn,       {.v = instamenucmd } },
+	{Mod1Mask,          	XK_e,      		spawn,       {.v = editorcmd } },
+	{Mod1Mask,          	XK_n,      		spawn,       {.v = filemanagercmd } },
+	{Mod1Mask,          	XK_f,      		spawn,       {.v = browsercmd} },
+	{Mod1Mask,          	XK_Return, 		spawn,       {.v = terminalcmd} },
+	{Mod1Mask,         	 	XK_plus,		spawn,       {.v = upvol} },
+	{Mod1Mask,          	XK_minus,		spawn,       {.v = downvol} },
+	{Mod1Mask,          	XK_u,			spawn,       {.v = upbright} },
+	{Mod1Mask,          	XK_d,			spawn,       {.v = downbright} },
+	{Mod1Mask,          	XK_y,      		spawn,       {.v = smartcmd} },
 
 	{Mod1Mask,          	XK_1,      		view,        {.ui = 1 << 0}},
 	{Mod1Mask,          	XK_2,     		view,        {.ui = 1 << 1}},
