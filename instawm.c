@@ -1001,7 +1001,7 @@ drawbar(Monitor *m)
 	}
 
 	//draw start menu icon
-	drw_setscheme(drw, scheme[SchemeSel]);
+	drw_setscheme(drw, scheme[SchemeNorm]);
 	iconoffset = (bh - 20) / 2;
 	int startmenuinvert = (selmon->gesture == 13);
 	drw_rect(drw, 0, 0, startmenusize, bh, 1, startmenuinvert ? 0:1);
