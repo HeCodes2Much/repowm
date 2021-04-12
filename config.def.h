@@ -52,7 +52,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"picom" "-CGb" "--experimental-backend" "--config" "~/.config/instawm/picom.conf", NULL
+	"picom" "-CGb" "--experimental-backend" "--config" "~/.config/instawm/picom.conf", NULL,
 	"autorandr", "--force", "--load", "instawm", NULL,
 	"setxkbmap", "-option", "caps:escape", NULL,
 	"instamenue_youtube_subs", "-d", NULL,
@@ -191,6 +191,18 @@ static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 static Key keys[] = {
 	/* modifier                     chain key			key        					function        		argument */
+	//TheRepoClub Custom Keybinds.
+	{ MODKEY,						-1,         		XK_o,						spawn,       			{.v = systemmonitorcmd } },
+	{ MODKEY|ShiftMask,          	-1,         		XK_Return,  				spawn,       			{.v = filemanagercmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_h,						spawn,       			{.v = hypervisorcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_f,						spawn,       			{.v = browsercmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_c,						spawn,       			{.v = editorcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_t,						spawn,       			{.v = mailcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_g,						spawn,       			{.v = gitcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_i,						spawn,       			{.v = "inkscape" } },
+	{ MODKEY|ControlMask,			-1,         		XK_k,						spawn,       			{.v = "krita" } },
+
+	//Keybinds you may need to customise.
 	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
 	{ MODKEY,                       -1,         		XK_p,      					spawn,          		{.v = instamenucmd } },
 	{ MODKEY,						-1,         		XK_Return, 					spawn,          		{.v = terminalcmd } },
@@ -203,7 +215,7 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         		XK_l,      					setmfact,       		{.f = +0.05} },
 	{ MODKEY|ShiftMask,             -1,         		XK_j,      					movestack,      		{.i = +1 } },
 	{ MODKEY|ShiftMask,             -1,         		XK_k,      					movestack,      		{.i = -1 } },
-	{ MODKEY,                       -1,         		XK_Return, 					zoom,           		{0} },
+	{ MODKEY|Mod1Mask,              -1,         		XK_Return, 					zoom,           		{0} },
 	{ MODKEY,						-1,         		XK_z,						incrgaps,				{.i = +3 } },
 	{ MODKEY,						-1,         		XK_x,						incrgaps,				{.i = -3 } },
 	{ MODKEY,						-1,         		XK_a,      					togglegaps,     		{0} },
