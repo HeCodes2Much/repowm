@@ -10,13 +10,13 @@ static const unsigned int gappov    			= 30;       /* vert outer gap between win
 static const unsigned int systraypinning 		= 0;   		/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft 		= 0;   		/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing 		= 2;   		/* systray spacing */
+static const double defaultopacity  			= 0.80;		/* 0 being full transparent 1 being non-transparent */
 static const int swallowfloating    			= 0;        /* 1 means swallow floating windows by default */
 static const int smartgaps          			= 0;        /* 1 means no outer gap when there is only one window */
 static const int systraypinningfailfirst 		= 1;   		/* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        			= 1;     	/* 0 means no systray */
 static const int showbar            			= 1;        /* 0 means no bar */
 static const int topbar             			= 1;        /* 0 means bottom bar */
-static const double defaultopacity  			= 0.80;		/* 0 being full transparent 1 being non-transparent */
 static const int useinstabar 					= 0;  		/* 0 means don't use instabar script */
 static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
@@ -136,11 +136,11 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
-#define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+#define TAGKEYS(CHAIN,KEY,TAG) \
+	{ MODKEY,                       CHAIN,		KEY,      view,           {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask,           CHAIN,		KEY,      toggleview,     {.ui = 1 << TAG} }, \
+	{ MODKEY|ShiftMask,             CHAIN,		KEY,      tag,            {.ui = 1 << TAG} }, \
+	{ MODKEY|ControlMask|ShiftMask, CHAIN,		KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre instawm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -181,69 +181,69 @@ static const char *downbright[] = {"xbacklight", "-10", NULL};
 #include "movestack.c"
 #include "selfrestart.c"
 static Key keys[] = {
-	/* modifier                     key        					function        		argument */
-	{ Mod1Mask,          			XK_space,  					spawn,       			{.v = instamenucmd } },
-	{ MODKEY,                       XK_p,      					spawn,          		{.v = instamenucmd } },
-	{ MODKEY,						XK_Return, 					spawn,          		{.v = terminalcmd } },
-	{ MODKEY,                       XK_b,      					togglebar,      		{0} },
-	{ MODKEY,                       XK_j,      					focusstack,     		{.i = +1 } },
-	{ MODKEY,                       XK_k,      					focusstack,     		{.i = -1 } },
-	{ MODKEY,                       XK_i,      					incnmaster,     		{.i = +1 } },
-	{ MODKEY,                       XK_d,      					incnmaster,     		{.i = -1 } },
-	{ MODKEY,                       XK_h,      					setmfact,       		{.f = -0.05} },
-	{ MODKEY,                       XK_l,      					setmfact,       		{.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_j,      					movestack,      		{.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      					movestack,      		{.i = -1 } },
-	{ MODKEY,                       XK_Return, 					zoom,           		{0} },
-	{ MODKEY,						XK_z,						incrgaps,				{.i = +3 } },
-	{ MODKEY,						XK_x,						incrgaps,				{.i = -3 } },
-	{ MODKEY,						XK_a,      					togglegaps,     		{0} },
-	{ MODKEY|ShiftMask,				XK_a,      					defaultgaps,    		{0} },
-	{ MODKEY,                       XK_Tab,    					view,           		{0} },
-	{ MODKEY,             			XK_q,      					killclient,     		{0} },
-	{ MODKEY,						XK_t,						setlayout,				{.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,				XK_t,						setlayout,				{.v = &layouts[1]} }, /* bstack */
-	{ MODKEY,						XK_y,						setlayout,				{.v = &layouts[2]} }, /* spiral */
-	{ MODKEY|ShiftMask,				XK_y,						setlayout,				{.v = &layouts[3]} }, /* dwindle */
-	{ MODKEY,						XK_u,						setlayout,				{.v = &layouts[4]} }, /* deck */
-	{ MODKEY|ShiftMask,				XK_u,						setlayout,				{.v = &layouts[5]} }, /* monocle */
-	{ MODKEY,						XK_i,						setlayout,				{.v = &layouts[6]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,				XK_i,						setlayout,				{.v = &layouts[7]} }, /* centeredfloatingmaster */
-	{ MODKEY|Mod1Mask,				XK_s,	   					spawn,	   				SHCMD("transset-df -a --dec .1") },
-	{ MODKEY|Mod1Mask,				XK_d,	   					spawn,	   				SHCMD("transset-df -a --inc .1") },
-	{ MODKEY|Mod1Mask,				XK_f,	   					spawn,	   				SHCMD("transset-df -a .75") },
-	{ MODKEY|ControlMask,			XK_comma,					cyclelayout,			{.i = -1 } },
-	{ MODKEY|ControlMask,			XK_period,					cyclelayout,			{.i = +1 } },
-	{ MODKEY,                       XK_space,  					setlayout,      		{0} },
-	{ MODKEY|ShiftMask,             XK_space,  					togglefloating, 		{0} },
-	{ MODKEY|ShiftMask,             XK_f,      					togglefullscr,  		{0} },
-	{ MODKEY,                       XK_0,      					view,           		{.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      					tag,            		{.ui = ~0 } },
-	{ MODKEY,                       XK_comma, 					focusmon,       		{.i = -1 } },
-	{ MODKEY,                       XK_period, 					focusmon,       		{.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  					tagmon,         		{.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, 					tagmon,         		{.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_r,      					self_restart,   		{0} },
-	{ MODKEY|ShiftMask,             XK_q,     					quit,           		{0} },
-	TAGKEYS(						XK_1,                      	0)
-	TAGKEYS(						XK_2,                      	1)
-	TAGKEYS(						XK_3,                      	2)
-	TAGKEYS(						XK_4,                      	3)
-	TAGKEYS(						XK_5,                      	4)
-	TAGKEYS(						XK_6,                      	5)
-	TAGKEYS(						XK_7,                      	6)
-	TAGKEYS(						XK_8,                      	7)
-	TAGKEYS(						XK_9,                      	8)
-	TAGKEYS(						XK_0,                      	9)
-	// { 0,                            XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
-	// { 0,                            XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
-	// { 0,                            XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
-	// { 0,                            XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
-	// { 0,                            XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
-	// { 0,                            XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
-	// { 0,                            XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
-	// { 0,                            XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
-	// { 0,                            XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
+	/* modifier                     chain key			key        					function        		argument */
+	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
+	{ MODKEY,                       -1,         		XK_p,      					spawn,          		{.v = instamenucmd } },
+	{ MODKEY,						-1,         		XK_Return, 					spawn,          		{.v = terminalcmd } },
+	{ MODKEY,                       -1,         		XK_b,      					togglebar,      		{0} },
+	{ MODKEY,                       -1,         		XK_j,      					focusstack,     		{.i = +1 } },
+	{ MODKEY,                       -1,         		XK_k,      					focusstack,     		{.i = -1 } },
+	{ MODKEY,                       -1,         		XK_i,      					incnmaster,     		{.i = +1 } },
+	{ MODKEY,                       -1,         		XK_d,      					incnmaster,     		{.i = -1 } },
+	{ MODKEY,                       -1,         		XK_h,      					setmfact,       		{.f = -0.05} },
+	{ MODKEY,                       -1,         		XK_l,      					setmfact,       		{.f = +0.05} },
+	{ MODKEY|ShiftMask,             -1,         		XK_j,      					movestack,      		{.i = +1 } },
+	{ MODKEY|ShiftMask,             -1,         		XK_k,      					movestack,      		{.i = -1 } },
+	{ MODKEY,                       -1,         		XK_Return, 					zoom,           		{0} },
+	{ MODKEY,						-1,         		XK_z,						incrgaps,				{.i = +3 } },
+	{ MODKEY,						-1,         		XK_x,						incrgaps,				{.i = -3 } },
+	{ MODKEY,						-1,         		XK_a,      					togglegaps,     		{0} },
+	{ MODKEY|ShiftMask,				-1,         		XK_a,      					defaultgaps,    		{0} },
+	{ MODKEY,                       -1,         		XK_Tab,    					view,           		{0} },
+	{ MODKEY,             			-1,         		XK_q,      					killclient,     		{0} },
+	{ MODKEY,						-1,         		XK_t,						setlayout,				{.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,				-1,         		XK_t,						setlayout,				{.v = &layouts[1]} }, /* bstack */
+	{ MODKEY,						-1,         		XK_y,						setlayout,				{.v = &layouts[2]} }, /* spiral */
+	{ MODKEY|ShiftMask,				-1,         		XK_y,						setlayout,				{.v = &layouts[3]} }, /* dwindle */
+	{ MODKEY,						-1,         		XK_u,						setlayout,				{.v = &layouts[4]} }, /* deck */
+	{ MODKEY|ShiftMask,				-1,         		XK_u,						setlayout,				{.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,						-1,         		XK_i,						setlayout,				{.v = &layouts[6]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,				-1,         		XK_i,						setlayout,				{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY|Mod1Mask,				-1,         		XK_s,	   					spawn,	   				SHCMD("transset-df -a --dec .1") },
+	{ MODKEY|Mod1Mask,				-1,         		XK_d,	   					spawn,	   				SHCMD("transset-df -a --inc .1") },
+	{ MODKEY|Mod1Mask,				-1,         		XK_f,	   					spawn,	   				SHCMD("transset-df -a .75") },
+	{ MODKEY|ControlMask,			-1,         		XK_comma,					cyclelayout,			{.i = -1 } },
+	{ MODKEY|ControlMask,			-1,         		XK_period,					cyclelayout,			{.i = +1 } },
+	{ MODKEY,                       -1,         		XK_space,  					setlayout,      		{0} },
+	{ MODKEY|ShiftMask,             -1,         		XK_space,  					togglefloating, 		{0} },
+	{ MODKEY|ShiftMask,             -1,         		XK_f,      					togglefullscr,  		{0} },
+	{ MODKEY,                       -1,         		XK_0,      					view,           		{.ui = ~0 } },
+	{ MODKEY|ShiftMask,             -1,         		XK_0,      					tag,            		{.ui = ~0 } },
+	{ MODKEY,                       -1,         		XK_comma, 					focusmon,       		{.i = -1 } },
+	{ MODKEY,                       -1,         		XK_period, 					focusmon,       		{.i = +1 } },
+	{ MODKEY|ShiftMask,             -1,         		XK_comma,  					tagmon,         		{.i = -1 } },
+	{ MODKEY|ShiftMask,             -1,         		XK_period, 					tagmon,         		{.i = +1 } },
+	{ MODKEY|ShiftMask,             -1,         		XK_r,      					self_restart,   		{0} },
+	{ MODKEY|ShiftMask,             -1,         		XK_q,     					quit,           		{0} },
+	TAGKEYS(						-1,         		XK_1,                      	0)
+	TAGKEYS(						-1,         		XK_2,                      	1)
+	TAGKEYS(						-1,         		XK_3,                      	2)
+	TAGKEYS(						-1,         		XK_4,                      	3)
+	TAGKEYS(						-1,         		XK_5,                      	4)
+	TAGKEYS(						-1,         		XK_6,                      	5)
+	TAGKEYS(						-1,         		XK_7,                      	6)
+	TAGKEYS(						-1,         		XK_8,                      	7)
+	TAGKEYS(						-1,         		XK_9,                      	8)
+	TAGKEYS(						-1,         		XK_0,                      	9)
+	// { 0,                            -1,         		XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
+	// { 0,                            -1,         		XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
+	// { 0,                            -1,         		XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
+	// { 0,                            -1,         		XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
+	// { 0,                            -1,         		XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
+	// { 0,                            -1,         		XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
+	// { 0,                            -1,         		XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
+	// { 0,                            -1,         		XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
+	// { 0,                            -1,         		XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
 };
 
 /* button definitions */
