@@ -1,23 +1,23 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
-static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     	/* 0 means no systray */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int useinstabar 		= 0;  		/* 0 means don't use instabar script */
-static const int user_bh            = 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
+static const unsigned int borderpx  			= 1;        /* border pixel of windows */
+static const unsigned int snap      			= 32;       /* snap pixel */
+static const unsigned int gappih    			= 20;       /* horiz inner gap between windows */
+static const unsigned int gappiv    			= 10;       /* vert inner gap between windows */
+static const unsigned int gappoh    			= 10;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    			= 30;       /* vert outer gap between windows and screen edge */
+static const unsigned int systraypinning 		= 0;   		/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systrayonleft 		= 0;   		/* 0: systray in the right corner, >0: systray on left of status text */
+static const unsigned int systrayspacing 		= 2;   		/* systray spacing */
+static const int swallowfloating    			= 0;        /* 1 means swallow floating windows by default */
+static const int smartgaps          			= 0;        /* 1 means no outer gap when there is only one window */
+static const int systraypinningfailfirst 		= 1;   		/* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray        			= 1;     	/* 0 means no systray */
+static const int showbar            			= 1;        /* 0 means no bar */
+static const int topbar             			= 1;        /* 0 means bottom bar */
+static const int useinstabar 					= 0;  		/* 0 means don't use instabar script */
+static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
     "Misc Termsyn:size=12",
     "Siji:size=14",
@@ -49,11 +49,11 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
-	// "mpd-notification", NULL,
+	"kitty", NULL,
 	// "hsetroot", "-center", "/usr/home/bit6tream/pic/wallapper.png", NULL,
 	// "xrdb", "/usr/home/bit6tream/.config/X/Xresources", NULL,
 	// "sh", "-c", "while :; do instawmstatus.sh -; sleep 60; done", NULL,
-	"dunst", NULL,
+	// "dunst", NULL,
 	// "picom", NULL,
 	NULL
 };
