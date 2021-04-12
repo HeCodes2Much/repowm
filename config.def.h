@@ -193,14 +193,29 @@ static Key keys[] = {
 	/* modifier                     chain key			key        					function        		argument */
 	//TheRepoClub Custom Keybinds.
 	{ MODKEY,						-1,         		XK_o,						spawn,       			{.v = systemmonitorcmd } },
+	{ MODKEY,						-1,         		XK_F1,						spawn,       			{.v = smartcmd } },
+	{ MODKEY,						-1,         		XK_F2,						spawn,       			{.v = clipmenucmd } },
+	{ MODKEY,						-1,         		XK_F3,						spawn,       			{.v = instasettings } },
 	{ MODKEY|ShiftMask,          	-1,         		XK_Return,  				spawn,       			{.v = filemanagercmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_h,						spawn,       			{.v = hypervisorcmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_f,						spawn,       			{.v = browsercmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_c,						spawn,       			{.v = editorcmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_t,						spawn,       			{.v = mailcmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_g,						spawn,       			{.v = gitcmd } },
-	{ MODKEY|ControlMask,			-1,         		XK_i,						spawn,       			{.v = "inkscape" } },
-	{ MODKEY|ControlMask,			-1,         		XK_k,						spawn,       			{.v = "krita" } },
+	{ MODKEY|ControlMask,			-1,         		XK_i,						spawn,       			SHCMD("inkscape") },
+	{ MODKEY|ControlMask,			-1,         		XK_k,						spawn,       			SHCMD("krita") },
+	{ MODKEY|ControlMask,			-1,         		XK_v,						spawn,       			SHCMD("vlc") },
+	{ MODKEY|ControlMask,			-1,         		XK_s,						spawn,       			SHCMD("prime-run steam") },
+	{ MODKEY|ControlMask,			-1,         		XK_m,						spawn,       			SHCMD("prime-run minecraft-launcher") },
+	{ MODKEY|ControlMask,			-1,         		XK_e,						spawn,       			SHCMD("element-desktop") },
+	{ MODKEY|ControlMask,			-1,         		XK_p,						spawn,       			SHCMD("piper") },
+	{ MODKEY|ControlMask,			-1,         		XK_u,						spawn,       			SHCMD("pavucontrol") },
+	{ MODKEY|ShiftMask,				-1,         		XK_z,						spawn,       			SHCMD("multimonitorlock-gui") },
+	{ MODKEY|Mod1Mask,				-1,         		XK_p,						spawn,       			SHCMD("pamac-manager") },
+
+	{ 0,							-1,         		XK_Print,					spawn,       			SHCMD("i3-maim -w" ) },
+	{ ControlMask,					-1,         		XK_Print,					spawn,       			SHCMD("i3-maim -s" ) },
+	{ MODKEY,						-1,         		XK_Print,					spawn,       			SHCMD("i3-maim -f" ) },
 
 	//Keybinds you may need to customise.
 	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
