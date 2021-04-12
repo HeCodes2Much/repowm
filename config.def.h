@@ -212,9 +212,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				-1,         		XK_z,						spawn,       			SHCMD("multimonitorlock-gui") },
 	{ MODKEY|Mod1Mask,				-1,         		XK_p,						spawn,       			SHCMD("pamac-manager") },
 
-	{ MODKEY,						XK_Print,         	XK_w,						spawn,       			SHCMD("i3-maim -w" ) },
-	{ MODKEY,						XK_Print,         	XK_s,						spawn,       			SHCMD("i3-maim -s" ) },
-	{ MODKEY,						XK_Print,         	XK_f,						spawn,       			SHCMD("i3-maim -f" ) },
+	{ MODKEY,						XK_Print,         	XK_w,						spawn,       			SHCMD("wm-maim -w" ) },
+	{ MODKEY,						XK_Print,         	XK_s,						spawn,       			SHCMD("wm-maim -s" ) },
+	{ MODKEY,						XK_Print,         	XK_f,						spawn,       			SHCMD("wm-maim -f" ) },
 
 	//Keybinds you may need to customise.
 	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
