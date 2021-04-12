@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  			= 1;        /* border pixel of windows */
@@ -51,12 +52,18 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"kitty", NULL,
-	// "hsetroot", "-center", "/usr/home/bit6tream/pic/wallapper.png", NULL,
-	// "xrdb", "/usr/home/bit6tream/.config/X/Xresources", NULL,
-	// "sh", "-c", "while :; do instawmstatus.sh -; sleep 60; done", NULL,
-	// "dunst", NULL,
-	// "picom", NULL,
+	"autorandr", "--force", "--load", "instawm", NULL,
+	"setxkbmap", "-option", "caps:escape", NULL,
+	"instamenue_youtube_subs", "-d", NULL,
+	"polkit-dumb-agent", NULL,
+	"touchpad-indicator", NULL,
+	"blueman-applet", NULL,
+	"numlockx", "on", NULL,
+	"xsettingsd", NULL,
+	"pamac-tray", NULL,
+	"nm-applet", NULL,
+	"pasystray", NULL,
+	"clipmenud", NULL,
 	NULL
 };
 
@@ -235,15 +242,15 @@ static Key keys[] = {
 	TAGKEYS(						-1,         		XK_8,                      	7)
 	TAGKEYS(						-1,         		XK_9,                      	8)
 	TAGKEYS(						-1,         		XK_0,                      	9)
-	// { 0,                            -1,         		XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
-	// { 0,                            -1,         		XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
-	// { 0,                            -1,         		XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
-	// { 0,                            -1,         		XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
-	// { 0,                            -1,         		XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
-	// { 0,                            -1,         		XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
-	// { 0,                            -1,         		XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
-	// { 0,                            -1,         		XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
-	// { 0,                            -1,         		XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
+	{ 0,                            -1,         		XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
+	{ 0,                            -1,         		XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
+	{ 0,                            -1,         		XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
+	{ 0,                            -1,         		XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
+	{ 0,                            -1,         		XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
+	{ 0,                            -1,         		XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
+	{ 0,                            -1,         		XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
+	{ 0,                            -1,         		XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
+	{ 0,                            -1,         		XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
 };
 
 /* button definitions */
