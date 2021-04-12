@@ -18,7 +18,7 @@ static const int systraypinningfailfirst 		= 1;   		/* 1: if pinning fails, disp
 static const int showsystray        			= 1;     	/* 0 means no systray */
 static const int showbar            			= 1;        /* 0 means no bar */
 static const int topbar             			= 1;        /* 0 means bottom bar */
-static const int useinstabar 					= 0;  		/* 0 means don't use instabar script */
+static const int useinstabar 					= 1;  		/* 0 means don't use instabar script */
 static const unsigned int startmenusize = 30;		  /* snap pixel */
 static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
