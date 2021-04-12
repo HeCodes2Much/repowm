@@ -93,7 +93,7 @@ enum { NetSupported, NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, N
 enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-       ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
+       ClkClientWin, ClkRootWin, ClkLast, ClkShutDown }; /* clicks */
 
 typedef union {
 	int i;
@@ -310,6 +310,7 @@ static const char localshare[] = ".local/share";
 static char stext[256];
 
 static int freealttab = 0;
+static int statuswidth = 0;
 
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
@@ -611,7 +612,9 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + blw)
 			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth())
+		else if (!selmon->sel && ev->x > x + blw &&  ev->x < x + blw + bh)
+			click = ClkShutDown;
+		else if (ev->x > selmon->ww - getsystraywidth() - statuswidth + lrpad - 2)
 			click = ClkStatusText;
 		else
 			click = ClkWinTitle;
