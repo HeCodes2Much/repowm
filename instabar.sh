@@ -5,48 +5,109 @@
 # github:     https://github.com/The-Repo-Club/instawm
 # date:       2021-04-10 12:34:47.440579
 
-[ "$(pidof -s instawm )" ] || (printf '%s\n' "instawm is not running!" && exit 1) || exit 1
+usbmon() {
+	usb1=$(lsblk -la | awk '/sdc1/ { print $1 }')
+	usb1mounted=$(lsblk -la | awk '/sdc1/ { print $7 }')
 
-backlight() {
-	BACKLIGHT=$(xbacklight -get | cut -d. -f1)
-	if [ "$BACKLIGHT" ]; then
-		printf '%s\n' "  $BACKLIGHT"
+	if [ "$usb1" ]; then
+		if [ -z "$usb1mounted" ]; then
+			echo " |"
+		else
+			echo " $usb1 |"
+		fi
 	fi
 }
 
-volume() {
-  PULSEVOLUME=$( amixer sget Master | grep -e 'Front Left: Playback' | sed 's/[^\[]*\[\([0-9]\{1,3\}%\).*\(on\|off\).*/\2 \1/' | sed 's/off/ M/' | sed 's/on / /' )
-	if [ "$PULSEVOLUME" ]; then
-		printf '%s\n' " | $PULSEVOLUME"
+fsmon() {
+	ROOTPART=$(df -h | awk '/\/$/ { print $3}') 
+	HOMEPART=$(df -h | awk '/\/home/ { print $3}') 
+	SWAPPART=$(cat /proc/swaps | awk '/\// { print $4 }')
+
+	echo "   $ROOTPART    $HOMEPART    $SWAPPART"
+}
+
+ram() {
+	mem=$(free -h | awk '/Mem:/ { print $3 }' | cut -f1 -d 'i')
+	echo  "$mem"
+}
+
+cpu() {
+	read -r cpu a b c previdle rest < /proc/stat
+	prevtotal=$((a+b+c+previdle))
+	sleep 0.5
+	read -r cpu a b c idle rest < /proc/stat
+	total=$((a+b+c+idle))
+	cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
+	echo  "$cpu"%
+}
+
+network() {
+	conntype=$(ip route | awk '/default/ { print substr($5,1,1) }')
+
+	if [ -z "$conntype" ]; then
+		echo " down"
+	elif [ "$conntype" = "e" ]; then
+		echo " up"
+	elif [ "$conntype" = "w" ]; then
+		echo " up"
+	fi
+}
+
+volume_pa() {
+	muted=$(pactl list sinks | awk '/Mute:/ { print $2 }')
+	vol=$(pactl list sinks | grep Volume: | awk 'FNR == 1 { print $5 }' | cut -f1 -d '%')
+
+	if [ "$muted" = "yes" ]; then
+		echo " muted"
 	else
-		ALSAVOLUME=$( amixer sget Master | grep -e 'Mono: Playback' | sed 's/[^\[]*\[\([0-9]\{1,3\}%\).*\(on\|off\).*/\2 \1/' | sed 's/off/ M/' | sed 's/on / /' )
-		printf '%s\n' " | $ALSAVOLUME"
+		if [ "$vol" -ge 65 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 40 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 0 ]; then
+			echo " $vol%"	
+		fi
 	fi
+
 }
 
-wireless() {
-	wifi=$(iwgetid -r)
-  if [ "$wifi" ]; then
-		printf '%s\n' " | 直  $wifi"
+volume_alsa() {
+
+	mono=$(amixer -M sget Master | grep Mono: | awk '{ print $2 }')
+
+	if [ -z "$mono" ]; then
+		muted=$(amixer -M sget Master | awk 'FNR == 6 { print $7 }' | sed 's/[][]//g')
+		vol=$(amixer -M sget Master | awk 'FNR == 6 { print $5 }' | sed 's/[][]//g; s/%//g')
 	else
-		printf '%s\n' ""
+		muted=$(amixer -M sget Master | awk 'FNR == 5 { print $6 }' | sed 's/[][]//g')
+		vol=$(amixer -M sget Master | awk 'FNR == 5 { print $4 }' | sed 's/[][]//g; s/%//g')
+	fi
+
+	if [ "$muted" = "off" ]; then
+		echo " muted"
+	else
+		if [ "$vol" -ge 65 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 40 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 0 ]; then
+			echo " $vol%"	
+		fi
 	fi
 }
 
-layout() {
-	klayout=$(setxkbmap -query | awk '/layout/{print $2}')
-	if [ "$klayout" ]; then
-		printf '%s\n' " |   $klayout"
-	fi
+clock() {
+	dte=$(date +"%D")
+	time=$(date +"%H:%M")
+
+	echo " $dte  $time"
 }
 
-datetime() {
-  DATE=$(date +%R)
-	printf '%s\n' "  ${DATE}"
+main() {
+	while true; do
+		xsetroot -name " $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_pa) | $(clock) |"
+		sleep 1
+	done
 }
 
-while true
-do
-	xsetroot -name "$(backlight)$(volume)$(wireless)$(layout) | $(datetime)"
-	sleep 3
-done
+main
