@@ -52,6 +52,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
+	"picom" "-CGb" "--experimental-backend" "--config" "~/.config/instawm/picom.conf", NULL
 	"autorandr", "--force", "--load", "instawm", NULL,
 	"setxkbmap", "-option", "caps:escape", NULL,
 	"instamenue_youtube_subs", "-d", NULL,
