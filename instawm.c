@@ -88,11 +88,11 @@ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeInv, SchemeSel }; /* color schemes */
 enum { NetSupported, NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayVisual,
 	   NetWMName, NetWMState, NetWMFullscreen, NetActiveWindow, NetWMWindowType, NetWMWindowTypeDock,
-	   NetSystemTrayOrientationHorz, NetWMWindowTypeDialog, NetClientList, NetWMCheck, NetLast, 
+	   NetSystemTrayOrientationHorz, NetWMWindowTypeDialog, NetClientList, NetWMCheck, NetLast,
 	   NetWMWindowsOpacity }; /* EWMH atoms */
 enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
 enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
-enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
+enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkStartMenu, ClkWinTitle,
        ClkClientWin, ClkRootWin, ClkLast, ClkShutDown }; /* clicks */
 
 typedef union {
@@ -163,6 +163,7 @@ struct Monitor {
 	int topbar;
 	Client *clients;
 	Client *sel;
+	int gesture;
 	Client *stack;
 	Monitor *next;
 	Window barwin;
@@ -315,6 +316,9 @@ static char stext[256];
 static int freealttab = 0;
 static int statuswidth = 0;
 
+static int tagprefix = 0;
+
+
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh, blw = 0;      /* bar geometry */
@@ -409,7 +413,7 @@ applyrules(Client *c)
 
 	/* rule matching */
 	c->iscentered = 0;
-	c->isfloating = 0;	
+	c->isfloating = 0;
 	c->tags = 0;
 	XGetClassHint(dpy, c->win, &ch);
 	class    = ch.res_class ? ch.res_class : broken;
@@ -604,7 +608,8 @@ buttonpress(XEvent *e)
 		focus(NULL);
 	}
 	if (ev->window == selmon->barwin) {
-		i = x = 0;
+		i = 0;
+		x = startmenusize;
 		for (c = m->clients; c; c = c->next)
 			occ |= c->tags == 255 ? 0 : c->tags;
 		do {
@@ -613,7 +618,12 @@ buttonpress(XEvent *e)
 				continue;
 			x += TEXTW(tags[i]);
 		} while (ev->x >= x && ++i < LENGTH(tags));
-		if (i < LENGTH(tags)) {
+		if (ev->x < startmenusize) {
+			click = ClkStartMenu;
+			selmon->gesture = 0;
+			drawbar(selmon);
+		}
+		else if (i < LENGTH(tags)) {
 			click = ClkTagBar;
 			arg.ui = 1 << i;
 		} else if (ev->x < x + blw)
@@ -977,6 +987,7 @@ drawbar(Monitor *m)
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0, n = 0;
+	int iconoffset;
 	Client *c;
 
 	if(showsystray && m == systraytomon(m) && !systrayonleft)
@@ -989,6 +1000,16 @@ drawbar(Monitor *m)
 		drw_text(drw, m->ww - tw - stw, 0, tw, bh, lrpad / 2 - 2, stext, 0);
 	}
 
+	//draw start menu icon
+	drw_setscheme(drw, scheme[SchemeSel]);
+	iconoffset = (bh - 20) / 2;
+	int startmenuinvert = (selmon->gesture == 13);
+	drw_rect(drw, 0, 0, startmenusize, bh, 1, startmenuinvert ? 0:1);
+	drw_rect(drw, 5, iconoffset, 14, 14, 1, startmenuinvert ? 1:0);
+	drw_rect(drw, 9, iconoffset + 4, 6, 6, 1, startmenuinvert ? 0:1);
+	drw_rect(drw, 19, iconoffset + 14, 6, 6, 1, startmenuinvert ? 1:0);
+
+
 	resizebarwin(m);
 	for (c = m->clients; c; c = c->next) {
 		if (ISVISIBLE(c))
@@ -997,7 +1018,8 @@ drawbar(Monitor *m)
 		if (c->isurgent)
 			urg |= c->tags;
 	}
-	x = 0;
+
+	x = startmenusize;
 	for (i = 0; i < LENGTH(tags); i++) {
 		/* do not draw vacant tags */
 		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
@@ -1085,7 +1107,7 @@ drawbars(void)
 
 	for (m = mons; m; m = m->next)
 		drawbar(m);
-	
+
 	if (showsystray)
 		updatesystray();
 }
