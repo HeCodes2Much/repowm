@@ -53,7 +53,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char *const autostart[] = {
-"picom" "-CGb" "--experimental-backend" "--config" "~/.config/instawm/picom.conf", NULL,
+	"picom" "-CGb" "--experimental-backend" "--config" "~/.config/instawm/picom.conf", NULL,
 	"autorandr", "--force", "--load", "instawm", NULL,
 	"setxkbmap", "-option", "caps:escape", NULL,
 	"instamenue_youtube_subs", "-d", NULL,
@@ -179,9 +179,9 @@ static const char *playernext[] = { "playerctl", "next", NULL};
 static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
-static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
-static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
-static const char *mutevol[] = {"amixer", "sset", "Master", "toggle", NULL};
+static const char *upvol[] = {"amixer", "set", "Master", "5%+", NULL};
+static const char *downvol[] = {"amixer", "set", "Master", "5%-", NULL};
+static const char *mutevol[] = {"amixer", "set", "Master", "toggle", NULL};
 
 static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
@@ -190,6 +190,33 @@ static const char *downbright[] = {"xbacklight", "-10", NULL};
 #include "selfrestart.c"
 static Key keys[] = {
 	/* modifier                     chain key			key        					function        		argument */
+	//TheRepoClub Custom Keybinds.
+	{ MODKEY,						-1,         		XK_o,						spawn,       			{.v = systemmonitorcmd } },
+	{ MODKEY,						-1,         		XK_F1,						spawn,       			{.v = smartcmd } },
+	{ MODKEY,						-1,         		XK_F2,						spawn,       			{.v = clipmenucmd } },
+	{ MODKEY,						-1,         		XK_F3,						spawn,       			{.v = instasettings } },
+	{ MODKEY|ShiftMask,          	-1,         		XK_Return,  				spawn,       			{.v = filemanagercmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_h,						spawn,       			{.v = hypervisorcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_f,						spawn,       			{.v = browsercmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_c,						spawn,       			{.v = editorcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_t,						spawn,       			{.v = mailcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_g,						spawn,       			{.v = gitcmd } },
+	{ MODKEY|ControlMask,			-1,         		XK_i,						spawn,       			SHCMD("inkscape") },
+	{ MODKEY|ControlMask,			-1,         		XK_k,						spawn,       			SHCMD("krita") },
+	{ MODKEY|ControlMask,			-1,         		XK_v,						spawn,       			SHCMD("vlc") },
+	{ MODKEY|ControlMask,			-1,         		XK_s,						spawn,       			SHCMD("prime-run steam") },
+	{ MODKEY|ControlMask,			-1,         		XK_m,						spawn,       			SHCMD("prime-run minecraft-launcher") },
+	{ MODKEY|ControlMask,			-1,         		XK_e,						spawn,       			SHCMD("element-desktop") },
+	{ MODKEY|ControlMask,			-1,         		XK_p,						spawn,       			SHCMD("piper") },
+	{ MODKEY|ControlMask,			-1,         		XK_u,						spawn,       			SHCMD("pavucontrol") },
+	{ MODKEY|ShiftMask,				-1,         		XK_z,						spawn,       			SHCMD("multimonitorlock-gui") },
+	{ MODKEY|Mod1Mask,				-1,         		XK_p,						spawn,       			SHCMD("pamac-manager") },
+
+	{ MODKEY,						XK_Print,         	XK_w,						spawn,       			SHCMD("i3-maim -w" ) },
+	{ MODKEY,						XK_Print,         	XK_s,						spawn,       			SHCMD("i3-maim -s" ) },
+	{ MODKEY,						XK_Print,         	XK_f,						spawn,       			SHCMD("i3-maim -f" ) },
+
+	//Keybinds you may need to customise.
 	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
 	{ MODKEY,                       -1,         		XK_p,      					spawn,          		{.v = instamenucmd } },
 	{ MODKEY,						-1,         		XK_Return, 					spawn,          		{.v = terminalcmd } },
@@ -202,7 +229,7 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         		XK_l,      					setmfact,       		{.f = +0.05} },
 	{ MODKEY|ShiftMask,             -1,         		XK_j,      					movestack,      		{.i = +1 } },
 	{ MODKEY|ShiftMask,             -1,         		XK_k,      					movestack,      		{.i = -1 } },
-	{ MODKEY,                       -1,         		XK_Return, 					zoom,           		{0} },
+	{ MODKEY|Mod1Mask, 				-1, 				XK_Return, 					zoom, 					{0} },
 	{ MODKEY,						-1,         		XK_z,						incrgaps,				{.i = +3 } },
 	{ MODKEY,						-1,         		XK_x,						incrgaps,				{.i = -3 } },
 	{ MODKEY,						-1,         		XK_a,      					togglegaps,     		{0} },
@@ -243,22 +270,22 @@ static Key keys[] = {
 	TAGKEYS(						-1,         		XK_8,                      	7)
 	TAGKEYS(						-1,         		XK_9,                      	8)
 	TAGKEYS(						-1,         		XK_0,                      	9)
-	// { 0,                            -1,         		XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
-	// { 0,                            -1,         		XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
-	// { 0,                            -1,         		XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
-	// { 0,                            -1,         		XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
-	// { 0,                            -1,         		XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
-	// { 0,                            -1,         		XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
-	// { 0,                            -1,         		XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
-	// { 0,                            -1,         		XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
-	// { 0,                            -1,         		XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
+	{ 0,                            -1,         		XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
+	{ 0,                            -1,         		XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
+	{ 0,                            -1,         		XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
+	{ 0,                            -1,         		XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
+	{ 0,                            -1,         		XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
+	{ 0,                            -1,         		XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
+	{ 0,                            -1,         		XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
+	{ 0,                            -1,         		XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
+	{ 0,                            -1,         		XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, ClkShutDown, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        	argument */
-	{ ClkStartMenu,					0,				Button1,		spawn,		{.v = instamenucmd } },
+	{ ClkStartMenu,					0,				Button1,		spawn,		{.v = startmenucmd } },
 	{ ClkLtSymbol,    		0,				Button1, 		cyclelayout,       	{.i = -1 } },
 	{ ClkLtSymbol,    		0,				Button3, 		cyclelayout,       	{.i = +1 } },
 	{ ClkLtSymbol,    		0,				Button2, 		setlayout,         	{.v = &layouts[0]} },
@@ -272,6 +299,5 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            	{0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      	{0} },
 	{ ClkShutDown,    		0,				Button1,		spawn,				{.v = powermenucmd } },
-	// { ClkStartMenu,   		0,				Button1, 		spawn,				{.v = startmenucmd}},
 };
 
