@@ -33,7 +33,7 @@ instawm: ${OBJ}
 
 .PHONY: clean
 clean:
-	rm -f instawm ${OBJ} instawm-${CMS_VERSION}.tar.gz
+	rm -f instawm config.h ${OBJ} instawm-${CMS_VERSION}.tar.gz
 
 .PHONY: dist
 dist: clean

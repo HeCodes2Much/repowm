@@ -15,7 +15,7 @@ static const double defaultopacity  			= 1;		/* 0 being full transparent 1 being
 static const int swallowfloating    			= 0;        /* 1 means swallow floating windows by default */
 static const int smartgaps          			= 0;        /* 1 means no outer gap when there is only one window */
 static const int systraypinningfailfirst 		= 1;   		/* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        			= 1;     	/* 0 means no systray */
+static const int showsystray        			= 0;     	/* 0 means no systray */
 static const int showbar            			= 1;        /* 0 means no bar */
 static const int topbar             			= 1;        /* 0 means bottom bar */
 static const int useinstabar 					= 1;  		/* 0 means don't use instabar script */
@@ -189,7 +189,6 @@ static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 #include "movestack.c"
-#include "selfrestart.c"
 static Key keys[] = {
 	/* modifier                     chain key			key        					function        		argument */
 	//TheRepoClub Custom Keybinds.
@@ -260,7 +259,7 @@ static Key keys[] = {
 	{ MODKEY,                       -1,         		XK_period, 					focusmon,       		{.i = +1 } },
 	{ MODKEY|ShiftMask,             -1,         		XK_comma,  					tagmon,         		{.i = -1 } },
 	{ MODKEY|ShiftMask,             -1,         		XK_period, 					tagmon,         		{.i = +1 } },
-	{ MODKEY|ShiftMask,             -1,         		XK_r,      					self_restart,   		{0} },
+	{ MODKEY|ShiftMask,             -1,         		XK_r,      					quit,   				{1} },
 	{ MODKEY|ShiftMask,             -1,         		XK_q,     					quit,           		{0} },
 	TAGKEYS(						-1,         		XK_1,                      	0)
 	TAGKEYS(						-1,         		XK_2,                      	1)
