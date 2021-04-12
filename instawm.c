@@ -316,9 +316,6 @@ static char stext[256];
 static int freealttab = 0;
 static int statuswidth = 0;
 
-static int tagprefix = 0;
-
-
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh, blw = 0;      /* bar geometry */
