@@ -1223,17 +1223,6 @@ grabkeys(void)
 				}
 		}
 
-		if(!selmon->sel){
-			for (i = 0; i < LENGTH(dkeys); i++) {
-				if ((code = XKeysymToKeycode(dpy, dkeys[i].keysym)))
-					for (j = 0; j < LENGTH(modifiers); j++)
-						XGrabKey(dpy, code, dkeys[i].mod | modifiers[j], root,
-							True, GrabModeAsync, GrabModeAsync);
-			}
-
-		}
-
-
 	}
 }
 
@@ -1274,18 +1263,6 @@ keypress(XEvent *e)
 		}
 
 	}
-
-	if (!selmon->sel) {
-		for (i = 0; i < LENGTH(dkeys); i++) {
-			if (keysym == dkeys[i].keysym
-			&& CLEANMASK(dkeys[i].mod) == CLEANMASK(ev->state)
-			&& dkeys[i].func)
-				dkeys[i].func(&(dkeys[i].arg));
-
-		}
-
-	}
-
 }
 
 void

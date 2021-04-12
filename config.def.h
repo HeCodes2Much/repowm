@@ -192,31 +192,6 @@ static const char *playernext[] = { "playerctl", "next", NULL};
 static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
-static Key dkeys[] = {
-	/* modifier  			key        		function     argument */
-	{Mod1Mask,          	XK_space,  		spawn,       {.v = instamenucmd } },
-	{Mod1Mask,          	XK_e,      		spawn,       {.v = editorcmd } },
-	{Mod1Mask,          	XK_n,      		spawn,       {.v = filemanagercmd } },
-	{Mod1Mask,          	XK_f,      		spawn,       {.v = browsercmd} },
-	{Mod1Mask,          	XK_Return, 		spawn,       {.v = terminalcmd} },
-	{Mod1Mask,         	 	XK_plus,		spawn,       {.v = upvol} },
-	{Mod1Mask,          	XK_minus,		spawn,       {.v = downvol} },
-	{Mod1Mask,          	XK_u,			spawn,       {.v = upbright} },
-	{Mod1Mask,          	XK_d,			spawn,       {.v = downbright} },
-	{Mod1Mask,          	XK_y,      		spawn,       {.v = smartcmd} },
-
-	{Mod1Mask,          	XK_1,      		view,        {.ui = 1 << 0}},
-	{Mod1Mask,          	XK_2,     		view,        {.ui = 1 << 1}},
-	{Mod1Mask,          	XK_3,      		view,        {.ui = 1 << 2}},
-	{Mod1Mask,          	XK_4,      		view,        {.ui = 1 << 3}},
-	{Mod1Mask,          	XK_5,      		view,        {.ui = 1 << 4}},
-	{Mod1Mask,          	XK_6,      		view,        {.ui = 1 << 5}},
-	{Mod1Mask,          	XK_7,      		view,        {.ui = 1 << 6}},
-	{Mod1Mask,          	XK_8,      		view,        {.ui = 1 << 7}},
-	{Mod1Mask,          	XK_9,      		view,        {.ui = 1 << 8}},
-	{Mod1Mask,          	XK_0,      		view,        {.ui = 1 << 9}},
-};
-
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        		function        argument */
