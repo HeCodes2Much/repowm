@@ -1071,23 +1071,25 @@ drawbar(Monitor *m)
 				w -= tw;
 			}
  		}
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		drw_rect(drw, x, 0, w, bh, 1, 1);
 		// render shutdown button
-		drw_text(drw, x, 0, tw, bh, lrpad / 2, "", 0);
+		if (!selmon->clients) {
+			drw_setscheme(drw, scheme[SchemeNorm]);
+			drw_rect(drw, x, 0, w, bh, 1, 1);
+			drw_text(drw, x, 0, tw, bh, lrpad / 2, "", 0);
+		}
 		// display help message if no application is opened
 		if (!selmon->clients) {
 			int titlewidth =
-				TEXTW("Press alt + space to launch an application") <
+				TEXTW(" Press alt + space to launch an application") <
 						selmon->btw
 					? TEXTW(
-						"Press alt + space to launch an application")
+						" Press alt + space to launch an application")
 					: (selmon->btw - bh);
 			drw_text(
 				drw,
 				x + bh + ((selmon->btw - bh) - titlewidth + 1) / 2,
 				0, titlewidth, bh, 0,
-				"Press alt + space to launch an application", 0);
+				" Press alt + space to launch an application", 0);
 		}
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
