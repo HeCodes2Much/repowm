@@ -17,7 +17,7 @@ static const int showsystray        = 1;     	/* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int useinstabar 		= 0;  		/* 0 means don't use instabar script */
-static const int user_bh            = 28;       /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh            = 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
     "Misc Termsyn:size=12",
     "Siji:size=14",
@@ -46,6 +46,16 @@ static const char *colors[][4] = {
 static const unsigned int alphas[][3]      = {
 	[SchemeNorm] = { OPAQUE, 			baralpha, 			borderalpha },
 	[SchemeSel]  = { OPAQUE, 			baralpha, 			borderalpha },
+};
+
+static const char *const autostart[] = {
+	// "mpd-notification", NULL,
+	// "hsetroot", "-center", "/usr/home/bit6tream/pic/wallapper.png", NULL,
+	// "xrdb", "/usr/home/bit6tream/.config/X/Xresources", NULL,
+	// "sh", "-c", "while :; do instawmstatus.sh -; sleep 60; done", NULL,
+	"dunst", NULL,
+	// "picom", NULL,
+	NULL
 };
 
 /* tagging */
