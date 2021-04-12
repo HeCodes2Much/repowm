@@ -41,15 +41,15 @@ static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 
 static const char *colors[][4] = {
-	/*               fg              	bg              	border 	           	 float*/
-	[SchemeNorm] = { col_gray3, 		col_gray1, 			col_gray2, 			col_green },
-	[SchemeInv]  = { col_gray1, 		col_gray3, 			col_gray2, 			col_green },
-	[SchemeSel]  = { col_gray4, 		col_cyan,  			col_cyan, 			col_green },
+	/*               	fg              	bg              	border 	           	 float*/
+	[SchemeNorm] 		= { col_gray3, 		col_gray1, 			col_gray2, 			col_green },
+	[SchemeInv]  		= { col_gray1, 		col_gray3, 			col_gray2, 			col_green },
+	[SchemeSel]  		= { col_gray4, 		col_cyan,  			col_cyan, 			col_green },
 };
 
-static const unsigned int alphas[][3]      = {
-	[SchemeNorm] = { OPAQUE, 			baralpha, 			borderalpha },
-	[SchemeSel]  = { OPAQUE, 			baralpha, 			borderalpha },
+static const unsigned int alphas[][3] = {
+	[SchemeNorm] 		= { OPAQUE, 		baralpha, 			borderalpha },
+	[SchemeSel]  		= { OPAQUE, 		baralpha, 			borderalpha },
 };
 
 static const char *const autostart[] = {

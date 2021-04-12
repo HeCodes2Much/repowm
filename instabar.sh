@@ -105,7 +105,7 @@ clock() {
 
 main() {
 	while true; do
-		xsetroot -name " $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_pa) | $(clock) |"
+		instawm -s " $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_pa) | $(clock) |"
 		sleep 1
 	done
 }

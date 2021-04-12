@@ -32,8 +32,8 @@ indicated with an empty square in the top left corner.
 instawm draws a small border around windows to indicate the focus state.
 .P
 On start, instawm can start additional programs that may be specified in two special
-shell scripts (see the FILES section below), autostart_blocking.sh and
-autostart.sh.  The former is executed first and instawm will wait for its
+shell scripts (see the FILES section below), autostart.sh.  
+The former is executed first and instawm will wait for its
 termination before starting.  The latter is executed in the background before
 instawm enters its handler loop.
 .P
@@ -172,9 +172,6 @@ The first existing directory is scanned for any of the autostart files below.
 autostart.sh
 This file is started as a shell background process before instawm enters its handler
 loop.
-.TP 15
-autostart_blocking.sh
-This file is started before any autostart.sh; instawm waits for its termination.
 .SH CUSTOMIZATION
 instawm is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
