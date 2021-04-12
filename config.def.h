@@ -179,9 +179,9 @@ static const char *playernext[] = { "playerctl", "next", NULL};
 static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
-static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
-static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
-static const char *mutevol[] = {"amixer", "sset", "Master", "toggle", NULL};
+static const char *upvol[] = {"amixer", "set", "Master", "5%+", NULL};
+static const char *downvol[] = {"amixer", "set", "Master", "5%-", NULL};
+static const char *mutevol[] = {"amixer", "set", "Master", "toggle", NULL};
 
 static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
