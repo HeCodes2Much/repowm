@@ -175,6 +175,7 @@ static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 #include "movestack.c"
+#include "selfrestart.c"
 static Key keys[] = {
 	/* modifier                     key        					function        		argument */
 	{ MODKEY,                       XK_p,      					spawn,          		{.v = instamenucmd } },
@@ -214,6 +215,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, 					focusmon,       		{.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  					tagmon,         		{.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, 					tagmon,         		{.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_r,      					self_restart,   		{0} },
 	{ MODKEY|ShiftMask,             XK_q,     					quit,           		{0} },
 	TAGKEYS(						XK_1,                      	0)
 	TAGKEYS(						XK_2,                      	1)
