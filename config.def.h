@@ -26,66 +26,30 @@ static const char *fonts[] = {
     "xos4 Terminus:size=12"};
 
 
-// empty background
-static char col_background[] = "#292f3a"; /* top bar dark background*/
-// fonts
-static char col_white[] = "#ffffff";/*white for fonts*/
+// instawm bar colors
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
+static const char col_green[] 		= "#52E167";
 
-// border active and inactive
-static char col_pastel_blue[] = "#747c90";/*unsaturated for focused border*/
-static char col_light_blue[] = "#4dadd4";/*focused windows d */
-
-// blue window indicator
-static char col_blue[] = "#5294E2";/*focused instamenu or topbar d */
-static char col_dark_blue[] = "#3579CB";/*focused instamenu or topbar d */
-
-// hover over blue window indicator
-static char col_hover_blue[] = "#7CA8DC";/*focused instamenu or topbar d */
-static char col_hover_dark_blue[] = "#578BC9";/*focused instamenu or topbar d */
-
-// sticky window indicator
-static char col_green[] = "#52E167";/*focused instamenu or topbar d */
-static char col_dark_green[] = "#35CB4B";/*focused instamenu or topbar d */
-
-// unfocused sticky indicator
-static char col_orange[] = "#E1A052";/*focused instamenu or topbar d */
-static char col_dark_orange[] = "#CB8735";/*focused instamenu or topbar d */
-
-// close button
-static char col_red[] = "#E1527E";/*focused instamenu or topbar d */
-static char col_dark_red[] = "#CB3563";/*focused instamenu or topbar d */
-
-// hover over close button
-static char col_hover_red[] = "#D37492";/*focused instamenu or topbar d */
-static char col_hover_dark_red[] = "#CE577C";/*focused instamenu or topbar d */
-
-// hover over empty tag
-static char col_hover[] = "#596377";/*focused instamenu or topbar d */
-static char col_hover_shadow[] = "#475166";/*focused instamenu or topbar d */
+static const unsigned int baralpha = 0xd0;
+static const unsigned int borderalpha = OPAQUE;
 
 static const char *colors[][4] = {
-	/*                    		fg              		bg              		border 	           		float*/
-	[SchemeNorm]      = { col_white,       col_background, col_pastel_blue,    col_green },
-	[SchemeSel]       = { col_white,       col_blue,       col_light_blue,     col_green },
-	[SchemeHid]       = { col_pastel_blue, col_background, col_pastel_blue,    col_green },
-	[SchemeTags]      = { col_white,       col_blue,       col_light_blue,     col_dark_blue },
-	[SchemeActive]    = { col_white,       col_green,      col_light_blue,     col_dark_green },
-	[SchemeAddActive] = { col_white,       col_orange,     col_light_blue,     col_dark_orange },
-	[SchemeEmpty]     = { col_white,       col_red,        col_light_blue,     col_dark_red },
-	[SchemeHover]     = { col_white,       col_hover,      col_light_blue,     col_hover_shadow },
-	[SchemeClose]     = { col_hover_red,   col_red,        col_hover_dark_red, col_dark_red },
-	[SchemeHoverTags] = { col_white,       col_hover_blue, col_light_blue,     col_hover_dark_blue },
+	/*               fg              	bg              	border 	           	 float*/
+	[SchemeNorm] = { col_gray3, 		col_gray1, 			col_gray2, 			col_green },
+	[SchemeSel]  = { col_gray4, 		col_cyan,  			col_cyan, 			col_green  },
+};
+
+static const unsigned int alphas[][3]      = {
+	[SchemeNorm] = { OPAQUE, 			baralpha, 			borderalpha },
+	[SchemeSel]  = { OPAQUE, 			baralpha, 			borderalpha },
 };
 
 /* tagging */
 static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: VirtualBox", " 9: Chat" , " 10: Settings" };
-
-static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
-static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
-static const char *mutevol[] = {"amixer", "sset", "Master", "toggle", NULL};
-
-static const char *upbright[] = {"xbacklight", "+10", NULL};
-static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -192,57 +156,73 @@ static const char *playernext[] = { "playerctl", "next", NULL};
 static const char *playerprevious[] = { "playerctl", "previous", NULL};
 static const char *playerpause[] = { "playerctl", "play-pause", NULL};
 
+static const char *upvol[] = {"amixer", "sset", "Master", "5%+", NULL};
+static const char *downvol[] = {"amixer", "sset", "Master", "5%-", NULL};
+static const char *mutevol[] = {"amixer", "sset", "Master", "toggle", NULL};
+
+static const char *upbright[] = {"xbacklight", "+10", NULL};
+static const char *downbright[] = {"xbacklight", "-10", NULL};
+
 #include "movestack.c"
 static Key keys[] = {
-	/* modifier                     key        		function        argument */
-	{ MODKEY,                       XK_p,      		spawn,          {.v = instamenucmd } },
-	{ MODKEY,						XK_Return, 		spawn,          {.v = terminalcmd } },
-	{ MODKEY,                       XK_b,      		togglebar,      {0} },
-	{ MODKEY,                       XK_j,      		focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      		focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      		incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      		incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      		setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      		setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_j,      		movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,      		movestack,      {.i = -1 } },
-	{ MODKEY,                       XK_Return, 		zoom,           {0} },
-	{ MODKEY,						XK_z,			incrgaps,		{.i = +3 } },
-	{ MODKEY,						XK_x,			incrgaps,		{.i = -3 } },
-	{ MODKEY,						XK_a,      		togglegaps,     {0} },
-	{ MODKEY|ShiftMask,				XK_a,      		defaultgaps,    {0} },
-	{ MODKEY,                       XK_Tab,    		view,           {0} },
-	{ MODKEY,             			XK_q,      		killclient,     {0} },
-	{ MODKEY,						XK_t,			setlayout,		{.v = &layouts[0]} }, /* tile */
-	{ MODKEY|ShiftMask,				XK_t,			setlayout,		{.v = &layouts[1]} }, /* bstack */
-	{ MODKEY,						XK_y,			setlayout,		{.v = &layouts[2]} }, /* spiral */
-	{ MODKEY|ShiftMask,				XK_y,			setlayout,		{.v = &layouts[3]} }, /* dwindle */
-	{ MODKEY,						XK_u,			setlayout,		{.v = &layouts[4]} }, /* deck */
-	{ MODKEY|ShiftMask,				XK_u,			setlayout,		{.v = &layouts[5]} }, /* monocle */
-	{ MODKEY,						XK_i,			setlayout,		{.v = &layouts[6]} }, /* centeredmaster */
-	{ MODKEY|ShiftMask,				XK_i,			setlayout,		{.v = &layouts[7]} }, /* centeredfloatingmaster */
-	{ MODKEY|ControlMask,			XK_comma,		cyclelayout,	{.i = -1 } },
-	{ MODKEY|ControlMask,			XK_period,		cyclelayout,	{.i = +1 } },
-	{ MODKEY,                       XK_space,  		setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  		togglefloating, {0} },
-	{ MODKEY|ShiftMask,             XK_f,      		togglefullscr,  {0} },
-	{ MODKEY,                       XK_0,      		view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      		tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma, 		focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, 		focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  		tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, 		tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_q,     		quit,           {0} },
-	TAGKEYS(						XK_1,                      		0)
-	TAGKEYS(						XK_2,                      		1)
-	TAGKEYS(						XK_3,                      		2)
-	TAGKEYS(						XK_4,                      		3)
-	TAGKEYS(						XK_5,                      		4)
-	TAGKEYS(						XK_6,                      		5)
-	TAGKEYS(						XK_7,                      		6)
-	TAGKEYS(						XK_8,                      		7)
-	TAGKEYS(						XK_9,                      		8)
-	TAGKEYS(						XK_0,                      		9)
+	/* modifier                     key        					function        		argument */
+	{ MODKEY,                       XK_p,      					spawn,          		{.v = instamenucmd } },
+	{ MODKEY,						XK_Return, 					spawn,          		{.v = terminalcmd } },
+	{ MODKEY,                       XK_b,      					togglebar,      		{0} },
+	{ MODKEY,                       XK_j,      					focusstack,     		{.i = +1 } },
+	{ MODKEY,                       XK_k,      					focusstack,     		{.i = -1 } },
+	{ MODKEY,                       XK_i,      					incnmaster,     		{.i = +1 } },
+	{ MODKEY,                       XK_d,      					incnmaster,     		{.i = -1 } },
+	{ MODKEY,                       XK_h,      					setmfact,       		{.f = -0.05} },
+	{ MODKEY,                       XK_l,      					setmfact,       		{.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_j,      					movestack,      		{.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      					movestack,      		{.i = -1 } },
+	{ MODKEY,                       XK_Return, 					zoom,           		{0} },
+	{ MODKEY,						XK_z,						incrgaps,				{.i = +3 } },
+	{ MODKEY,						XK_x,						incrgaps,				{.i = -3 } },
+	{ MODKEY,						XK_a,      					togglegaps,     		{0} },
+	{ MODKEY|ShiftMask,				XK_a,      					defaultgaps,    		{0} },
+	{ MODKEY,                       XK_Tab,    					view,           		{0} },
+	{ MODKEY,             			XK_q,      					killclient,     		{0} },
+	{ MODKEY,						XK_t,						setlayout,				{.v = &layouts[0]} }, /* tile */
+	{ MODKEY|ShiftMask,				XK_t,						setlayout,				{.v = &layouts[1]} }, /* bstack */
+	{ MODKEY,						XK_y,						setlayout,				{.v = &layouts[2]} }, /* spiral */
+	{ MODKEY|ShiftMask,				XK_y,						setlayout,				{.v = &layouts[3]} }, /* dwindle */
+	{ MODKEY,						XK_u,						setlayout,				{.v = &layouts[4]} }, /* deck */
+	{ MODKEY|ShiftMask,				XK_u,						setlayout,				{.v = &layouts[5]} }, /* monocle */
+	{ MODKEY,						XK_i,						setlayout,				{.v = &layouts[6]} }, /* centeredmaster */
+	{ MODKEY|ShiftMask,				XK_i,						setlayout,				{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY|ControlMask,			XK_comma,					cyclelayout,			{.i = -1 } },
+	{ MODKEY|ControlMask,			XK_period,					cyclelayout,			{.i = +1 } },
+	{ MODKEY,                       XK_space,  					setlayout,      		{0} },
+	{ MODKEY|ShiftMask,             XK_space,  					togglefloating, 		{0} },
+	{ MODKEY|ShiftMask,             XK_f,      					togglefullscr,  		{0} },
+	{ MODKEY,                       XK_0,      					view,           		{.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,      					tag,            		{.ui = ~0 } },
+	{ MODKEY,                       XK_comma, 					focusmon,       		{.i = -1 } },
+	{ MODKEY,                       XK_period, 					focusmon,       		{.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,  					tagmon,         		{.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period, 					tagmon,         		{.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_q,     					quit,           		{0} },
+	TAGKEYS(						XK_1,                      	0)
+	TAGKEYS(						XK_2,                      	1)
+	TAGKEYS(						XK_3,                      	2)
+	TAGKEYS(						XK_4,                      	3)
+	TAGKEYS(						XK_5,                      	4)
+	TAGKEYS(						XK_6,                      	5)
+	TAGKEYS(						XK_7,                      	6)
+	TAGKEYS(						XK_8,                      	7)
+	TAGKEYS(						XK_9,                      	8)
+	TAGKEYS(						XK_0,                      	9)
+	// { 0,                            XF86XK_MonBrightnessUp,   	spawn,   				{.v = upbright}},
+	// { 0,                            XF86XK_MonBrightnessDown, 	spawn,   				{.v = downbright}},
+	// { 0,                            XF86XK_AudioLowerVolume,  	spawn,   				{.v = downvol}},
+	// { 0,                            XF86XK_AudioMute,         	spawn,   				{.v = mutevol}},
+	// { 0,                            XF86XK_AudioRaiseVolume,  	spawn,   				{.v = upvol}},
+	// { 0,                            XF86XK_AudioPlay,         	spawn,   				{.v = playerpause}},
+	// { 0,                            XF86XK_AudioPause,        	spawn,   				{.v = playerpause}},
+	// { 0,                            XF86XK_AudioNext,         	spawn,   				{.v = playernext}},
+	// { 0,                            XF86XK_AudioPrev,         	spawn,   				{.v = playerprevious}},
 };
 
 /* button definitions */
