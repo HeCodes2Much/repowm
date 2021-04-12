@@ -148,6 +148,7 @@ struct Monitor {
 	int nmaster;
 	int num;
 	int by;               /* bar geometry */
+	int btw;              /* width of tasks portion of bar */
 	int mx, my, mw, mh;   /* screen size */
 	int wx, wy, ww, wh;   /* window area  */
 	int gappih;           /* horizontal gap between windows */
@@ -1051,20 +1052,20 @@ drawbar(Monitor *m)
 		// render shutdown button
 		drw_text(drw, x, 0, tw, bh, lrpad / 2, "", 0);
 		// display help message if no application is opened
-		// if (!selmon->clients) {
-		// 	int titlewidth =
-		// 		TEXTW("Press space to launch an application") <
-		// 				selmon->btw
-		// 			? TEXTW(
-		// 				"Press space to launch an application")
-		// 			: (selmon->btw - bh);
-		// 	drw_text(
-		// 		drw,
-		// 		x + bh +
-		// 			((selmon->btw - bh) - titlewidth + 1) / 2,
-		// 		0, titlewidth, bh, 0,
-		// 		"Press space to launch an application", 0, 0);
-		// }
+		if (!selmon->clients) {
+			int titlewidth =
+				TEXTW("Press alt + space to launch an application") <
+						selmon->btw
+					? TEXTW(
+						"Press alt + space to launch an application")
+					: (selmon->btw - bh);
+			drw_text(
+				drw,
+				x + bh +
+					((selmon->btw - bh) - titlewidth + 1) / 2,
+				0, titlewidth, bh, 0,
+				"Press alt + space to launch an application", 0);
+		}
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
 }

@@ -182,6 +182,7 @@ static const char *downbright[] = {"xbacklight", "-10", NULL};
 #include "selfrestart.c"
 static Key keys[] = {
 	/* modifier                     key        					function        		argument */
+	{ Mod1Mask,          			XK_space,  					spawn,       			{.v = instamenucmd } },
 	{ MODKEY,                       XK_p,      					spawn,          		{.v = instamenucmd } },
 	{ MODKEY,						XK_Return, 					spawn,          		{.v = terminalcmd } },
 	{ MODKEY,                       XK_b,      					togglebar,      		{0} },
@@ -246,7 +247,7 @@ static Key keys[] = {
 };
 
 /* button definitions */
-/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, ClkShutDown, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        	argument */
 	{ ClkLtSymbol,    		0,				Button1, 		cyclelayout,       	{.i = -1 } },
