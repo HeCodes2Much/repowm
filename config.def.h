@@ -16,6 +16,7 @@ static const int systraypinningfailfirst 		= 1;   		/* 1: if pinning fails, disp
 static const int showsystray        			= 1;     	/* 0 means no systray */
 static const int showbar            			= 1;        /* 0 means no bar */
 static const int topbar             			= 1;        /* 0 means bottom bar */
+static const double defaultopacity  			= 0.80;		/* 0 being full transparent 1 being non-transparent */
 static const int useinstabar 					= 0;  		/* 0 means don't use instabar script */
 static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
@@ -204,6 +205,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,				XK_u,						setlayout,				{.v = &layouts[5]} }, /* monocle */
 	{ MODKEY,						XK_i,						setlayout,				{.v = &layouts[6]} }, /* centeredmaster */
 	{ MODKEY|ShiftMask,				XK_i,						setlayout,				{.v = &layouts[7]} }, /* centeredfloatingmaster */
+	{ MODKEY|Mod1Mask,				XK_s,	   					spawn,	   				SHCMD("transset-df -a --dec .1") },
+	{ MODKEY|Mod1Mask,				XK_d,	   					spawn,	   				SHCMD("transset-df -a --inc .1") },
+	{ MODKEY|Mod1Mask,				XK_f,	   					spawn,	   				SHCMD("transset-df -a .75") },
 	{ MODKEY|ControlMask,			XK_comma,					cyclelayout,			{.i = -1 } },
 	{ MODKEY|ControlMask,			XK_period,					cyclelayout,			{.i = +1 } },
 	{ MODKEY,                       XK_space,  					setlayout,      		{0} },
