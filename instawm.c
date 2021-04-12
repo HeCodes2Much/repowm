@@ -984,7 +984,6 @@ drawbar(Monitor *m)
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0, n = 0;
-	int iconoffset;
 	Client *c;
 
 	if(showsystray && m == systraytomon(m) && !systrayonleft)
@@ -999,12 +998,9 @@ drawbar(Monitor *m)
 
 	//draw start menu icon
 	drw_setscheme(drw, scheme[SchemeNorm]);
-	iconoffset = (bh - 20) / 2;
 	int startmenuinvert = (selmon->gesture == 13);
 	drw_rect(drw, 0, 0, startmenusize, bh, 1, startmenuinvert ? 0:1);
-	drw_rect(drw, 5, iconoffset, 14, 14, 1, startmenuinvert ? 1:0);
-	drw_rect(drw, 9, iconoffset + 4, 6, 6, 1, startmenuinvert ? 0:1);
-	drw_rect(drw, 19, iconoffset + 14, 6, 6, 1, startmenuinvert ? 1:0);
+	drw_text(drw, x, 0, startmenusize, bh, 1, " ", 0);
 
 
 	resizebarwin(m);
@@ -3171,4 +3167,3 @@ main(int argc, char *argv[])
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
 }
-
