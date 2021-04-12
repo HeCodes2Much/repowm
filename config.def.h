@@ -80,7 +80,9 @@ static const Rule rules[] = {
 
 	/* class     				instance  	title           	tags mask  		iscentered		isfloating  	isterminal  	noswallow  		monitor */
 	//All workspaces
-	{ "floatmenu",		        NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
+	{ "MultiMonitorLock-GUI",	NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
+	{ "Pavucontrol",			NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
+	{ "floatmenu",				NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
 
 	//Workspace 1 Monator 0
 	{ "kitty", 		  			NULL,     	NULL,         		1 << 0,         0,          	0,          	1,          	-1,        		0 },
