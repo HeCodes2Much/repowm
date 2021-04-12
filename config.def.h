@@ -188,6 +188,7 @@ static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 #include "movestack.c"
 #include "selfrestart.c"
+
 static Key keys[] = {
 	/* modifier                     chain key			key        					function        		argument */
 	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
