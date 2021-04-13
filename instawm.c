@@ -1003,7 +1003,7 @@ drawbar(Monitor *m)
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	int startmenuinvert = (selmon->gesture == 13);
 	drw_rect(drw, 0, 0, startmenusize, bh, 1, startmenuinvert ? 0:1);
-	drw_text(drw, x, 0, startmenusize, bh, 1, " ", 0);
+	drw_text(drw, 0, 0, startmenusize, bh, 1, " ", 0);
 
 
 	resizebarwin(m);
