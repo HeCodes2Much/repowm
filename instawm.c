@@ -2228,7 +2228,7 @@ tag(const Arg *arg)
 		selmon->sel->tags = arg->ui & TAGMASK;
 		focus(NULL);
 		arrange(selmon);
-		if(viewontag)
+		if(viewontag && ((arg->ui & TAGMASK) != TAGMASK))
 			view(arg);
 	}
 }

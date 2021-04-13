@@ -17,7 +17,7 @@ static const int systraypinningfailfirst 		= 1;   		/* 1: if pinning fails, disp
 static const int showsystray        			= 1;     	/* 0 means no systray */
 static const int showbar            			= 1;        /* 0 means no bar */
 static const int topbar             			= 1;        /* 0 means bottom bar */
-static const int viewontag         				= 1;     	/* 0 means don't  view on tag switch */
+static const int viewontag         				= 1;     	/* 0 means don't view on tag switch */
 static const int useinstabar 					= 1;  		/* 0 means don't use instabar script */
 static const unsigned int startmenusize = 30;		  /* snap pixel */
 static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
@@ -134,6 +134,12 @@ static const Layout layouts[] = {
 
 	{ "><>",	NULL },			/* no layout function means floating behavior */
 	{ NULL,		NULL },
+};
+
+static const MonitorRule monrules[] = {
+	/* monitor  	tag  	layout  	mfact  		nmaster  	showbar  	topbar */
+	{  0,       	0,  	6,      	-1,    		-1,      	-1,      	-1     }, // use a different layout for the second monitor
+	{  -1,      	-1,  	0,      	-1,    		-1,      	-1,      	-1     }, // default
 };
 
 /* key definitions */
