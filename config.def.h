@@ -29,12 +29,12 @@ static const char *fonts[] = {
 
 
 // instawm bar colors
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray1[]       = "#282a36";
+static const char col_gray2[]       = "#ffb86c";
+static const char col_gray3[]       = "#BE78D1";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char col_green[] 		= "#52E167";
+static const char col_cyan[]        = "#BE78D1";
+static const char col_green[] 		= "#61C766";
 
 static const char *colors[][4] = {
 	/*               	fg              	bg              	border 	           	 float*/
@@ -193,6 +193,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,			-1,         		XK_c,						spawn,       			{.v = editorcmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_t,						spawn,       			{.v = mailcmd } },
 	{ MODKEY|ControlMask,			-1,         		XK_g,						spawn,       			{.v = gitcmd } },
+	{ MODKEY|ShiftMask,          	-1,         		XK_e,  						spawn,       			SHCMD("qt-logout") },
 	{ MODKEY|ControlMask,			-1,         		XK_i,						spawn,       			SHCMD("inkscape") },
 	{ MODKEY|ControlMask,			-1,         		XK_k,						spawn,       			SHCMD("krita") },
 	{ MODKEY|ControlMask,			-1,         		XK_v,						spawn,       			SHCMD("vlc") },
