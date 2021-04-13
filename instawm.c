@@ -398,7 +398,7 @@ void
 applyrules(Client *c)
 {
 	const char *class, *instance;
-	unsigned int i;
+	unsigned int i, newtagset;
 	const Rule *r;
 	Monitor *m;
 	XClassHint ch = { NULL, NULL };
@@ -426,9 +426,22 @@ applyrules(Client *c)
 			if (m)
 				c->mon = m;
 			if (r->switchtotag) {
-				Arg a = { .ui = r->tags };
-				c->switchtotag = selmon->tagset[selmon->seltags];
-				view(&a);
+				selmon = c->mon;
+				if (r->switchtotag == 2 || r->switchtotag == 4)
+					newtagset = c->mon->tagset[c->mon->seltags] ^ c->tags;
+				else
+					newtagset = c->tags;
+
+				if (newtagset && !(c->tags & c->mon->tagset[c->mon->seltags])) {
+					if (r->switchtotag == 3 || r->switchtotag == 4)
+						c->switchtotag = c->mon->tagset[c->mon->seltags];
+					if (r->switchtotag == 1 || r->switchtotag == 3)
+						view(&((Arg) { .ui = newtagset }));
+					else {
+						c->mon->tagset[c->mon->seltags] = newtagset;
+						arrange(c->mon);
+					}
+				}
 			}
 		}
 	}
@@ -1953,6 +1966,8 @@ sendmon(Client *c, Monitor *m)
 	attachstack(c);
 	focus(NULL);
 	arrange(NULL);
+	if (c->switchtotag)
+		c->switchtotag = 0;
 }
 
 void
@@ -2242,6 +2257,8 @@ tag(const Arg *arg)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
 		selmon->sel->tags = arg->ui & TAGMASK;
+		if (selmon->sel->switchtotag)
+			selmon->sel->switchtotag = 0;
 		focus(NULL);
 		arrange(selmon);
 		if(viewontag && ((arg->ui & TAGMASK) != TAGMASK))
@@ -2372,6 +2389,7 @@ void
 unmanage(Client *c, int destroyed)
 {
 	Monitor *m = c->mon;
+	unsigned int switchtotag = c->switchtotag;
 	XWindowChanges wc;
 
 	if (c->swallowing) {
@@ -2407,9 +2425,8 @@ unmanage(Client *c, int destroyed)
 		arrange(m);
 		focus(NULL);
 		updateclientlist();
-		if (c->switchtotag) {
-			Arg a = { .ui = c->switchtotag };
-			view(&a);
+		if (switchtotag) {
+			view(&((Arg) { .ui = switchtotag }));
 		}
 	}
 }
