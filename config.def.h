@@ -135,11 +135,11 @@ static const Layout layouts[] = {
 	{ NULL,		NULL },
 };
 
-static const MonitorRule monrules[] = {
-	/* monitor  	tag  	layout  	mfact  		nmaster  	showbar  	topbar */
-	{  0,       	0,  	6,      	-1,    		-1,      	-1,      	-1     }, // use a different layout for the second monitor
-	{  -1,      	-1,  	0,      	-1,    		-1,      	-1,      	-1     }, // default
-};
+// static const MonitorRule monrules[] = {
+// 	/* monitor  	tag  	layout  	mfact  		nmaster  	showbar  	topbar */
+// 	{  0,       	0,  	6,      	-1,    		-1,      	-1,      	-1     }, // use a different layout for the second monitor
+// 	{  -1,      	-1,  	0,      	-1,    		-1,      	-1,      	-1     }, // default
+// };
 
 /* key definitions */
 #define MODKEY Mod4Mask

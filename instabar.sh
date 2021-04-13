@@ -5,25 +5,8 @@
 # github:     https://github.com/The-Repo-Club/instawm
 # date:       2021-04-10 12:34:47.440579
 
-usbmon() {
-	usb1=$(lsblk -la | awk '/sdc1/ { print $1 }')
-	usb1mounted=$(lsblk -la | awk '/sdc1/ { print $7 }')
-
-	if [ "$usb1" ]; then
-		if [ -z "$usb1mounted" ]; then
-			echo " |"
-		else
-			echo " $usb1 |"
-		fi
-	fi
-}
-
-fsmon() {
-	ROOTPART=$(df -h | awk '/\/$/ { print $3}') 
-	HOMEPART=$(df -h | awk '/\/home/ { print $3}') 
-	SWAPPART=$(cat /proc/swaps | awk '/\// { print $4 }')
-
-	echo "   $ROOTPART    $HOMEPART    $SWAPPART"
+sep() {
+	echo " | "
 }
 
 ram() {
@@ -105,7 +88,7 @@ clock() {
 
 main() {
 	while true; do
-		instawm -s " $(usbmon) $(ram) | $(cpu) | $(network) | $(volume_pa) | $(clock) |"
+		instawm -s "$(ram)$(sep)$(cpu)$(sep)$(network)$(sep)$(volume_pa)$(sep)$(clock)"
 		sleep 1
 	done
 }
