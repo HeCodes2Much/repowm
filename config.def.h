@@ -20,13 +20,13 @@ static const int topbar             			= 1;        /* 0 means bottom bar */
 static const int viewontag         				= 1;     	/* 0 means don't view on tag switch */
 static const int useinstabar 					= 1;  		/* 0 means don't use instabar script */
 static const unsigned int startmenusize = 30;		  /* snap pixel */
-static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
+static const int user_bh            			= 18;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
-    "Misc Termsyn:size=12",
-    "Siji:size=14",
-    "FiraCode Nerd Font:size=14",
-    "MaterialIcons:size=10",
-    "xos4 Terminus:size=12"};
+    "Misc Termsyn:size=10",
+    "Siji:size=12",
+    "FiraCode Nerd Font:size=12",
+    "MaterialIcons:size=8",
+    "xos4 Terminus:size=10"};
 
 
 // instawm bar colors

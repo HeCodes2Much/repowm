@@ -5,13 +5,53 @@
 # github:     https://github.com/The-Repo-Club/instawm
 # date:       2021-04-10 12:34:47.440579
 
+DaySuffix() {
+    if [ "x`date +%-d | cut -c2`x" = "xx" ]
+    then
+        DayNum=`date +%-d`
+    else
+        DayNum=`date +%-d | cut -c2`
+    fi
+
+    CheckSpecialCase=`date +%-d`
+    case $DayNum in
+    0 )
+      echo "th" ;;
+    1 )
+      if [ "$CheckSpecialCase" = "11" ]
+      then
+        echo "th"
+      else
+        echo "st"
+      fi ;;
+    2 )
+      if [ "$CheckSpecialCase" = "12" ]
+      then
+        echo "th"
+      else
+        echo "nd"
+      fi ;;
+    3 )
+      if [ "$CheckSpecialCase" = "13" ]
+      then
+        echo "th"
+      else
+        echo "rd"
+      fi ;;
+    [4-9] )
+      echo "th" ;;
+    * )
+      return 1 ;;
+    esac
+}
+
 sep() {
 	echo " | "
 }
 
 ram() {
 	mem=$(free -h | awk '/Mem:/ { print $3 }' | cut -f1 -d 'i')
-	echo  "$mem"
+	echo  "$mem"
 }
 
 cpu() {
@@ -21,18 +61,18 @@ cpu() {
 	read -r cpu a b c idle rest < /proc/stat
 	total=$((a+b+c+idle))
 	cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-	echo  "$cpu"%
+	echo  "$cpu"%
 }
 
 network() {
 	conntype=$(ip route | awk '/default/ { print substr($5,1,1) }')
 
 	if [ -z "$conntype" ]; then
-		echo " down"
+		echo " down"
 	elif [ "$conntype" = "e" ]; then
-		echo " up"
+		echo " up"
 	elif [ "$conntype" = "w" ]; then
-		echo " up"
+		echo " up"
 	fi
 }
 
@@ -41,14 +81,18 @@ volume_pa() {
 	vol=$(pactl list sinks | grep Volume: | awk 'FNR == 1 { print $5 }' | cut -f1 -d '%')
 
 	if [ "$muted" = "yes" ]; then
-		echo " muted"
+		echo " muted"
 	else
-		if [ "$vol" -ge 65 ]; then
-			echo " $vol%"
-		elif [ "$vol" -ge 40 ]; then
-			echo " $vol%"
+		if [ "$vol" -ge 90 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 65 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 50 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 25 ]; then
+			echo " $vol%"
 		elif [ "$vol" -ge 0 ]; then
-			echo " $vol%"	
+			echo " $vol%"	
 		fi
 	fi
 
@@ -66,29 +110,44 @@ volume_alsa() {
 		vol=$(amixer -M sget Master | awk 'FNR == 5 { print $4 }' | sed 's/[][]//g; s/%//g')
 	fi
 
-	if [ "$muted" = "off" ]; then
-		echo " muted"
+	if [ "$muted" = "yes" ]; then
+		echo " muted"
 	else
-		if [ "$vol" -ge 65 ]; then
-			echo " $vol%"
-		elif [ "$vol" -ge 40 ]; then
-			echo " $vol%"
+		if [ "$vol" -ge 90 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 65 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 50 ]; then
+			echo " $vol%"
+		elif [ "$vol" -ge 25 ]; then
+			echo " $vol%"
 		elif [ "$vol" -ge 0 ]; then
-			echo " $vol%"	
+			echo " $vol%"	
 		fi
 	fi
 }
 
-clock() {
-	dte=$(date +"%D")
+updates() {
+	updates=$(checkupdates+aur | wc -l)
+	if [ "$updates" -eq "0" ]; then
+		echo " No Updates"
+	elif [ "$updates" -ge "1" ]; then
+		echo " $updates Update"
+	else
+		echo " $updates Updates"
+	fi
+}
+
+date() {
+	date=$(date +"%-d`DaySuffix` %b %Y")
 	time=$(date +"%H:%M")
 
-	echo " $dte  $time"
+	echo " $date  $time"
 }
 
 main() {
 	while true; do
-		instawm -s "$(ram)$(sep)$(cpu)$(sep)$(network)$(sep)$(volume_pa)$(sep)$(clock)"
+		instawm -s "$(ram)$(sep)$(cpu)$(sep)$(updates)$(sep)$(network)$(sep)$(volume_pa)$(sep)$(clock)"
 		sleep 1
 	done
 }
