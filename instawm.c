@@ -2676,7 +2676,7 @@ updatesystray(void)
 	Client *i;
 	Monitor *m = systraytomon(NULL);
 	unsigned int x = m->mx + m->mw;
-	unsigned int w = 1, xpad = 0, ypad = 0;
+	unsigned int w = 1;
 	#if BARPADDING_PATCH
 	xpad = sp;
 	ypad = vp;
