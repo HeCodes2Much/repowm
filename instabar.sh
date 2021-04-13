@@ -68,11 +68,15 @@ network() {
 	conntype=$(ip route | awk '/default/ { print substr($5,1,1) }')
 
 	if [ -z "$conntype" ]; then
-		echo " down"
+		echo " No internet"
 	elif [ "$conntype" = "e" ]; then
-		echo " up"
+		upspeed=$(numfmt --to=iec-i </sys/class/net/enp12s0/statistics/tx_packets)
+		downspeed=$(numfmt --to=iec-i </sys/class/net/enp12s0/statistics/rx_packets)
+		echo " $upspeed - $downspeed"
 	elif [ "$conntype" = "w" ]; then
-		echo " up"
+		upspeed=$(numfmt --to=iec-i </sys/class/net/wlp0s20f3/statistics/tx_packets)
+		downspeed=$(numfmt --to=iec-i </sys/class/net/wlp0s20f3/statistics/rx_packets)
+		echo " $upspeed - $downspeed"
 	fi
 }
 
