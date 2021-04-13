@@ -1829,7 +1829,7 @@ runAutostart(void) {
 	system("command -v instawm-schemas || { sleep 4 && notify-send 'instawm-schemas missing, please install instawm-schemas!!!'; } &");
 	if (useinstabar) {
 		system("command -v instabar || { sleep 4 && notify-send 'instabar script is missing'; } &");
-		system("pgrep -x instabar || instabar &");
+		system("pgrep -f instabar || instabar &");
 	}
 
 	char *pathpfx;

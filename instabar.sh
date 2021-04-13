@@ -138,7 +138,7 @@ updates() {
 	fi
 }
 
-date() {
+clock() {
 	date=$(date +"%-d`DaySuffix` %b %Y")
 	time=$(date +"%H:%M")
 
@@ -146,10 +146,11 @@ date() {
 }
 
 main() {
+	
 	while true; do
 		instawm -s "$(ram)$(sep)$(cpu)$(sep)$(updates)$(sep)$(network)$(sep)$(volume_pa)$(sep)$(clock)"
 		sleep 1
-	done
+	done 
 }
 
 main
