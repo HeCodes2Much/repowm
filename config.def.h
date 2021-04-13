@@ -69,43 +69,43 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 
-	/* class     				instance  	title           	tags mask  		iscentered		isfloating  	isterminal  	noswallow  		monitor */
+	/* class     				instance  	title           	tags mask  		iscentered		switchtotag		isfloating  	isterminal  	noswallow  		monitor */
 	//All workspaces
-	{ "MultiMonitorLock-GUI",	NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
-	{ "Pavucontrol",			NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
-	{ "floatmenu",				NULL,     	NULL,  				0,         		1,          	1,          	0,          	-1,				-1},
+	{ "MultiMonitorLock-GUI",	NULL,     	NULL,  				0,         		1,          	1,          	1,          	0,          	-1,				-1},
+	{ "Pavucontrol",			NULL,     	NULL,  				0,         		1,          	1,          	1,          	0,          	-1,				-1},
+	{ "floatmenu",				NULL,     	NULL,  				0,         		1,          	1,          	1,          	0,          	-1,				-1},
 
 	//Workspace 1 Monator 0
-	{ "kitty", 		  			NULL,     	NULL,         		1 << 0,         0,          	0,          	1,          	-1,        		0 },
+	{ "kitty", 		  			NULL,     	NULL,         		1 << 0,         0,          	1,          	0,          	1,          	-1,        		0 },
 
 	//Workspace 2 Monator 0
-	{ "code-oss", 		  		NULL,     	NULL,         		1 << 1,         0,          	0,          	0,          	-1,        		0 },
-	{ "Emacs", 		  			NULL,     	NULL,         		1 << 1,         0,          	0,          	0,          	-1,        		0 },
+	{ "code-oss", 		  		NULL,     	NULL,         		1 << 1,         0,          	1,          	0,          	0,          	-1,        		0 },
+	{ "Emacs", 		  			NULL,     	NULL,         		1 << 1,         0,          	1,          	0,          	0,          	-1,        		0 },
 
 	//Workspace 3 Monator 0
-	{ "Nemo", 		  			NULL,     	NULL,         		1 << 2,         0,          	0,          	0,          	-1,        		0 },
+	{ "Nemo", 		  			NULL,     	NULL,         		1 << 2,         0,          	1,          	0,          	0,          	-1,        		0 },
 
 	//Workspace 4 Monator 0
-	{ "Ld-linux-x86-64.so.2",	NULL,    	NULL,   			1 << 3,    		0,          	1,          	0,          	-1,        		0 }, // Inkscape
-	{ "Gimp",    				NULL,		NULL,         		1 << 3,    		0,          	1,          	0,          	-1,        		0 },
+	{ "Ld-linux-x86-64.so.2",	NULL,    	NULL,   			1 << 3,    		0,          	1,          	1,          	0,          	-1,        		0 }, // Inkscape
+	{ "Gimp",    				NULL,		NULL,         		1 << 3,    		0,          	1,          	1,          	0,          	-1,        		0 },
 
 	//Workspace 5 Monator 0
 
 	//Workspace 6 Monator 1
-	{ "Firefox", 		  		NULL,     	NULL,         		1 << 5,        	0,          	0,          	0,          	-1,        		1 },
-	{ "Vivaldi-stable",			NULL, 		NULL,         		1 << 5,        	0,          	0,          	0,          	-1,        		1 },
+	{ "Firefox", 		  		NULL,     	NULL,         		1 << 5,        	0,          	1,          	0,          	0,          	-1,        		1 },
+	{ "Vivaldi-stable",			NULL, 		NULL,         		1 << 5,        	0,          	1,          	0,          	0,          	-1,        		1 },
 
 	//Workspace 7 Monator 1
 
 	//Workspace 8 Monator 1
-	{ "Steam",					NULL,     	NULL,         		1 << 7,    		0,          	0,          	0,          	-1,        		1 },
+	{ "Steam",					NULL,     	NULL,         		1 << 7,    		0,          	1,          	0,          	0,          	-1,        		1 },
 
 	//Workspace 9 Monator 1
-	{ "TelegramDesktop",		NULL,   	NULL,         		1 << 8,    		0,          	0,          	0,          	-1,        		1 },
-	{ "Element",				NULL,     	NULL,         		1 << 8,    		0,          	0,          	0,          	-1,        		1 },
+	{ "TelegramDesktop",		NULL,   	NULL,         		1 << 8,    		0,          	1,          	0,          	0,          	-1,        		1 },
+	{ "Element",				NULL,     	NULL,         		1 << 8,    		0,          	1,          	0,          	0,          	-1,        		1 },
 
 	//Workspace 10 Monator 1
-	{ NULL,      				NULL,     	"Event Tester", 	1 << 9,        	0,          	0,          	1,          	-1,        		1 }, /* xev */
+	{ NULL,      				NULL,     	"Event Tester", 	1 << 9,        	0,          	1,          	0,          	1,          	-1,        		1 }, /* xev */
 };
 
 /* layout(s) */
