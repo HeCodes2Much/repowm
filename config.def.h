@@ -8,7 +8,7 @@ static const unsigned int gappih    			= 20;       /* horiz inner gap between wi
 static const unsigned int gappiv    			= 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    			= 10;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    			= 30;       /* vert outer gap between windows and screen edge */
-static const unsigned int systraypinning 		= 1;   		/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning 		= 2;   		/* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft 		= 0;   		/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing 		= 2;   		/* systray spacing */
 static const int swallowfloating    			= 0;        /* 1 means swallow floating windows by default */
@@ -31,9 +31,9 @@ static const char *fonts[] = {
 // instawm bar colors
 static const char col_gray1[]       = "#282a36";
 static const char col_gray2[]       = "#ffb86c";
-static const char col_gray3[]       = "#BE78D1";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#BE78D1";
+static const char col_gray3[]       = "#bd93f9";
+static const char col_gray4[]       = "#f8f8f2";
+static const char col_cyan[]        = "#bd93f9";
 static const char col_green[] 		= "#61C766";
 
 static const char *colors[][4] = {
