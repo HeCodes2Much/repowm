@@ -144,7 +144,7 @@ updates() {
 
 clock() {
 	date=$(date +"%-d`DaySuffix` %b %Y")
-	time=$(date +"%I:%M:%S %P")
+	time=$(date +"%I:%M %P")
 
 	echo " $date  $time"
 }
