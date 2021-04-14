@@ -61,7 +61,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: VirtualBox", " 9: Chat" , " 10: Settings" };
+static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
 
 static const Rule rules[] = {
 	/* xprop(1):

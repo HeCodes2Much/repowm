@@ -118,6 +118,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, iscentered, switchtotag, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isterminal, noswallow;
+	int issteam;
 	pid_t pid;
 	Client *next;
 	Client *snext;
@@ -410,6 +411,9 @@ applyrules(Client *c)
 	XGetClassHint(dpy, c->win, &ch);
 	class    = ch.res_class ? ch.res_class : broken;
 	instance = ch.res_name  ? ch.res_name  : broken;
+
+	if (strstr(class, "Steam") || strstr(class, "steam_app_"))
+		c->issteam = 1;
 
 	for (i = 0; i < LENGTH(rules); i++) {
 		r = &rules[i];
@@ -852,13 +856,15 @@ configurerequest(XEvent *e)
 			c->bw = ev->border_width;
 		else if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
 			m = c->mon;
-			if (ev->value_mask & CWX) {
-				c->oldx = c->x;
-				c->x = m->mx + ev->x;
-			}
-			if (ev->value_mask & CWY) {
-				c->oldy = c->y;
-				c->y = m->my + ev->y;
+			if (!c->issteam) {
+				if (ev->value_mask & CWX) {
+					c->oldx = c->x;
+					c->x = m->mx + ev->x;
+				}
+				if (ev->value_mask & CWY) {
+					c->oldy = c->y;
+					c->y = m->my + ev->y;
+				}
 			}
 			if (ev->value_mask & CWWidth) {
 				c->oldw = c->w;
@@ -1071,7 +1077,7 @@ drawbar(Monitor *m)
 		if (!selmon->clients) {
 			drw_setscheme(drw, scheme[SchemeNorm]);
 			drw_rect(drw, x, 0, w, bh, 1, 1);
-			drw_text(drw, x, 0, tw, bh, lrpad / 2, "", 0);
+			drw_text(drw, x, 0, tw, bh, lrpad / 2, "", 0);
 		}
 		// display help message if no application is opened
 		if (!selmon->clients) {
