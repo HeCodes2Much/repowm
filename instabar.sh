@@ -104,14 +104,14 @@ volume_pa() {
 
 volume_alsa() {
 
-	mono=$(amixer -M sget Master | grep Mono: | awk '{ print $2 }')
+	mono=$(amixer -M get Master | grep Mono: | awk '{ print $2 }')
 
 	if [ -z "$mono" ]; then
-		muted=$(amixer -M sget Master | awk 'FNR == 6 { print $7 }' | sed 's/[][]//g')
-		vol=$(amixer -M sget Master | awk 'FNR == 6 { print $5 }' | sed 's/[][]//g; s/%//g')
+		muted=$(amixer -M get Master | awk 'FNR == 6 { print $7 }' | sed 's/[][]//g')
+		vol=$(amixer -M get Master | awk 'FNR == 6 { print $5 }' | sed 's/[][]//g; s/%//g')
 	else
-		muted=$(amixer -M sget Master | awk 'FNR == 5 { print $6 }' | sed 's/[][]//g')
-		vol=$(amixer -M sget Master | awk 'FNR == 5 { print $4 }' | sed 's/[][]//g; s/%//g')
+		muted=$(amixer -M get Master | awk 'FNR == 5 { print $6 }' | sed 's/[][]//g')
+		vol=$(amixer -M get Master | awk 'FNR == 5 { print $4 }' | sed 's/[][]//g; s/%//g')
 	fi
 
 	if [ "$muted" = "yes" ]; then
@@ -144,7 +144,7 @@ updates() {
 
 clock() {
 	date=$(date +"%-d`DaySuffix` %b %Y")
-	time=$(date +"%H:%M")
+	time=$(date +"%I:%M:%S %P")
 
 	echo " $date  $time"
 }
@@ -152,7 +152,7 @@ clock() {
 main() {
 	while true; do
 		instawm -s "$(ram)$(sep)$(cpu)$(sep)$(updates)$(sep)$(network)$(sep)$(volume_pa)$(sep)$(clock)"
-		sleep 1
+		sleep 0.5
 	done 
 }
 
