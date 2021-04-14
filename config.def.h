@@ -22,13 +22,11 @@ static const int useinstabar 					= 1;  		/* 0 means don't use instabar script *
 static const unsigned int startmenusize 		= 30;		/* snap pixel */
 static const int user_bh            			= 28;       /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
-    "Misc Termsyn:size=12",
-    "Cantarell-Regular:size=12",
-    "Siji:size=14",
-	"FiraCode Nerd Font:size=14",
-    "JoyPixels:pixelsize=20:antialias=true:autohint=true",
-    "MaterialIcons:size=10",
-    "xos4 Terminus:size=12"};
+    "Source Code Pro:size=10",
+	"remixicon:size=12",
+	"Siji:size=12",
+	"MaterialIcons:size=10",
+    "FiraCode Nerd Font:size=12",};
 
 
 // instawm bar colors
@@ -63,7 +61,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
+static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
 
 static const Rule rules[] = {
 	/* xprop(1):

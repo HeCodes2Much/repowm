@@ -1036,7 +1036,7 @@ drawbar(Monitor *m)
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	int startmenuinvert = (selmon->gesture == 13);
 	drw_rect(drw, 0, 0, startmenusize, bh, 1, startmenuinvert ? 0:1);
-	drw_text(drw, 0, 0, startmenusize, bh, 1, " ", 0);
+	drw_text(drw, 0, 0, startmenusize, bh, 1, " ", 0);
 
 
 	resizebarwin(m);
@@ -1068,9 +1068,8 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - tw - stw - x) > bh) {
 		if (m->sel) {
-			int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x;
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0);
+			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
@@ -1081,7 +1080,7 @@ drawbar(Monitor *m)
 		if (!selmon->clients) {
 			drw_setscheme(drw, scheme[SchemeNorm]);
 			drw_rect(drw, x, 0, w, bh, 1, 1);
-			drw_text(drw, x, 0, tw, bh, lrpad / 2, "", 0);
+			drw_text(drw, x, 0, tw, bh, lrpad / 2, "⏻", 0);
 		}
 		// display help message if no application is opened
 		if (!selmon->clients) {
