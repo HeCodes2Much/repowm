@@ -152,7 +152,7 @@ clock() {
 main() {
 	while true; do
 		instawm -s "$(ram)$(sep)$(cpu)$(sep)$(updates)$(sep)$(network)$(sep)$(volume_pa)$(sep)$(clock)"
-		sleep 0.5
+		sleep 5s
 	done 
 }
 
