@@ -185,6 +185,9 @@ static const char *mutevol[] = {"amixer", "set", "Master", "toggle", NULL};
 static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
+static const char scratchpadname[] = "dropdown_kitty";
+static const char *scratchpadcmd[] = { "kitty", "--title=dropdown_kitty", "--name=dropdown_kitty", "--class=dropdown_kitty", NULL };
+
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     chain key			key        					function        		argument */
@@ -219,6 +222,7 @@ static Key keys[] = {
 	{ Mod1Mask,          			-1,         		XK_space,  					spawn,       			{.v = instamenucmd } },
 	{ MODKEY,                       -1,         		XK_p,      					spawn,          		{.v = instamenucmd } },
 	{ MODKEY,						-1,         		XK_Return, 					spawn,          		{.v = terminalcmd } },
+	{ ControlMask,                  -1,         		XK_Return,  				togglescratch,  		{.v = scratchpadcmd } },
 	{ MODKEY,                       -1,         		XK_b,      					togglebar,      		{0} },
 	{ MODKEY,                       -1,         		XK_j,      					focusstack,     		{.i = +1 } },
 	{ MODKEY,                       -1,         		XK_k,      					focusstack,     		{.i = -1 } },
