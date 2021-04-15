@@ -46,7 +46,7 @@ dist: clean
 install: all
 	install -d ${DESTDIR}{${PREFIX}/bin,/usr/share/xsessions,${MANPREFIX}/man1}
 	install -m  755 -s instawm ${DESTDIR}${PREFIX}/bin/
-	install -Dm  755 instabar.sh ${DESTDIR}${PREFIX}/bin/instabar
+	install -Dm  755 instabar ${DESTDIR}${PREFIX}/bin/instabar
 	install -m  644 instawm.1 ${DESTDIR}${MANPREFIX}/man1/
 	sed -i 's/VERSION/${VERSION}/g' ${DESTDIR}${MANPREFIX}/man1/instawm.1
 	install -m  644 instawm.desktop ${DESTDIR}/usr/share/xsessions
