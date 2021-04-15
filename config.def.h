@@ -119,20 +119,16 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol arrange			function */
- 	{ "[]=",	tile },			/* Default: Master on left, slaves on right */
-	{ "TTT",	bstack },		/* Master on top, slaves on bottom */
-
-	{ "[@]",	spiral },		/* Fibonacci spiral */
-	{ "[\\]",	dwindle },		/* Decreasing in size right and leftward */
-
-	{ "[D]",	deck },			/* Master on left, slaves in monocle-like mode on right */
- 	{ "[M]",	monocle },		/* All windows on top of eachother */
-
-	{ "|M|",	centeredmaster },		/* Master in middle, slaves on sides */
-	{ ">M>",	centeredfloatingmaster },	/* Same but master floats */
-
-	{ "><>",	NULL },			/* no layout function means floating behavior */
-	{ NULL,		NULL },
+ 	{ "[]=",					tile },						/* Default: Master on left, slaves on right */
+	{ "TTT",					bstack },					/* Master on top, slaves on bottom */
+	{ "[@]",					spiral },					/* Fibonacci spiral */
+	{ "[\\]",					dwindle },					/* Decreasing in size right and leftward */
+	{ "[D]",					deck },						/* Master on left, slaves in monocle-like mode on right */
+ 	{ "[M]",					monocle },					/* All windows on top of eachother */
+	{ "|M|",					centeredmaster },			/* Master in middle, slaves on sides */
+	{ ">M>",					centeredfloatingmaster },	/* Same but master floats */
+	{ "><>",					NULL },						/* no layout function means floating behavior */
+	{ NULL,						NULL },
 };
 
 static const Taglayout taglayouts[] = {
