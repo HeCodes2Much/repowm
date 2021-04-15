@@ -182,6 +182,11 @@ typedef struct {
 	int monitor;
 } Rule;
 
+typedef struct {
+	int tag;
+	const Arg arg;
+} Taglayout;
+
 typedef struct Systray Systray;
 struct Systray {
 	Window win;
@@ -356,12 +361,12 @@ static xcb_connection_t *xcon;
 #include "config.h"
 
 struct Pertag {
-	unsigned int curtag, prevtag; /* current and previous tag */
-	int nmasters[LENGTH(tags) + 1]; /* number of windows in master area */
-	float mfacts[LENGTH(tags) + 1]; /* mfacts per tag */
-	unsigned int sellts[LENGTH(tags) + 1]; /* selected layouts */
-	const Layout *ltidxs[LENGTH(tags) + 1][2]; /* matrix of tags and layouts indexes  */
-	int showbars[LENGTH(tags) + 1]; /* display bar for the current tag */
+	unsigned int curtag, prevtag; 					/* current and previous tag */
+	int nmasters[LENGTH(tags) + 1]; 				/* number of windows in master area */
+	float mfacts[LENGTH(tags) + 1]; 				/* mfacts per tag */
+	unsigned int sellts[LENGTH(tags) + 1]; 			/* selected layouts */
+	const Layout *ltidxs[LENGTH(tags) + 1][2]; 		/* matrix of tags and layouts indexes  */
+	int showbars[LENGTH(tags) + 1]; 				/* display bar for the current tag */
 };
 
 static unsigned int scratchtag = 1 << LENGTH(tags);
@@ -2904,6 +2909,9 @@ view(const Arg *arg)
 
 	focus(NULL);
 	arrange(selmon);
+	for (int i = 0; i < LENGTH(taglayouts); i++)
+		if (arg->ui & 1 << (taglayouts[i].tag - 1))
+			setlayout(&taglayouts[i].arg);
 }
 
 pid_t
