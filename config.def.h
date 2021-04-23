@@ -11,6 +11,7 @@ static const unsigned int gappov    		    = 10;       	    /* vert outer gap bet
 static const unsigned int systraypinning 	    = 2;   		    /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft 	    = 0;   		    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing 	    = 2;   		    /* systray spacing */
+static const unsigned int iconsizes 	            = 30;		    /* snap pixel */
 static const int swallowfloating    		    = 0;        	    /* 1 means swallow floating windows by default */
 static const int smartgaps          		    = 0;        	    /* 1 means no outer gap when there is only one window */
 static const int systraypinningfailfirst 	    = 1;   		    /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -19,7 +20,6 @@ static const int showbar            		    = 1;        	    /* 0 means no bar */
 static const int topbar             		    = 1;        	    /* 0 means bottom bar */
 static const int viewontag         		    = 1;     	            /* 0 means don't view on tag switch */
 static const int useinstabar 			    = 1;  		    /* 0 means don't use instabar script */
-static const unsigned int iconsizes 	    = 30;		    /* snap pixel */
 static const int user_bh            		    = 28;                   /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
     "Source Code Pro:size=10",
