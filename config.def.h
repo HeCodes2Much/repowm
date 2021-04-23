@@ -19,7 +19,7 @@ static const int showbar            		    = 1;        	    /* 0 means no bar */
 static const int topbar             		    = 1;        	    /* 0 means bottom bar */
 static const int viewontag         		    = 1;     	            /* 0 means don't view on tag switch */
 static const int useinstabar 			    = 1;  		    /* 0 means don't use instabar script */
-static const unsigned int startmenusize 	    = 30;		    /* snap pixel */
+static const unsigned int iconsizes 	    = 30;		    /* snap pixel */
 static const int user_bh            		    = 28;                   /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
 static const char *fonts[] = {
     "Source Code Pro:size=10",
@@ -299,4 +299,3 @@ static Button buttons[] = {
     { ClkTagBar,                MODKEY,         Button3,        toggletag,      	    {0} },
     { ClkShutDown,    		0,		Button1,	spawn,			    {.v = powermenucmd } },
 };
-
