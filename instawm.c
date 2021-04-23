@@ -640,7 +640,7 @@ buttonpress(XEvent *e)
 	}
 	if (ev->window == selmon->barwin) {
 		i = 0;
-		x = startmenusize;
+		x = iconsizes;
 		for (c = m->clients; c; c = c->next)
 			occ |= c->tags == 255 ? 0 : c->tags;
 		do {
@@ -649,7 +649,7 @@ buttonpress(XEvent *e)
 				continue;
 			x += TEXTW(tags[i]);
 		} while (ev->x >= x && ++i < LENGTH(tags));
-		if (ev->x < startmenusize) {
+		if (ev->x < iconsizes) {
 			click = ClkStartMenu;
 			selmon->gesture = 0;
 			drawbar(selmon);
@@ -1041,8 +1041,8 @@ drawbar(Monitor *m)
 	//draw start menu icon
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	int startmenuinvert = (selmon->gesture == 13);
-	drw_rect(drw, 0, 0, startmenusize, bh, 1, startmenuinvert ? 0:1);
-	drw_text(drw, 0, 0, startmenusize, bh, 1, " ", 0);
+	drw_rect(drw, 0, 0, iconsizes, bh, 1, startmenuinvert ? 0:1);
+	drw_text(drw, 0, 0, iconsizes, bh, 1, " ", 0);
 
 
 	resizebarwin(m);
@@ -1052,7 +1052,7 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 
-	x = startmenusize;
+	x = iconsizes;
 	for (i = 0; i < LENGTH(tags); i++) {
 		/* do not draw vacant tags */
 		if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
@@ -1083,25 +1083,26 @@ drawbar(Monitor *m)
 			drw_rect(drw, x, 0, w, bh, 1, 1);
 		}
 		// render shutdown button
-		if (!selmon->clients) {
+		if (!selmon->sel) {
 			drw_setscheme(drw, scheme[SchemeNorm]);
-			drw_rect(drw, x, 0, w, bh, 1, 1);
-			drw_text(drw, x, 0, tw, bh, lrpad / 2, "⏻", 0);
+			drw_rect(drw, x, 0, iconsizes, bh, 1, 1);
+			drw_text(drw, x, 0, iconsizes, bh, 1, "⏻", 0);
 		}
+
 		// display help message if no application is opened
 		if (!selmon->clients) {
 			int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x;
 			int titlewidth =
-				TEXTW(" Press alt + space to launch an application") <
+				TEXTW("Press alt + space to launch an application") <
 						selmon->btw
 					? TEXTW(
-						" Press alt + space to launch an application")
+						"Press alt + space to launch an application")
 					: (selmon->btw - bh);
 			drw_text(
 				drw,
 				x + bh + ((selmon->btw - bh) - titlewidth + 1) / 2,
 				0, titlewidth, bh, mid,
-				" Press alt + space to launch an application", 0);
+				"Press alt + space to launch an application", 0);
 		}
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
@@ -3183,4 +3184,3 @@ main(int argc, char *argv[])
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
 }
-
