@@ -30,6 +30,7 @@ please refer to the documentation.
   * full multi monitor support
   * tag system
   * instabar script
+  * indicators
   * shutdown menu
   * system tray
   * window gaps
