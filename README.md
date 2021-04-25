@@ -24,18 +24,6 @@ please refer to the documentation.
   * hybrid-wm: tiling and floating mode
   * Keyboard and Mouse based workflows
   * start menu
-  * desktop bindings
   * full multi monitor support
   * tag system
-  * overview mode
-  * overlays
   * instabar script
-- Graphical Features
-  * Animations
-  * Hover indicators
-  * Status markup
-  * color indicators for sticky windows, tag status etc.
-- Mouse support
-  * Drag windows by grabbing the title
-  * Drag windows onto other tags
-  * Rio-like drawing feature
