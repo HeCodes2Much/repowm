@@ -74,6 +74,7 @@ static const Rule rules[] = {
     { "Pavucontrol",		    NULL,           NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "floatmenu",		    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "Yad",		            NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "Timeshift-gtk",              NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
 
     //Workspace 1 Monitor 0
     { "kitty", 		  	    NULL,     	    NULL,         	1 << 0,             0,          	    1,          	0,          	1,          	-1,        		0 },
