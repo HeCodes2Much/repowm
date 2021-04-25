@@ -2100,7 +2100,6 @@ setlayout(const Arg *arg)
         arrange(selmon);
     else
         drawbar(selmon);
-		focus(selmon->sel);
 }
 
 /* arg > 1.0 will set mfact absolutely */
