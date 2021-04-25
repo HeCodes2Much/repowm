@@ -42,8 +42,7 @@ static const char *colors[][4] = {
     [SchemeNorm]=   {   col_gray3, 	col_gray1, 		col_gray2, 		col_green },
     [SchemeInv] =   {   col_gray1, 	col_gray3, 		col_gray2, 		col_green },
     [SchemeSel] =   {   col_gray4, 	col_cyan,  		col_cyan, 		col_green },
-    [SchemeFloating] =   {   col_gray4, 	col_green,  		col_cyan, 		col_green },
-
+    [SchemeFloating] =   {   col_gray4, 	col_green,  		col_green, 		col_green },
 };
 
 static const char *const autostart[] = {
