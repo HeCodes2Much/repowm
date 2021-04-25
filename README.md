@@ -3,10 +3,13 @@
     <p>Window manager for linux</p>
 </div>
 
-instawm the window manager for linux.
+![instawm the window manager for linux.](https://raw.githubusercontent.com/The-Repo-Club/instawm/main/screenshot.png)
 
 ## Installation
 
+**For Arch** it can be founded in [AUR](https://aur.archlinux.org/packages/instawm)
+
+**Recommended Method**
 ```sh
 git clone https://github.com/The-Repo-Club/instawm.git
 cd instawm
