@@ -53,7 +53,6 @@ static const char *const autostart[] = {
     "blueman-applet", NULL,
     "numlockx", "on", NULL,
     "xsettingsd", NULL,
-    "pamac-tray", NULL,
     "nm-applet", NULL,
     "pasystray", NULL,
     "clipmenud", NULL,
@@ -74,6 +73,7 @@ static const Rule rules[] = {
     { "MultiMonitorLock-GUI",	    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "Pavucontrol",		    NULL,           NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "floatmenu",		    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "Yad",		            NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
 
     //Workspace 1 Monitor 0
     { "kitty", 		  	    NULL,     	    NULL,         	1 << 0,             0,          	    1,          	0,          	1,          	-1,        		0 },
@@ -120,12 +120,12 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
     /* symbol arrange			function */
-     { "[]=",				tile },				/* Default: Master on left, slaves on right */
+    { "[]=",				tile },				/* Default: Master on left, slaves on right */
     { "TTT",				bstack },			/* Master on top, slaves on bottom */
     { "[@]",				spiral },			/* Fibonacci spiral */
     { "[\\]",				dwindle },			/* Decreasing in size right and leftward */
     { "[D]",				deck },				/* Master on left, slaves in monocle-like mode on right */
-     { "[M]",				monocle },			/* All windows on top of eachother */
+    { "[M]",				monocle },			/* All windows on top of eachother */
     { "|M|",				centeredmaster },		/* Master in middle, slaves on sides */
     { ">M>",				centeredfloatingmaster },	/* Same but master floats */
     { "><>",				NULL },				/* no layout function means floating behavior */
@@ -140,10 +140,10 @@ static const Taglayout taglayouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(CHAIN,KEY,TAG) \
-    { MODKEY,                       CHAIN,		KEY,      view,           {.ui = 1 << TAG} }, \
-    { MODKEY|ControlMask,           CHAIN,		KEY,      toggleview,     {.ui = 1 << TAG} }, \
-    { MODKEY|ShiftMask,             CHAIN,		KEY,      tag,            {.ui = 1 << TAG} }, \
-    { MODKEY|ControlMask|ShiftMask, CHAIN,		KEY,      toggletag,      {.ui = 1 << TAG} },
+{ MODKEY,                       CHAIN,		KEY,      view,           {.ui = 1 << TAG} }, \
+{ MODKEY|ControlMask,           CHAIN,		KEY,      toggleview,     {.ui = 1 << TAG} }, \
+{ MODKEY|ShiftMask,             CHAIN,		KEY,      tag,            {.ui = 1 << TAG} }, \
+{ MODKEY|ControlMask|ShiftMask, CHAIN,		KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre instawm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -157,7 +157,7 @@ static const char *startmenucmd[] = { "instawm-schemas", "startmenucmd", NULL};
 static const char *clipmenucmd[] = { "instawm-schemas", "clipmenucmd", NULL};
 static const char *smartcmd[] = { "instawm-schemas", "smartmenucmd", NULL};
 
- /* Do not remove */
+/* Do not remove */
 static const char *powermenucmd[] = { "instawm-schemas", "powermenucmd", NULL};
 
 /* instamenu commands */
