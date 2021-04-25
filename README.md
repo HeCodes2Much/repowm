@@ -27,3 +27,7 @@ please refer to the documentation.
   * full multi monitor support
   * tag system
   * instabar script
+  * shutdown menu
+  * system tray
+  * window gaps
+  * restart function
