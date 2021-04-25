@@ -101,6 +101,7 @@ static const Rule rules[] = {
 
     //Workspace 8 Monitor 1
     { "Steam",			    NULL,     	    NULL,         	1 << 7,    	    0,              	    1,              	0,          	0,          	-1,        		1 },
+    { "Minecraft Launcher",	    NULL,     	    NULL,         	1 << 7,    	    0,              	    1,              	0,          	0,          	-1,        		1 },
 
     //Workspace 9 Monitor 1
     { "TelegramDesktop",	    NULL,   	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1 },
@@ -108,6 +109,7 @@ static const Rule rules[] = {
 
     //Workspace 10 Monitor 1
     { NULL,      		    NULL,           "Event Tester", 	1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1 }, /* xev */
+    { NULL,      		    NULL,           "lazygit", 	        1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1 }, /* lazygit */
 };
 
 /* layout(s) */
@@ -197,19 +199,20 @@ static Key keys[] = {
     { MODKEY|ControlMask,		    -1,         		XK_h,						spawn,       			{.v = hypervisorcmd } },
     { MODKEY|ControlMask,		    -1,         		XK_f,						spawn,       			{.v = browsercmd } },
     { MODKEY|ControlMask,		    -1,         		XK_c,						spawn,       			{.v = editorcmd } },
-    { MODKEY|ControlMask,		    -1,         		XK_t,						spawn,       			{.v = mailcmd } },
+    { MODKEY|ControlMask,		    -1,         		XK_m,						spawn,       			{.v = mailcmd } },
     { MODKEY|ControlMask,		    -1,         		XK_g,						spawn,       			{.v = gitcmd } },
     { MODKEY|ShiftMask,          	    -1,         		XK_e,  					        spawn,       			SHCMD("qt-logout") },
     { MODKEY|ControlMask,		    -1,         		XK_i,						spawn,       			SHCMD("inkscape") },
     { MODKEY|ControlMask,		    -1,         		XK_k,						spawn,       			SHCMD("krita") },
     { MODKEY|ControlMask,		    -1,         		XK_v,						spawn,       			SHCMD("vlc") },
-    { MODKEY|ControlMask,	            -1,         		XK_s,						spawn,       			SHCMD("prime-run steam") },
-    { MODKEY|ControlMask,		    -1,         		XK_m,						spawn,       			SHCMD("prime-run minecraft-launcher") },
+    { MODKEY|ControlMask,	            XK_g,         		XK_s,						spawn,       			SHCMD("prime-run steam") },
+    { MODKEY|ControlMask,		    XK_g,         		XK_m,						spawn,       			SHCMD("prime-run minecraft-launcher") },
     { MODKEY|ControlMask,	            -1,         		XK_e,						spawn,       			SHCMD("element-desktop") },
     { MODKEY|ControlMask,		    -1,         		XK_p,						spawn,       			SHCMD("piper") },
     { MODKEY|ControlMask,		    -1,         		XK_u,						spawn,       			SHCMD("pavucontrol") },
     { MODKEY|ShiftMask,			    -1,         		XK_z,						spawn,       		        SHCMD("multimonitorlock-gui") },
     { MODKEY|Mod1Mask,			    -1,         		XK_p,						spawn,       			SHCMD("pamac-manager") },
+    { MODKEY|Mod1Mask,			    -1,         		XK_t,						spawn,       			SHCMD("telegram-desktop") },
 
     { MODKEY,				    XK_Print,                   XK_w,						spawn,       			SHCMD("wm-maim -w" ) },
     { MODKEY,				    XK_Print,                   XK_s,						spawn,       			SHCMD("wm-maim -s" ) },

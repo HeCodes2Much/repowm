@@ -6,10 +6,10 @@
 # date:       2021-04-10 12:34:47.440579
 
 main() {
-	while true; do
-		instawm -s "$(bar_ram)$(bar_sep)$(bar_cpu)$(bar_sep)$(bar_keyboard)$(bar_sep)$(bar_updates)$(bar_sep)$(bar_network)$(bar_sep)$(bar_volume)$(bar_sep)$(bar_clock)"
-		sleep 0.5s
-	done 
+    while true; do
+        instawm -s "$(bar_ram)$(bar_sep)$(bar_cpu)$(bar_sep)$(bar_keyboard)$(bar_sep)$(bar_updates)$(bar_sep)$(bar_network)$(bar_sep)$(bar_volume)$(bar_sep)$(bar_clock)"
+        sleep 0.5s
+    done
 }
 
 main
