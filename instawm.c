@@ -947,7 +947,7 @@ cyclelayout(const Arg *arg) {
     for(l = (Layout *)layouts; l != selmon->lt[selmon->sellt]; l++);
     if(arg->i > 0) {
         if(l->symbol && (l + 1)->symbol) {
-            setlayout(&((Arg) { .v = (l + 1) }));
+          setlayout(&((Arg) { .v = (l + 1) }));
         } else {
             setlayout(&((Arg) { .v = layouts }));
         }
@@ -977,7 +977,6 @@ destroynotify(XEvent *e)
         resizebarwin(selmon);
         updatesystray();
     }
-
 }
 
     void
@@ -2101,6 +2100,7 @@ setlayout(const Arg *arg)
         arrange(selmon);
     else
         drawbar(selmon);
+		focus(selmon->sel);
 }
 
 /* arg > 1.0 will set mfact absolutely */
@@ -2348,6 +2348,7 @@ togglefloating(const Arg *arg)
         resize(selmon->sel, selmon->sel->x, selmon->sel->y,
                 selmon->sel->w, selmon->sel->h, 0);
     arrange(selmon);
+		focus(selmon->sel);
 }
 
     void
