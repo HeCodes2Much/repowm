@@ -69,49 +69,50 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
 
-    /* class     		    instance  	    title               tags mask  	    iscentered		    switchtotag	        isfloating  	isterminal  	noswallow  	    	monitor */
+    /* class     		    instance  	    title         tags mask  	    iscentered		    switchtotag	  isfloating  	isterminal  	noswallow  	monitor */
     //All workspaces
-    { "MultiMonitorLock-GUI",	    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
-    { "Pavucontrol",		    NULL,           NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
-    { "floatmenu",		    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
-    { "Yad",		            NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
-    { "Timeshift-gtk",              NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "MultiMonitorLock-GUI",	NULL,     NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
+    { "Pavucontrol",		NULL,           NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
+    { "floatmenu",		  NULL,     	    NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
+    { "Yad",		        NULL,     	    NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
+    { "Timeshift-gtk",  NULL,     	    NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
 
     //Workspace 1 Monitor 0
-    { "kitty", 		  	    NULL,     	    NULL,         	1 << 0,             0,          	    1,          	0,          	1,          	-1,        		0 },
+    { "kitty", 		  	  NULL,     	    NULL,         1 << 0,         0,          	    1,          	0,          	1,          	-1,					0},
 
     //Workspace 2 Monitor 0
-    { "Code", 		  	    NULL,     	    NULL,         	1 << 1,             0,          	    1,          	0,          	0,          	-1,        		0 },
-    { "Emacs", 		  	    NULL,     	    NULL,         	1 << 1,             0,          	    1,              	0,          	0,          	-1,        		0 },
-    { "Gvim", 		  	    NULL,     	    NULL,         	1 << 1,             0,          	    1,              	0,          	0,          	-1,        		0 },
+    { "Code", 		  	  NULL,     	    NULL,         1 << 1,         0,          	    1,          	0,          	0,          	-1,        	0},
+    { "Emacs", 		  	  NULL,     	    NULL,         1 << 1,         0,          	    1,            0,          	0,          	-1,        	0},
+    { "Gvim", 		  	  NULL,     	    NULL,         1 << 1,         0,          	    1,            0,          	0,          	-1,        	0},
 
     //Workspace 3 Monitor 0
-    { "Nemo", 		  	    NULL,     	    NULL,         	1 << 2,             0,          	    1,              	0,          	0,          	-1,        		0 },
+    { "Nemo", 		  	  NULL,     	    NULL,         1 << 2,         0,          	    1,            0,          	0,          	-1,        	0},
 
     //Workspace 4 Monitor 0
-    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		1 << 3,    	    0,          	    1,              	1,          	0,          	-1,        		0 }, // Inkscape
-    { "Gimp",    		    NULL,	    NULL,         	1 << 3,    	    0,          	    1,                  1,          	0,          	-1,        	        0 },
+    { "Ld-linux-x86-64.so.2",	NULL,     NULL,					1 << 3,    	    0,          	    1,            1,          	0,          	-1,        	0}, // Inkscape
+    { "Gimp",    		    NULL,						NULL,         1 << 3,    	    0,          	    1,            1,          	0,          	-1,        	0},
 
     //Workspace 5 Monitor 0
 
     //Workspace 6 Monitor 1
-    { "Firefox", 		    NULL,     	    NULL,         	1 << 5,        	    0,          	    1,                  0,          	0,          	-1,        		1 },
-    { "Vivaldi-stable",		    NULL, 	    NULL,         	1 << 5,        	    0,              	    1,              	0,          	0,          	-1,        		1 },
+    { "Firefox", 		    NULL,     	    NULL,         1 << 5,        	0,          	    1,            0,          	0,          	-1,        	1},
+    { "Vivaldi-stable",	NULL,						NULL,         1 << 5,        	0,              	1,            0,          	0,          	-1,        	1},
 
     //Workspace 7 Monitor 1
 
     //Workspace 8 Monitor 1
-    { "Steam",			    NULL,     	    NULL,         	1 << 7,    	    0,              	    1,              	0,          	0,          	-1,        		1 },
-    { "Minecraft Launcher",	    NULL,     	    NULL,         	1 << 7,    	    0,              	    1,              	0,          	0,          	-1,        		1 },
+    { "Steam",			    NULL,     	    NULL,         1 << 7,    	    0,              	1,            0,          	0,          	-1,        	1},
+    { "Minecraft Launcher",	NULL,     	NULL,         1 << 7,    	    0,              	1,            0,          	0,          	-1,        	1},
 
     //Workspace 9 Monitor 1
-    { "TelegramDesktop",	    NULL,   	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1 },
-    { "Element",		    NULL,     	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1 },
+    { "TelegramDesktop",NULL,						NULL,         1 << 8,    	    0,          	    1,            0,          	0,          	-1,        	1},
+    { "Element",				NULL,     	    NULL,         1 << 8,    	    0,          	    1,            0,          	0,          	-1,        	1},
 
     //Workspace 10 Monitor 1
-    { NULL,      		    NULL,           "Event Tester", 	1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1 }, /* xev */
-    { NULL,      		    NULL,           "lazygit", 	        1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1 }, /* lazygit */
+    { NULL,      		    NULL,           "Event Tester", 1 << 9,       0,          	    1,            0,          	1,          	-1,        	1}, /* xev */
+    { NULL,      		    NULL,           "lazygit", 	  1 << 9,        	0,          	    1,            0,          	1,          	-1,        	1}, /* lazygit */
 };
+
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
