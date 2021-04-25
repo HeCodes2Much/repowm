@@ -82,7 +82,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeInv, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeInv, SchemeSel, SchemeFloating }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
     NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
     NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -1068,13 +1068,18 @@ drawbar(Monitor *m)
         drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
         x += w;
     }
+
     w = blw = TEXTW(m->ltsymbol);
     drw_setscheme(drw, scheme[SchemeNorm]);
     x = drw_text(drw, x, 0, w, bh, (w - TEXTW(m->ltsymbol)) * 0.5 + 10, m->ltsymbol, 0);
 
     if ((w = m->ww - tw - stw - x) > bh) {
         if (m->sel) {
-            drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+            /* drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]); */
+						if (m->sel->isfloating)
+							drw_setscheme(drw, scheme[m == selmon ? SchemeFloating : SchemeNorm]);
+						else
+							drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
             drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
             if (m->sel->isfloating)
                 drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
@@ -3184,3 +3189,4 @@ main(int argc, char *argv[])
     XCloseDisplay(dpy);
     return EXIT_SUCCESS;
 }
+
