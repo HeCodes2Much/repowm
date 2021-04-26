@@ -38,7 +38,7 @@ static const char col_cyan[]        = "#bd93f9";
 static const char col_green[] 	    = "#61C766";
 
 static const char *colors[][4] = {
-    /*                  fg          bg            border 	      float*/
+    /*                  fg              bg                      border 	                float*/
     [SchemeNorm]=   {   col_gray3, 	col_gray1, 		col_gray2, 		col_green },
     [SchemeInv] =   {   col_gray1, 	col_gray3, 		col_gray2, 		col_green },
     [SchemeSel] =   {   col_gray4, 	col_cyan,  		col_cyan, 		col_green },
