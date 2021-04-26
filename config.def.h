@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  		    = 3;        	    /* border pixel of windows */
+static const unsigned int borderpx  		    = 1;        	    /* border pixel of windows */
 static const unsigned int snap      		    = 32;       	    /* snap pixel */
 static const unsigned int gappih    		    = 10;       	    /* horiz inner gap between windows */
 static const unsigned int gappiv    		    = 10;       	    /* vert inner gap between windows */
@@ -70,7 +70,7 @@ static const Rule rules[] = {
 
     /* class     		    instance  	    title               tags mask  	    iscentered		    switchtotag	        isfloating  	isterminal  	noswallow  	    	monitor */
     //All workspaces
-    { "MultiMonitorLock-GUI",	    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "MultiMonitorLock-Gui",	    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "Pavucontrol",		    NULL,           NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "floatmenu",		    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
     { "Yad",		            NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
@@ -107,7 +107,8 @@ static const Rule rules[] = {
     { "TelegramDesktop",	    NULL,   	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1},
     { "Element",		    NULL,     	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1},
 
-    //Workspace 10 Monitor 1
+    //Workspace 10 Monitor
+    { "Virt-manager",		    NULL,     	    NULL,         	1 << 9,    	    0,          	    1,              	0,          	0,          	-1,        		1},
     { NULL,      		    NULL,           "Event Tester", 	1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1}, /* xev */
     { NULL,      		    NULL,           "lazygit", 	        1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1}, /* lazygit */
 };
@@ -224,7 +225,6 @@ static Key keys[] = {
     { MODKEY|ControlMask,		    -1,         		XK_u,						spawn,       			SHCMD("pavucontrol") },
     { MODKEY|ShiftMask,			    -1,         		XK_z,						spawn,       		        SHCMD("multimonitorlock-gui") },
     { MODKEY|Mod1Mask,			    -1,         		XK_p,						spawn,       			SHCMD("pamac-manager") },
-    { MODKEY|Mod1Mask,			    -1,         		XK_t,						spawn,       			SHCMD("telegram-desktop") },
 
     { MODKEY,				    XK_Print,                   XK_w,						spawn,       			SHCMD("wm-maim -w" ) },
     { MODKEY,				    XK_Print,                   XK_s,						spawn,       			SHCMD("wm-maim -s" ) },
