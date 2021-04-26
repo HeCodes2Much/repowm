@@ -68,48 +68,48 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
 
-    /* class     		    instance  	    title         tags mask  	    iscentered		    switchtotag	  isfloating  	isterminal  	noswallow  	monitor */
+    /* class     		    instance  	    title               tags mask  	    iscentered		    switchtotag	        isfloating  	isterminal  	noswallow  	    	monitor */
     //All workspaces
-    { "MultiMonitorLock-GUI",	NULL,     NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
-    { "Pavucontrol",		NULL,           NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
-    { "floatmenu",		  NULL,     	    NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
-    { "Yad",		        NULL,     	    NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
-    { "Timeshift-gtk",  NULL,     	    NULL,					0,         	    1,          	    1,          	1,          	0,          	-1,					-1},
+    { "MultiMonitorLock-GUI",	    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "Pavucontrol",		    NULL,           NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "floatmenu",		    NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "Yad",		            NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
+    { "Timeshift-gtk",              NULL,     	    NULL,  		0,         	    1,          	    1,          	1,          	0,          	-1,			-1},
 
     //Workspace 1 Monitor 0
-    { "kitty", 		  	  NULL,     	    NULL,         1 << 0,         0,          	    1,          	0,          	1,          	-1,					0},
+    { "kitty", 		  	    NULL,     	    NULL,         	1 << 0,             0,          	    1,          	0,          	1,          	-1,        		0},
 
     //Workspace 2 Monitor 0
-    { "Code", 		  	  NULL,     	    NULL,         1 << 1,         0,          	    1,          	0,          	0,          	-1,        	0},
-    { "Emacs", 		  	  NULL,     	    NULL,         1 << 1,         0,          	    1,            0,          	0,          	-1,        	0},
-    { "Gvim", 		  	  NULL,     	    NULL,         1 << 1,         0,          	    1,            0,          	0,          	-1,        	0},
+    { "Code", 		  	    NULL,     	    NULL,         	1 << 1,             0,          	    1,          	0,          	0,          	-1,        		0},
+    { "Emacs", 		  	    NULL,     	    NULL,         	1 << 1,             0,          	    1,              	0,          	0,          	-1,        		0},
+    { "Gvim", 		  	    NULL,     	    NULL,         	1 << 1,             0,          	    1,              	0,          	0,          	-1,        		0},
 
     //Workspace 3 Monitor 0
-    { "Nemo", 		  	  NULL,     	    NULL,         1 << 2,         0,          	    1,            0,          	0,          	-1,        	0},
+    { "Nemo", 		  	    NULL,     	    NULL,         	1 << 2,             0,          	    1,              	0,          	0,          	-1,        		0},
 
     //Workspace 4 Monitor 0
-    { "Ld-linux-x86-64.so.2",	NULL,     NULL,					1 << 3,    	    0,          	    1,            1,          	0,          	-1,        	0}, // Inkscape
-    { "Gimp",    		    NULL,						NULL,         1 << 3,    	    0,          	    1,            1,          	0,          	-1,        	0},
+    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		1 << 3,    	    0,          	    1,              	1,          	0,          	-1,        		0}, // Inkscape
+    { "Gimp",    		    NULL,	    NULL,         	1 << 3,    	    0,          	    1,                  1,          	0,          	-1,        	        0},
 
     //Workspace 5 Monitor 0
 
     //Workspace 6 Monitor 1
-    { "Firefox", 		    NULL,     	    NULL,         1 << 5,        	0,          	    1,            0,          	0,          	-1,        	1},
-    { "Vivaldi-stable",	NULL,						NULL,         1 << 5,        	0,              	1,            0,          	0,          	-1,        	1},
+    { "Firefox", 		    NULL,     	    NULL,         	1 << 5,        	    0,          	    1,                  0,          	0,          	-1,        		1},
+    { "Vivaldi-stable",		    NULL, 	    NULL,         	1 << 5,        	    0,              	    1,              	0,          	0,          	-1,        		1},
 
     //Workspace 7 Monitor 1
 
     //Workspace 8 Monitor 1
-    { "Steam",			    NULL,     	    NULL,         1 << 7,    	    0,              	1,            0,          	0,          	-1,        	1},
-    { "Minecraft Launcher",	NULL,     	NULL,         1 << 7,    	    0,              	1,            0,          	0,          	-1,        	1},
+    { "Steam",			    NULL,     	    NULL,         	1 << 7,    	    0,              	    1,              	0,          	0,          	-1,        		1},
+    { "Minecraft Launcher",	    NULL,     	    NULL,         	1 << 7,    	    0,              	    1,              	0,          	0,          	-1,        		1},
 
     //Workspace 9 Monitor 1
-    { "TelegramDesktop",NULL,						NULL,         1 << 8,    	    0,          	    1,            0,          	0,          	-1,        	1},
-    { "Element",				NULL,     	    NULL,         1 << 8,    	    0,          	    1,            0,          	0,          	-1,        	1},
+    { "TelegramDesktop",	    NULL,   	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1},
+    { "Element",		    NULL,     	    NULL,         	1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        		1},
 
     //Workspace 10 Monitor 1
-    { NULL,      		    NULL,           "Event Tester", 1 << 9,       0,          	    1,            0,          	1,          	-1,        	1}, /* xev */
-    { NULL,      		    NULL,           "lazygit", 	  1 << 9,        	0,          	    1,            0,          	1,          	-1,        	1}, /* lazygit */
+    { NULL,      		    NULL,           "Event Tester", 	1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1}, /* xev */
+    { NULL,      		    NULL,           "lazygit", 	        1 << 9,        	    0,          	    1,              	0,          	1,          	-1,        		1}, /* lazygit */
 };
 
 
@@ -209,6 +209,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,	            XK_g,         		XK_s,						spawn,       			SHCMD("prime-run steam") },
     { MODKEY|ControlMask,		    XK_g,         		XK_m,						spawn,       			SHCMD("prime-run minecraft-launcher") },
     { MODKEY|ControlMask,	            -1,         		XK_e,						spawn,       			SHCMD("element-desktop") },
+    { MODKEY|ControlMask,		    -1,         		XK_t,						spawn,       			SHCMD("telegram-desktop") },
     { MODKEY|ControlMask,		    -1,         		XK_p,						spawn,       			SHCMD("piper") },
     { MODKEY|ControlMask,		    -1,         		XK_u,						spawn,       			SHCMD("pavucontrol") },
     { MODKEY|ShiftMask,			    -1,         		XK_z,						spawn,       		        SHCMD("multimonitorlock-gui") },
@@ -265,24 +266,24 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             	    -1,         		XK_r,      			                quit,   			{1} },
     { MODKEY|ShiftMask,             	    -1,         		XK_q,     			                quit,           		{0} },
     TAGKEYS(				    -1,         		XK_1,           0)
-    TAGKEYS(				    -1,         		XK_2,           1)
-    TAGKEYS(				    -1,         		XK_3,           2)
-    TAGKEYS(				    -1,         		XK_4,           3)
-    TAGKEYS(				    -1,         		XK_5,           4)
-    TAGKEYS(				    -1,         		XK_6,           5)
-    TAGKEYS(				    -1,         		XK_7,           6)
-    TAGKEYS(				    -1,         		XK_8,           7)
-    TAGKEYS(				    -1,         		XK_9,           8)
-    TAGKEYS(				    -1,         		XK_0,           9)
-    { 0,                            	    -1,         		XF86XK_MonBrightnessUp,   			spawn,   			{.v = upbright}},
-    { 0,                            	    -1,         		XF86XK_MonBrightnessDown, 			spawn,   			{.v = downbright}},
-    { 0,                            	    -1,         		XF86XK_AudioLowerVolume,  			spawn,   			{.v = downvol}},
-    { 0,                            	     -1,         		XF86XK_AudioMute,         			spawn,   			{.v = mutevol}},
-    { 0,                            	    -1,         		XF86XK_AudioRaiseVolume,  			spawn,   			{.v = upvol}},
-    { 0,                            	    -1,         		XF86XK_AudioPlay,         			spawn,   			{.v = playerpause}},
-    { 0,                            	    -1,         		XF86XK_AudioPause,        			spawn,   			{.v = playerpause}},
-    { 0,                            	    -1,         		XF86XK_AudioNext,         			spawn,   			{.v = playernext}},
-    { 0,                            	    -1,         		XF86XK_AudioPrev,         			spawn,   			{.v = playerprevious}},
+        TAGKEYS(				    -1,         		XK_2,           1)
+        TAGKEYS(				    -1,         		XK_3,           2)
+        TAGKEYS(				    -1,         		XK_4,           3)
+        TAGKEYS(				    -1,         		XK_5,           4)
+        TAGKEYS(				    -1,         		XK_6,           5)
+        TAGKEYS(				    -1,         		XK_7,           6)
+        TAGKEYS(				    -1,         		XK_8,           7)
+        TAGKEYS(				    -1,         		XK_9,           8)
+        TAGKEYS(				    -1,         		XK_0,           9)
+        { 0,                            	    -1,         		XF86XK_MonBrightnessUp,   			spawn,   			{.v = upbright}},
+        { 0,                            	    -1,         		XF86XK_MonBrightnessDown, 			spawn,   			{.v = downbright}},
+        { 0,                            	    -1,         		XF86XK_AudioLowerVolume,  			spawn,   			{.v = downvol}},
+        { 0,                            	     -1,         		XF86XK_AudioMute,         			spawn,   			{.v = mutevol}},
+        { 0,                            	    -1,         		XF86XK_AudioRaiseVolume,  			spawn,   			{.v = upvol}},
+        { 0,                            	    -1,         		XF86XK_AudioPlay,         			spawn,   			{.v = playerpause}},
+        { 0,                            	    -1,         		XF86XK_AudioPause,        			spawn,   			{.v = playerpause}},
+        { 0,                            	    -1,         		XF86XK_AudioNext,         			spawn,   			{.v = playernext}},
+        { 0,                            	    -1,         		XF86XK_AudioPrev,         			spawn,   			{.v = playerprevious}},
 };
 
 /* button definitions */
