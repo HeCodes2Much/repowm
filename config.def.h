@@ -191,6 +191,16 @@ static const char *scratchpadcmd[] = { "kitty", "--title=dropdown_kitty", "--nam
 #include "movestack.c"
 static Key keys[] = {
     /* modifier                             chain key			  key        			                function        		argument */
+    // Keybinds for XFKeys
+    { 0,                            	    -1,         		XF86XK_MonBrightnessUp,   			spawn,   			{.v = upbright}},
+    { 0,                            	    -1,         		XF86XK_MonBrightnessDown, 			spawn,   			{.v = downbright}},
+    { 0,                            	    -1,         		XF86XK_AudioLowerVolume,  			spawn,   			{.v = downvol}},
+    { 0,                            	     -1,         		XF86XK_AudioMute,         			spawn,   			{.v = mutevol}},
+    { 0,                            	    -1,         		XF86XK_AudioRaiseVolume,  			spawn,   			{.v = upvol}},
+    { 0,                            	    -1,         		XF86XK_AudioPlay,         			spawn,   			{.v = playerpause}},
+    { 0,                            	    -1,         		XF86XK_AudioPause,        			spawn,   			{.v = playerpause}},
+    { 0,                            	    -1,         		XF86XK_AudioNext,         			spawn,   			{.v = playernext}},
+    { 0,                            	    -1,         		XF86XK_AudioPrev,         			spawn,   			{.v = playerprevious}},
     //TheRepoClub Custom Keybinds.
     { MODKEY,				    -1,         		XK_o,						spawn,       			{.v = systemmonitorcmd } },
     { MODKEY,				    -1,         		XK_F1,					        spawn,       			{.v = smartcmd } },
@@ -265,25 +275,16 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             	    -1,         		XK_period, 			                tagmon,         		{.i = +1 } },
     { MODKEY|ShiftMask,             	    -1,         		XK_r,      			                quit,   			{1} },
     { MODKEY|ShiftMask,             	    -1,         		XK_q,     			                quit,           		{0} },
-    TAGKEYS(				    -1,         		XK_1,           0)
-        TAGKEYS(				    -1,         		XK_2,           1)
-        TAGKEYS(				    -1,         		XK_3,           2)
-        TAGKEYS(				    -1,         		XK_4,           3)
-        TAGKEYS(				    -1,         		XK_5,           4)
-        TAGKEYS(				    -1,         		XK_6,           5)
-        TAGKEYS(				    -1,         		XK_7,           6)
-        TAGKEYS(				    -1,         		XK_8,           7)
-        TAGKEYS(				    -1,         		XK_9,           8)
-        TAGKEYS(				    -1,         		XK_0,           9)
-        { 0,                            	    -1,         		XF86XK_MonBrightnessUp,   			spawn,   			{.v = upbright}},
-        { 0,                            	    -1,         		XF86XK_MonBrightnessDown, 			spawn,   			{.v = downbright}},
-        { 0,                            	    -1,         		XF86XK_AudioLowerVolume,  			spawn,   			{.v = downvol}},
-        { 0,                            	     -1,         		XF86XK_AudioMute,         			spawn,   			{.v = mutevol}},
-        { 0,                            	    -1,         		XF86XK_AudioRaiseVolume,  			spawn,   			{.v = upvol}},
-        { 0,                            	    -1,         		XF86XK_AudioPlay,         			spawn,   			{.v = playerpause}},
-        { 0,                            	    -1,         		XF86XK_AudioPause,        			spawn,   			{.v = playerpause}},
-        { 0,                            	    -1,         		XF86XK_AudioNext,         			spawn,   			{.v = playernext}},
-        { 0,                            	    -1,         		XF86XK_AudioPrev,         			spawn,   			{.v = playerprevious}},
+    TAGKEYS(				    -1,         		XK_1,                                           0)
+    TAGKEYS(				    -1,         		XK_2,                                           1)
+    TAGKEYS(				    -1,         		XK_3,                                           2)
+    TAGKEYS(				    -1,         		XK_4,                                           3)
+    TAGKEYS(				    -1,         		XK_5,                                           4)
+    TAGKEYS(				    -1,         		XK_6,                                           5)
+    TAGKEYS(				    -1,         		XK_7,                                           6)
+    TAGKEYS(				    -1,         		XK_8,                                           7)
+    TAGKEYS(				    -1,         		XK_9,                                           8)
+    TAGKEYS(				    -1,         		XK_0,                                           9)
 };
 
 /* button definitions */
