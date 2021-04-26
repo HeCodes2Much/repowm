@@ -63,6 +63,7 @@
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
 #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
+#define ColFloating             3
 
 #define SYSTEM_TRAY_REQUEST_DOCK    0
 
@@ -82,7 +83,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeInv, SchemeSel, SchemeFloating }; /* color schemes */
+enum { SchemeNorm, SchemeInv, SchemeSel }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
     NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
     NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -1040,8 +1041,8 @@ drawbar(Monitor *m)
     //draw start menu icon
     drw_setscheme(drw, scheme[SchemeNorm]);
     int startmenuinvert = (selmon->gesture == 13);
-    drw_rect(drw, 0, 0, iconsizes, bh, 1, startmenuinvert ? 0:1);
-    drw_text(drw, 0, 0, iconsizes, bh, 1, " ", 0);
+    drw_rect(drw, 0, 0, iconsizes, bh, 0, startmenuinvert ? 0:1);
+    drw_text(drw, 0, 0, iconsizes, bh, 0, " ", 0);
 
 
     resizebarwin(m);
@@ -1058,12 +1059,10 @@ drawbar(Monitor *m)
             continue;
 
         w = TEXTW(tags[i]);
-        if (m == selmon) {
+        if (m == selmon)
             drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
-        }
-        else {
+        else
             drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeInv : SchemeNorm]);
-        }
         drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
         x += w;
     }
@@ -1074,18 +1073,17 @@ drawbar(Monitor *m)
 
     if ((w = m->ww - tw - stw - x) > bh) {
         if (m->sel) {
-            /* drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]); */
+            drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+						/* draw title of app */
+						drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+
 						if (m->sel->isfloating)
-							drw_setscheme(drw, scheme[m == selmon ? SchemeFloating : SchemeNorm]);
-						else
-							drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-            drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-            if (m->sel->isfloating)
                 drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
         } else {
             drw_setscheme(drw, scheme[SchemeNorm]);
             drw_rect(drw, x, 0, w, bh, 1, 1);
         }
+
         // render shutdown button
         if (!selmon->sel) {
             drw_setscheme(drw, scheme[SchemeNorm]);
@@ -1171,10 +1169,10 @@ focus(Client *c)
         detachstack(c);
         attachstack(c);
         grabbuttons(c, 1);
-	if (c->isfloating)
-		XSetWindowBorder(dpy, c->win, scheme[SchemeFloating][ColBorder].pixel);
-	else
-		XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
+		if (c->isfloating)
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloating].pixel);
+		else
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
         setfocus(c);
     } else {
         XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
@@ -1488,7 +1486,10 @@ manage(Window w, XWindowAttributes *wa)
 
     wc.border_width = c->bw;
     XConfigureWindow(dpy, w, CWBorderWidth, &wc);
-    XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
+		if (c->isfloating)
+			XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloating].pixel);
+		else
+			XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
     configure(c); /* propagates border_width, if size doesn't change */
     updatewindowtype(c);
     updatesizehints(c);
@@ -1503,6 +1504,8 @@ manage(Window w, XWindowAttributes *wa)
         c->isfloating = c->oldstate = trans != None || c->isfixed;
     if (c->isfloating)
         XRaiseWindow(dpy, c->win);
+		if (c->isfloating)
+			XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColFloating].pixel);
     attachbottom(c);
     attachstack(c);
     XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
@@ -2170,7 +2173,7 @@ setup(void)
     /* init appearance */
     scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
     for (i = 0; i < LENGTH(colors); i++)
-        scheme[i] = drw_scm_create(drw, colors[i], 3);
+        scheme[i] = drw_scm_create(drw, colors[i], 4);
     /* init system tray */
     if (showsystray)
         updatesystray();
@@ -2344,6 +2347,10 @@ togglefloating(const Arg *arg)
         return;
     selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
     if (selmon->sel->isfloating)
+			XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColFloating].pixel);
+		else
+			XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
+		if (selmon->sel->isfloating)
         resize(selmon->sel, selmon->sel->x, selmon->sel->y,
                 selmon->sel->w, selmon->sel->h, 0);
     arrange(selmon);
