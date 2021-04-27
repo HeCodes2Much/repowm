@@ -326,6 +326,8 @@ static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh, blw = 0;      /* bar geometry */
 static int lrpad;            /* sum of left and right padding for text */
+static int vp;               /* vertical padding for bar */
+static int sp;               /* side padding for bar */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
 static void (*handler[LASTEvent]) (XEvent *) = {
@@ -2144,6 +2146,8 @@ setup(void)
     lrpad = drw->fonts->h;
     bh = user_bh ? user_bh : drw->fonts->h + 2;
     updategeom();
+    sp = sidepad;
+    vp = (topbar == 1) ? vertpad : - vertpad;
     /* init atoms */
     utf8string = XInternAtom(dpy, "UTF8_STRING", False);
     wmatom[WMProtocols] = XInternAtom(dpy, "WM_PROTOCOLS", False);
@@ -2323,15 +2327,12 @@ togglebar(const Arg *arg)
         if (!selmon->showbar)
             wc.y = -bh;
         else if (selmon->showbar) {
-#if BARPADDING_PATCH
             wc.y = vp;
             if (!selmon->topbar)
                 wc.y = selmon->mh - bh + vp;
-#else
             wc.y = 0;
             if (!selmon->topbar)
                 wc.y = selmon->mh - bh;
-#endif // BARPADDING_PATCH
         }
         XConfigureWindow(dpy, systray->win, CWY, &wc);
     }

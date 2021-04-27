@@ -18,7 +18,8 @@ static const int systraypinningfailfirst 	    = 1;   		        /* 1: if pinning 
 static const int showsystray        		    = 1;     	        /* 0 means no systray */
 static const int showbar            		    = 1;        	    /* 0 means no bar */
 static const int topbar             		    = 1;        	    /* 0 means bottom bar */
-static const int extrabar                       = 1;                /* 0 means no extra bar */
+static const int vertpad                        = 10;               /* vertical padding of bar */
+static const int sidepad                        = 10;               /* horizontal padding of bar */
 static const int viewontag         		        = 1;     	        /* 0 means don't view on tag switch */
 static const int useinstabar 			        = 1;  		        /* 0 means don't use instabar script */
 static const int user_bh            		    = 28;               /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
@@ -139,8 +140,17 @@ static const Layout layouts[] = {
 };
 
 static const Taglayout taglayouts[] = {
-    /* tag		    layout */
-    { 1,		    {.v = &layouts[6]} },
+    /*  tag		layout */
+    {   1,		{.v = &layouts[6]} },
+    {   2,		{.v = &layouts[0]} },
+    {   3,		{.v = &layouts[0]} },
+    {   4,		{.v = &layouts[0]} },
+    {   5,		{.v = &layouts[0]} },
+    {   6,		{.v = &layouts[0]} },
+    {   7,		{.v = &layouts[0]} },
+    {   8,		{.v = &layouts[0]} },
+    {   9,		{.v = &layouts[0]} },
+    {   10,		{.v = &layouts[0]} },
 };
 
 /* key definitions */
@@ -237,7 +247,6 @@ static Key keys[] = {
     { MODKEY,				                -1,         		XK_Return, 			                    spawn,          		{.v = terminalcmd } },
     { ControlMask,                  	    -1,         		XK_Return,  		                    togglescratch,  		{.v = scratchpadcmd } },
     { MODKEY,                       	    -1,         		XK_b,      			                    togglebar,      		{0} },
-    { MODKEY,                               -1,                 XK_b,                                   toggleextrabar,         {0} },
     { MODKEY,                       	    -1,         		XK_j,      			                    focusstack,     		{.i = +1 } },
     { MODKEY,                       	    -1,         		XK_k,      			                    focusstack,     		{.i = -1 } },
     { MODKEY,                       	    -1,         		XK_i,      			                    incnmaster,     		{.i = +1 } },
