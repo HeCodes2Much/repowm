@@ -1,5 +1,5 @@
 # instawm version
-VERSION = 6.2
+VERSION = 2021.05.02
 
 # Customize below to fit your system
 
