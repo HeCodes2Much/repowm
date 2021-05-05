@@ -1899,6 +1899,11 @@ runAutostart(void) {
             system("instabar &");
         }
     }
+    
+    /* For Information Fetchers */
+    setenv("XDG_CURRENT_DESKTOP","instawm",1);
+    setenv("XDG_SESSION_DESKTOP","instawm",1);
+    setenv("DESKTOP_SESSION","instawm",1);
 
     char *pathpfx;
     char *path;
