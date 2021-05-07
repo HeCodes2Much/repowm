@@ -113,6 +113,7 @@ static const Rule rules[] = {
     { "Virt-manager",		        NULL,     	    NULL,         	    1 << 9,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
     { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* xev */
     { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* lazygit */
+    { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* bpytop */
 };
 
 
