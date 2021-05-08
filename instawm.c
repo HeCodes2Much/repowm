@@ -1087,7 +1087,7 @@ drawbar(Monitor *m)
         }
 
         // render shutdown button
-        if (!selmon->sel) {
+        if (!selmon->sel && !selmon->clients) {
             drw_setscheme(drw, scheme[SchemeNorm]);
             drw_rect(drw, x, 0, iconsizes, bh, 1, 1);
             drw_text(drw, x, 0, iconsizes, bh, 1, "⏻", 0);
