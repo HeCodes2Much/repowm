@@ -147,14 +147,15 @@ struct Monitor {
     float mfact;
     int nmaster;
     int num;
-    int by;               /* bar geometry */
-    int btw;              /* width of tasks portion of bar */
-    int mx, my, mw, mh;   /* screen size */
-    int wx, wy, ww, wh;   /* window area  */
-    int gappih;           /* horizontal gap between windows */
-    int gappiv;           /* vertical gap between windows */
-    int gappoh;           /* horizontal outer gaps */
-    int gappov;           /* vertical outer gaps */
+    int by;                 /* bar geometry */
+    int eby;	            /* extra bar geometry */
+    int btw;                /* width of tasks portion of bar */
+    int mx, my, mw, mh;     /* screen size */
+    int wx, wy, ww, wh;     /* window area  */
+    int gappih;             /* horizontal gap between windows */
+    int gappiv;             /* vertical gap between windows */
+    int gappoh;             /* horizontal outer gaps */
+    int gappov;             /* vertical outer gaps */
     unsigned int seltags;
     unsigned int sellt;
     unsigned int tagset[2];
@@ -166,6 +167,7 @@ struct Monitor {
     Client *stack;
     Monitor *next;
     Window barwin;
+    Window extrabarwin;
     const Layout *lt[2];
     Pertag *pertag;
 };
@@ -318,6 +320,7 @@ static const char configdir[] = ".config";
 static const char instawmdir[] = "instawm";
 static const char localshare[] = ".local/share";
 static char stext[256];
+static char estext[256];
 
 static int freealttab = 0;
 static int statuswidth = 0;
@@ -1110,6 +1113,11 @@ drawbar(Monitor *m)
         }
     }
     drw_map(drw, m->barwin, 0, 0, m->ww - stw, bh);
+
+    int mid = (mons->ww - (int)TEXTW(estext)) / 2;
+    drw_setscheme(drw, scheme[SchemeNorm]);
+    drw_text(drw, 0, 0, mons->ww, bh, mid, estext, 0);
+    drw_map(drw, m->extrabarwin, 0, 0, m->ww - stw, bh);
 }
 
     void
@@ -1767,6 +1775,7 @@ resizebarwin(Monitor *m) {
     if (showsystray && m == systraytomon(m) && !systrayonleft)
         w -= getsystraywidth();
     XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, w, bh);
+    XMoveResizeWindow(dpy, m->extrabarwin, m->wx, m->eby, w, bh);
 }
 
     void
@@ -2538,14 +2547,29 @@ updatebars(void)
         w = m->ww;
         if (showsystray && m == systraytomon(m))
             w -= getsystraywidth();
-        m->barwin = XCreateWindow(dpy, root, m->wx, m->by, w, bh, 0, DefaultDepth(dpy, screen),
+        if (!m->barwin) {
+            m->barwin = XCreateWindow(dpy, root, m->wx, m->by, w, bh, 0, DefaultDepth(dpy, screen),
                 CopyFromParent, DefaultVisual(dpy, screen),
                 CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
-        XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
-        if (showsystray && m == systraytomon(m))
-            XMapRaised(dpy, systray->win);
-        XMapRaised(dpy, m->barwin);
-        XSetClassHint(dpy, m->barwin, &ch);
+            XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
+            if (showsystray && m == systraytomon(m))
+                XMapRaised(dpy, systray->win);
+            XMapRaised(dpy, m->barwin);
+            XSetClassHint(dpy, m->barwin, &ch);
+        }
+
+        if (showebar) {
+            if (!m->extrabarwin) {
+                m->extrabarwin = XCreateWindow(dpy, root, m->wx, m->eby, w, bh, 0, DefaultDepth(dpy, screen),
+                CopyFromParent, DefaultVisual(dpy, screen),
+                CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
+                XDefineCursor(dpy, m->extrabarwin, cursor[CurNormal]->cursor);
+                if (showsystray && m == systraytomon(m))
+                    XMapRaised(dpy, systray->win);
+                XMapRaised(dpy, m->extrabarwin);
+                XSetClassHint(dpy, m->extrabarwin, &ch);
+            }
+        }
     }
 }
 
@@ -2554,12 +2578,24 @@ updatebarpos(Monitor *m)
 {
     m->wy = m->my;
     m->wh = m->mh;
-    if (m->showbar) {
-        m->wh -= bh;
-        m->by = m->topbar ? m->wy : m->wy + m->wh;
-        m->wy = m->topbar ? m->wy + bh : m->wy;
-    } else
-        m->by = -bh;
+    if (showebar) {
+        m->wh -= bh * m->showbar * 2;
+        m->wy = m->showbar ? m->wy + bh : m->wy;
+        if (m->showbar) {
+            m->by = m->topbar ? m->wy - bh : m->wy + m->wh;
+            m->eby = m->topbar ? m->wy + m->wh : m->wy - bh;
+        } else {
+            m->by = -bh;
+            m->eby = -bh;
+        }
+    } else {
+        if (m->showbar) {
+            m->wh -= bh;
+            m->by = m->topbar ? m->wy : m->wy + m->wh;
+            m->wy = m->topbar ? m->wy + bh : m->wy;
+        } else
+            m->by = -bh;
+    }
 }
 
     void
@@ -2717,8 +2753,20 @@ updatesizehints(Client *c)
 updatestatus(void)
 {
     Monitor* m;
-    if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
+    char text[512];
+    if (!gettextprop(root, XA_WM_NAME, text, sizeof(text))) {
         strcpy(stext, "instawm-"VERSION);
+        estext[0] = '\0';
+    } else {
+        char *e = strchr(text, statussep);
+        if (e) {
+            *e = '\0'; e++;
+            strncpy(estext, e, sizeof(estext) - 1);
+        } else {
+            estext[0] = '\0';
+        }
+        strncpy(stext, text, sizeof(stext) - 1);
+    }
     for(m = mons; m; m = m->next)
         drawbar(m);
     if (showsystray)
@@ -3099,7 +3147,7 @@ wintomon(Window w)
     if (w == root && getrootptr(&x, &y))
         return recttomon(x, y, 1, 1);
     for (m = mons; m; m = m->next)
-        if (w == m->barwin)
+        if (w == m->barwin || w == m->extrabarwin)
             return m;
     if ((c = wintoclient(w)))
         return c->mon;
