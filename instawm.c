@@ -1087,14 +1087,14 @@ drawbar(Monitor *m)
         }
 
         // render shutdown button
-        if (!selmon->sel && !selmon->clients) {
+        if (!m->sel) {
             drw_setscheme(drw, scheme[SchemeNorm]);
             drw_rect(drw, x, 0, iconsizes, bh, 1, 1);
             drw_text(drw, x, 0, iconsizes, bh, 1, "⏻", 0);
         }
 
         // display help message if no application is opened
-        if (!selmon->clients) {
+        if (!m->sel) {
             int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x;
             int titlewidth =
                 TEXTW("Press alt + space to launch an application") <
