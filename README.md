@@ -7,13 +7,13 @@
 
 ## Installation
 
-**For Arch** it can be founded in [AUR](https://aur.archlinux.org/packages/instawm)
-
+**For Arch** it can be founded in [AUR](https://aur.archlinux.org/packages/instawm) \
+**For Gentoo** refer to the [XDream's Repository](https://github.com/XDream8/dreamsrepo) \
 **Recommended Method**
 ```sh
-git clone https://github.com/The-Repo-Club/instawm.git
-cd instawm
-sudo make install
+$ git clone https://github.com/The-Repo-Club/instawm.git
+$ cd instawm
+# make install
 ```
 
 [Download latest release](https://github.com/The-Repo-Club/instawm/releases/)
