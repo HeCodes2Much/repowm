@@ -30,28 +30,34 @@ static const char *fonts[] = {
     "remixicon:size=12",
     "Siji:size=12",
     "MaterialIcons:size=10",
-    "FiraCode Nerd Font:size=12",};
+    "FiraCode Nerd Font:size=12",
+    "SourceCodePro Nerd Font:size=10",};
 
 
 // instawm bar colors
-static const char col_gray1[]       = "#282a36";
-static const char col_gray2[]       = "#ff79c6";
-static const char col_gray3[]       = "#bd93f9";
-static const char col_gray4[]       = "#f8f8f2";
-static const char col_cyan[]        = "#bd93f9";
-static const char col_green[] 	    = "#61C766";
+static const char col_bg[]          = "#282a36";
+static const char col_fg[]          = "#f8f8f2";
+static const char col_red[]         = "#ff5555";
+static const char col_cyan[]        = "#8be9fd";
+static const char col_pink[]        = "#ff79c6";
+static const char col_purple[]      = "#bd93f9";
+static const char col_yellow[]      = "#f1fa8c";
+static const char col_orange[]      = "#ffb86c";
+static const char col_green[] 	    = "#50fa7b";
 
 static const char *colors[][4] = {
-    /*                  fg              bg                   border 	    float*/
-    [SchemeNorm]=   {   col_gray3, 	    col_gray1, 		    col_gray2, 		col_green },
-    [SchemeInv] =   {   col_gray1, 	    col_gray3, 		    col_gray2, 		col_green },
-    [SchemeSel] =   {   col_gray4, 	    col_cyan,  	    	col_cyan, 		col_green },
+    /*                  fg                  bg                  border 	        float*/
+    [SchemeNorm]=   {   col_purple, 	    col_bg, 	        col_pink, 		col_green },
+    [SchemeInv] =   {   col_bg, 	        col_purple, 		col_pink, 		col_green },
+    [SchemeSel] =   {   col_fg, 	        col_purple,  	    col_purple, 	col_green },
+    [SchemeTitle] = {   col_fg,             col_pink,           col_pink, 		col_green },
 };
 
 static const char *const autostart[] = {
     "autorandr", "--force", "--load", "instawm", NULL,
     "setxkbmap", "-option", "caps:escape", NULL,
     "instamenue_youtube_subs", "-d", NULL,
+    "ckb-next", "--background", NULL,
     "polkit-dumb-agent", NULL,
     "touchpad-indicator", NULL,
     "blueman-applet", NULL,
@@ -81,6 +87,7 @@ static const Rule rules[] = {
     { "Timeshift-gtk",              NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
 
     //Workspace 1 Monitor 0
+    { "Alacritty", 		  	        NULL,     	    NULL,         	    1 << 0,         0,          	    1,          	    0,          	1,          	-1,        	    	0},
     { "kitty", 		  	            NULL,     	    NULL,         	    1 << 0,         0,          	    1,          	    0,          	1,          	-1,        	    	0},
 
     //Workspace 2 Monitor 0
@@ -92,8 +99,9 @@ static const Rule rules[] = {
     { "Nemo", 		  	            NULL,     	    NULL,         	    1 << 2,         0,          	    1,              	0,          	0,          	-1,        	    	0},
 
     //Workspace 4 Monitor 0
-    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	1,          	0,          	-1,        	    	0}, // Inkscape
-    { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  1,          	0,          	-1,        	        0},
+    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	0}, // Inkscape
+    { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
+    { "photopea",    		        NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
 
     //Workspace 5 Monitor 0
 
@@ -200,8 +208,8 @@ static const char *mutevol[] = {"amixer", "set", "Master", "toggle", NULL};
 static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
-static const char scratchpadname[] = "dropdown_kitty";
-static const char *scratchpadcmd[] = { "kitty", "--title=dropdown_kitty", "--name=dropdown_kitty", "--class=dropdown_kitty", NULL };
+static const char scratchpadname[] = "dropdown_alacritty";
+static const char *scratchpadcmd[] = { "alacritty", "--title", "dropdown_alacritty", "--class", "dropdown_alacritty,dropdown_alacritty", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
@@ -210,7 +218,7 @@ static Key keys[] = {
     { 0,                            	    -1,         		XF86XK_MonBrightnessUp,   			    spawn,   			    {.v = upbright}},
     { 0,                            	    -1,         		XF86XK_MonBrightnessDown, 			    spawn,   			    {.v = downbright}},
     { 0,                            	    -1,         		XF86XK_AudioLowerVolume,  			    spawn,   			    {.v = downvol}},
-    { 0,                            	     -1,         		XF86XK_AudioMute,         			    spawn,   		    	{.v = mutevol}},
+    { 0,                            	    -1,         		XF86XK_AudioMute,         			    spawn,   		    	{.v = mutevol}},
     { 0,                            	    -1,         		XF86XK_AudioRaiseVolume,  			    spawn,   		    	{.v = upvol}},
     { 0,                            	    -1,         		XF86XK_AudioPlay,         			    spawn,   		    	{.v = playerpause}},
     { 0,                            	    -1,         		XF86XK_AudioPause,        			    spawn,   		    	{.v = playerpause}},
@@ -237,7 +245,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            -1,         		XK_t,					            	spawn,       			SHCMD("telegram-desktop") },
     { MODKEY|ControlMask,		            -1,         		XK_p,					            	spawn,       			SHCMD("piper") },
     { MODKEY|ControlMask,		            -1,         		XK_u,					            	spawn,       			SHCMD("pavucontrol") },
-    { MODKEY|ShiftMask,			            -1,         		XK_z,					            	spawn,       		        SHCMD("multimonitorlock-gui") },
+    { MODKEY|ShiftMask,			            -1,         		XK_z,					            	spawn,       		    SHCMD("multimonitorlock-gui") },
     { MODKEY|Mod1Mask,			            -1,         		XK_p,					            	spawn,       			SHCMD("pamac-manager") },
 
     { MODKEY,				                XK_Print,           XK_w,						            spawn,       			SHCMD("wm-maim -w" ) },
@@ -265,6 +273,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,			            -1,         		XK_a,      			                    defaultgaps,    		{0} },
     { MODKEY,				                -1,         		XK_Tab,    			                    view,           		{0} },
     { MODKEY,             		            -1,         		XK_q,      			                    killclient,     		{0} },
+    { MODKEY,		                        -1,         		XK_c,					            	spawn,       			SHCMD("killall xkill 2>/dev/null || xkill") },
     { MODKEY,				                -1,         		XK_t,						            setlayout,		    	{.v = &layouts[0]} }, /* tile */
     { MODKEY|ShiftMask,			            -1,         		XK_t,					            	setlayout,		    	{.v = &layouts[1]} }, /* bstack */
     { MODKEY,				                -1,         		XK_y,					            	setlayout,		    	{.v = &layouts[2]} }, /* spiral */

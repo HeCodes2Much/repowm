@@ -83,7 +83,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeInv, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeInv, SchemeSel, SchemeTitle }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
     NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
     NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -1078,7 +1078,7 @@ drawbar(Monitor *m)
 
     if ((w = m->ww - tw - stw - x) > bh) {
         if (m->sel) {
-            drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+            drw_setscheme(drw, scheme[m == selmon ? SchemeTitle : SchemeNorm]);
             /* draw title of app */
             drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
 

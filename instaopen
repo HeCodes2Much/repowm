@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+instaopen () {
+    TERMINAL=$(gsettings get org.therepoclub.instamenu.preferences terminal | sed s/\'//g)
+
+    $TERMINAL --title $1 --class $1,$1 -e $@
+}
+
+instaopen $@
