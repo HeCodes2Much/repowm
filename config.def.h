@@ -124,6 +124,7 @@ static const Rule rules[] = {
     { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* xev */
     { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* lazygit */
     { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* bpytop */
+    { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* gotop */
 };
 
 
@@ -181,6 +182,7 @@ static const char *instamenucmd[] = {"instamenu_run", NULL};
 static const char *systemmonitorcmd[] = { "instawm-schemas", "systemmonitorcmd", NULL};
 static const char *instasettings[] = { "instawm-schemas", "instasettingscmd", NULL};
 static const char *startmenucmd[] = { "instawm-schemas", "startmenucmd", NULL};
+static const char *passmenucmd[] = { "instawm-schemas", "passmenucmd", NULL};
 static const char *clipmenucmd[] = { "instawm-schemas", "clipmenucmd", NULL};
 static const char *smartcmd[] = { "instawm-schemas", "smartmenucmd", NULL};
 
@@ -254,7 +256,8 @@ static Key keys[] = {
 
     //Keybinds you may need to customise.
     { Mod1Mask,          		            -1,         		XK_space,  			                    spawn,       			{.v = instamenucmd } },
-    { MODKEY,                       	    -1,         		XK_p,      		                        spawn,          		{.v = instamenucmd } },
+    { MODKEY,                       	    -1,         		XK_m,      		                        spawn,          		{.v = instamenucmd } },
+    { MODKEY,                       	    -1,         		XK_p,      		                        spawn,          		{.v = passmenucmd } },
     { MODKEY,				                -1,         		XK_Return, 			                    spawn,          		{.v = terminalcmd } },
     { ControlMask,                  	    -1,         		XK_Return,  		                    togglescratch,  		{.v = scratchpadcmd } },
     { MODKEY,                       	    -1,         		XK_b,      			                    togglebar,      		{0} },
@@ -290,8 +293,6 @@ static Key keys[] = {
     { MODKEY,                      	        -1,         		XK_space,  			                    setlayout,      		{0} },
     { MODKEY|ShiftMask,             	    -1,         		XK_space,  			                    togglefloating, 		{0} },
     { MODKEY|ShiftMask,             	    -1,         		XK_f,      			                    togglefullscr,  		{0} },
-    { MODKEY,                       	    -1,         		XK_0,      			                    view,           		{.ui = ~0 } },
-    { MODKEY|ShiftMask,             	    -1,         		XK_0,      			                    tag,            		{.ui = ~0 } },
     { MODKEY,                       	    -1,         		XK_comma, 			                    focusmon,       		{.i = -1 } },
     { MODKEY,                       	    -1,         		XK_period, 			                    focusmon,       		{.i = +1 } },
     { MODKEY|ShiftMask,             	    -1,         		XK_comma,  			                    tagmon,         		{.i = -1 } },
