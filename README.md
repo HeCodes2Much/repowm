@@ -35,3 +35,8 @@ please refer to the documentation.
   * system tray
   * window gaps
   * restart function
+
+
+## is this dwm?
+
+instamenu is a fork of [DWM](https://dwm.suckless.org) and can be used as a drop in replacement, maintaining all dmenu behavior and making all extra features optional some features are also borrowed from [InstantWM](https://github.com/instantOS/instantWM)
