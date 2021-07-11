@@ -93,7 +93,7 @@ static const Rule rules[] = {
     //Workspace 2 Monitor 0
     { "Code", 		  	            NULL,     	    NULL,         	    1 << 1,         0,          	    1,          	    0,          	0,          	-1,        		    0},
     { "Emacs", 		  	            NULL,     	    NULL,         	    1 << 1,         0,          	    1,              	0,          	0,          	-1,        		    0},
-    { "Gvim", 		  	            NULL,     	    NULL,         	    1 << 1,         0,          	    1,              	0,          	0,          	-1,        		    0},
+    { "nvim-qt", 		  	        NULL,     	    NULL,         	    1 << 1,         0,          	    1,              	0,          	0,          	-1,        		    0},
 
     //Workspace 3 Monitor 0
     { "Nemo", 		  	            NULL,     	    NULL,         	    1 << 2,         0,          	    1,              	0,          	0,          	-1,        	    	0},
@@ -101,7 +101,6 @@ static const Rule rules[] = {
     //Workspace 4 Monitor 0
     { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	0}, // Inkscape
     { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
-    { "photopea",    		        NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
 
     //Workspace 5 Monitor 0
 
