@@ -113,6 +113,7 @@ static const Rule rules[] = {
     //Workspace 8 Monitor 1
     { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
     { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
+    { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
 
     //Workspace 9 Monitor 1
     { "TelegramDesktop",	        NULL,   	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
@@ -242,6 +243,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            -1,         		XK_v,					            	spawn,       			SHCMD("vlc") },
     { MODKEY|ControlMask,	                XK_g,         		XK_s,					            	spawn,       			SHCMD("prime-run steam") },
     { MODKEY|ControlMask,		            XK_g,         		XK_m,					            	spawn,       			SHCMD("prime-run minecraft-launcher") },
+    { MODKEY|ControlMask,		            XK_g,         		XK_r,					            	spawn,       			SHCMD("prime-run runescape-launcher") },
     { MODKEY|ControlMask,	                -1,         		XK_e,					            	spawn,       			SHCMD("element-desktop") },
     { MODKEY|ControlMask,		            -1,         		XK_t,					            	spawn,       			SHCMD("telegram-desktop") },
     { MODKEY|ControlMask,		            -1,         		XK_p,					            	spawn,       			SHCMD("piper") },
