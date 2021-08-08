@@ -102,7 +102,8 @@ static const Rule rules[] = {
     { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	0}, // Inkscape
     { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
 
-    //Workspace 5 Monitor 0
+    //Workspace 0 Monitor 0
+    { "PkgBrowser", 		  	    NULL,     	    NULL,         	    1 << 9,         0,          	    1,              	0,          	0,          	-1,        	    	0},
 
     //Workspace 6 Monitor 1
     { "Firefox", 		            NULL,     	    NULL,         	    1 << 5,        	0,          	    1,                  0,          	0,          	-1,        	    	1},
@@ -111,9 +112,9 @@ static const Rule rules[] = {
     //Workspace 7 Monitor 1
 
     //Workspace 8 Monitor 1
-    { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
     { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
     { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
+    { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
 
     //Workspace 9 Monitor 1
     { "TelegramDesktop",	        NULL,   	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
@@ -231,6 +232,11 @@ static Key keys[] = {
     { MODKEY,				                -1,         		XK_F1,					                spawn,       			{.v = smartcmd } },
     { MODKEY,				                -1,         		XK_F2,			                        spawn,       			{.v = clipmenucmd } },
     { MODKEY,				                -1,         		XK_F3,					                spawn,       			{.v = instasettings } },
+    { MODKEY,				                -1,         		XK_F4,					                spawn,       			SHCMD("instamenue_pacman") },
+    { MODKEY,				                -1,         		XK_F5,					                spawn,       			SHCMD("instamenue_network") },
+    { MODKEY,				                -1,         		XK_F6,					                spawn,       			SHCMD("instamenue_music") },
+    { MODKEY,				                -1,         		XK_F7,					                spawn,       			SHCMD("instamenue_youtube_subs") },
+    { MODKEY,				                -1,         		XK_F8,					                spawn,       			SHCMD("instamenue_kill") },
     { MODKEY|ShiftMask,          	        -1,         	    XK_Return,  		                    spawn,       			{.v = filemanagercmd } },
     { MODKEY|ControlMask,		            -1,         		XK_h,						            spawn,       			{.v = hypervisorcmd } },
     { MODKEY|ControlMask,		            -1,         		XK_f,						            spawn,       			{.v = browsercmd } },
