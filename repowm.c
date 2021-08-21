@@ -1902,10 +1902,10 @@ run(void)
 void
 runAutostart(void) {
     system("command -v repowm-schemas || { sleep 4 && notify-send 'repowm-schemas missing, please install repowm-schemas!!!'; } &");
-    if (useinstabar) {
-        system("command -v instabar || { sleep 4 && notify-send 'instabar script is missing'; } &");
-        if (system("pgrep -f instabar")) {
-            system("instabar &");
+    if (userepobar) {
+        system("command -v repobar || { sleep 4 && notify-send 'repobar script is missing'; } &");
+        if (system("pgrep -f repobar")) {
+            system("repobar &");
         }
     }
 
