@@ -29,7 +29,7 @@ please refer to the documentation.
   * start menu
   * full multi monitor support
   * tag system
-  * instabar script
+  * repobar script
   * indicators
   * shutdown menu
   * system tray
@@ -39,4 +39,4 @@ please refer to the documentation.
 
 ## is this dwm?
 
-instamenu is a fork of [DWM](https://dwm.suckless.org) and can be used as a drop in replacement, maintaining all dmenu behavior and making all extra features optional some features are also borrowed from [InstantWM](https://github.com/instantOS/instantWM)
+repowm is a fork of [DWM](https://dwm.suckless.org) and can be used as a drop in replacement, maintaining all dmenu behavior and making all extra features optional some features are also borrowed from [InstantWM](https://github.com/instantOS/instantWM)

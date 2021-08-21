@@ -2295,7 +2295,7 @@ sigterm(int unused)
 spawn(const Arg *arg)
 {
     if (arg->v == startmenucmd)
-        instamenumon[0] = '0' + selmon->num;
+        repomenumon[0] = '0' + selmon->num;
     selmon->tagset[selmon->seltags] &= ~scratchtag;
     if (fork() == 0) {
         if (dpy)

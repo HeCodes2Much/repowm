@@ -56,7 +56,7 @@ static const char *colors[][4] = {
 static const char *const autostart[] = {
     "autorandr", "--force", "--load", "repowm", NULL,
     "setxkbmap", "-option", "caps:escape", NULL,
-    "instamenue_youtube_subs", "-d", NULL,
+    "repomenue_youtube_subs", "-d", NULL,
     "ckb-next", "--background", NULL,
     "polkit-dumb-agent", NULL,
     "touchpad-indicator", NULL,
@@ -178,8 +178,8 @@ static const Taglayout taglayouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* repowm commands */
-static char instamenumon[2] = "0"; /* component of instamenucmd, manipulated in spawn() */
-static const char *instamenucmd[] = {"instamenu_run", NULL};
+static char repomenumon[2] = "0"; /* component of repomenucmd, manipulated in spawn() */
+static const char *repomenucmd[] = {"repomenu_run", NULL};
 static const char *systemmonitorcmd[] = { "repowm-schemas", "systemmonitorcmd", NULL};
 static const char *instasettings[] = { "repowm-schemas", "instasettingscmd", NULL};
 static const char *startmenucmd[] = { "repowm-schemas", "startmenucmd", NULL};
@@ -190,7 +190,7 @@ static const char *smartcmd[] = { "repowm-schemas", "smartmenucmd", NULL};
 /* Do not remove */
 static const char *powermenucmd[] = { "repowm-schemas", "powermenucmd", NULL};
 
-/* instamenu commands */
+/* repomenu commands */
 static const char *filemanagercmd[] = { "repowm-schemas", "filemanager", NULL};
 static const char *hypervisorcmd[] = { "repowm-schemas", "hypervisor", NULL};
 static const char *terminalcmd[] = { "repowm-schemas", "terminal", NULL};
@@ -232,11 +232,11 @@ static Key keys[] = {
     { MODKEY,				                -1,         		XK_F1,					                spawn,       			{.v = smartcmd } },
     { MODKEY,				                -1,         		XK_F2,			                        spawn,       			{.v = clipmenucmd } },
     { MODKEY,				                -1,         		XK_F3,					                spawn,       			{.v = instasettings } },
-    { MODKEY,				                -1,         		XK_F4,					                spawn,       			SHCMD("instamenue_pacman") },
-    { MODKEY,				                -1,         		XK_F5,					                spawn,       			SHCMD("instamenue_network") },
-    { MODKEY,				                -1,         		XK_F6,					                spawn,       			SHCMD("instamenue_music") },
-    { MODKEY,				                -1,         		XK_F7,					                spawn,       			SHCMD("instamenue_youtube_subs") },
-    { MODKEY,				                -1,         		XK_F8,					                spawn,       			SHCMD("instamenue_kill") },
+    { MODKEY,				                -1,         		XK_F4,					                spawn,       			SHCMD("repomenue_pacman") },
+    { MODKEY,				                -1,         		XK_F5,					                spawn,       			SHCMD("repomenue_network") },
+    { MODKEY,				                -1,         		XK_F6,					                spawn,       			SHCMD("repomenue_music") },
+    { MODKEY,				                -1,         		XK_F7,					                spawn,       			SHCMD("repomenue_youtube_subs") },
+    { MODKEY,				                -1,         		XK_F8,					                spawn,       			SHCMD("repomenue_kill") },
     { MODKEY|ShiftMask,          	        -1,         	    XK_Return,  		                    spawn,       			{.v = filemanagercmd } },
     { MODKEY|ControlMask,		            -1,         		XK_h,						            spawn,       			{.v = hypervisorcmd } },
     { MODKEY|ControlMask,		            -1,         		XK_f,						            spawn,       			{.v = browsercmd } },
@@ -262,8 +262,8 @@ static Key keys[] = {
     { MODKEY,				                XK_Print,           XK_f,						            spawn,       			SHCMD("wm-maim -f" ) },
 
     //Keybinds you may need to customise.
-    { Mod1Mask,          		            -1,         		XK_space,  			                    spawn,       			{.v = instamenucmd } },
-    { MODKEY,                       	    -1,         		XK_m,      		                        spawn,          		{.v = instamenucmd } },
+    { Mod1Mask,          		            -1,         		XK_space,  			                    spawn,       			{.v = repomenucmd } },
+    { MODKEY,                       	    -1,         		XK_m,      		                        spawn,          		{.v = repomenucmd } },
     { MODKEY,                       	    -1,         		XK_p,      		                        spawn,          		{.v = passmenucmd } },
     { MODKEY,				                -1,         		XK_Return, 			                    spawn,          		{.v = terminalcmd } },
     { ControlMask,                  	    -1,         		XK_Return,  		                    togglescratch,  		{.v = scratchpadcmd } },
