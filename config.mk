@@ -1,5 +1,5 @@
-# instawm version
-VERSION = 2021.05.02
+# repowm version
+VERSION = 2021.08.21
 
 # Customize below to fit your system
 

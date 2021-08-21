@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=instawm
+Name=repowm
 Comment=insta window manager
-Icon=instawm
-Exec=instawm
+Icon=repowm
+Exec=repowm
 Type=XSession

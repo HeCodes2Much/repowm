@@ -23,8 +23,8 @@ static const int topbar             		    = 1;        	    /* 0 means bottom bar
 static const int vertpad                        = 10;               /* vertical padding of bar */
 static const int sidepad                        = 10;               /* horizontal padding of bar */
 static const int viewontag         		        = 1;     	        /* 0 means don't view on tag switch */
-static const int useinstabar 			        = 1;  		        /* 0 means don't use instabar script */
-static const int user_bh            		    = 28;               /* 0 means that instawm will calculate bar height, >= 1 means instawm will user_bh as bar height */
+static const int userepobar 			        = 1;  		        /* 0 means don't use repobar script */
+static const int user_bh            		    = 28;               /* 0 means that repowm will calculate bar height, >= 1 means repowm will user_bh as bar height */
 static const char *fonts[] = {
     "Source Code Pro:size=10",
     "remixicon:size=12",
@@ -34,7 +34,7 @@ static const char *fonts[] = {
     "SourceCodePro Nerd Font:size=10",};
 
 
-// instawm bar colors
+// repowm bar colors
 static const char col_bg[]          = "#282a36";
 static const char col_fg[]          = "#f8f8f2";
 static const char col_red[]         = "#ff5555";
@@ -54,7 +54,7 @@ static const char *colors[][4] = {
 };
 
 static const char *const autostart[] = {
-    "autorandr", "--force", "--load", "instawm", NULL,
+    "autorandr", "--force", "--load", "repowm", NULL,
     "setxkbmap", "-option", "caps:escape", NULL,
     "instamenue_youtube_subs", "-d", NULL,
     "ckb-next", "--background", NULL,
@@ -80,7 +80,7 @@ static const Rule rules[] = {
 
     /* class     		            instance  	    title               tags mask  	    iscentered		    switchtotag	        isfloating  	isterminal  	noswallow  	    	monitor */
     //All workspaces
-    { "MultiMonitorLock-Gui",	    NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,		        	-1},
+    { "Multimonitorlock-gui.py",	NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,		        	-1},
     { "Pavucontrol",		        NULL,           NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
     { "floatmenu",		            NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
     { "Yad",		                NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
@@ -174,30 +174,30 @@ static const Taglayout taglayouts[] = {
 { MODKEY|ShiftMask,             CHAIN,		KEY,      tag,            {.ui = 1 << TAG} }, \
 { MODKEY|ControlMask|ShiftMask, CHAIN,		KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre instawm-5.0 fashion */
+/* helper for spawning shell commands in the pre repowm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* instawm commands */
+/* repowm commands */
 static char instamenumon[2] = "0"; /* component of instamenucmd, manipulated in spawn() */
 static const char *instamenucmd[] = {"instamenu_run", NULL};
-static const char *systemmonitorcmd[] = { "instawm-schemas", "systemmonitorcmd", NULL};
-static const char *instasettings[] = { "instawm-schemas", "instasettingscmd", NULL};
-static const char *startmenucmd[] = { "instawm-schemas", "startmenucmd", NULL};
-static const char *passmenucmd[] = { "instawm-schemas", "passmenucmd", NULL};
-static const char *clipmenucmd[] = { "instawm-schemas", "clipmenucmd", NULL};
-static const char *smartcmd[] = { "instawm-schemas", "smartmenucmd", NULL};
+static const char *systemmonitorcmd[] = { "repowm-schemas", "systemmonitorcmd", NULL};
+static const char *instasettings[] = { "repowm-schemas", "instasettingscmd", NULL};
+static const char *startmenucmd[] = { "repowm-schemas", "startmenucmd", NULL};
+static const char *passmenucmd[] = { "repowm-schemas", "passmenucmd", NULL};
+static const char *clipmenucmd[] = { "repowm-schemas", "clipmenucmd", NULL};
+static const char *smartcmd[] = { "repowm-schemas", "smartmenucmd", NULL};
 
 /* Do not remove */
-static const char *powermenucmd[] = { "instawm-schemas", "powermenucmd", NULL};
+static const char *powermenucmd[] = { "repowm-schemas", "powermenucmd", NULL};
 
 /* instamenu commands */
-static const char *filemanagercmd[] = { "instawm-schemas", "filemanager", NULL};
-static const char *hypervisorcmd[] = { "instawm-schemas", "hypervisor", NULL};
-static const char *terminalcmd[] = { "instawm-schemas", "terminal", NULL};
-static const char *browsercmd[] = { "instawm-schemas", "webbrowser", NULL};
-static const char *editorcmd[] = { "instawm-schemas", "texteditor", NULL};
-static const char *mailcmd[] = { "instawm-schemas", "mailreader", NULL};
-static const char *gitcmd[] = { "instawm-schemas", "gitbrowser", NULL};
+static const char *filemanagercmd[] = { "repowm-schemas", "filemanager", NULL};
+static const char *hypervisorcmd[] = { "repowm-schemas", "hypervisor", NULL};
+static const char *terminalcmd[] = { "repowm-schemas", "terminal", NULL};
+static const char *browsercmd[] = { "repowm-schemas", "webbrowser", NULL};
+static const char *editorcmd[] = { "repowm-schemas", "texteditor", NULL};
+static const char *mailcmd[] = { "repowm-schemas", "mailreader", NULL};
+static const char *gitcmd[] = { "repowm-schemas", "gitbrowser", NULL};
 
 /* genreal commands*/
 static const char *playernext[] = { "playerctl", "next", NULL};

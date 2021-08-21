@@ -1,7 +1,7 @@
 config.h
 drw.o
 util.o
-instawm
-instawm.o
+repowm
+repowm.o
 itest
 itest.o

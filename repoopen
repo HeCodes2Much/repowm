@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+repoopen () {
+    TERMINAL=$(gsettings get org.therepoclub.repomenu.preferences terminal | sed s/\'//g)
+
+    $TERMINAL --title $1 --class $1,$1 -e $@
+}
+
+repoopen $@

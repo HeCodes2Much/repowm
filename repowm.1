@@ -1,11 +1,11 @@
-.TH instawm 1 instawm\-VERSION
+.TH repowm 1 repowm\-VERSION
 .SH NAME
-instawm \- dynamic window manager
+repowm \- dynamic window manager
 .SH SYNOPSIS
-.B instawm
+.B repowm
 .RB [ \-v ]
 .SH DESCRIPTION
-instawm is a dynamic window manager for X. It manages windows in tiled, monocle
+repowm is a dynamic window manager for X. It manages windows in tiled, monocle
 and floating layouts. Either layout can be applied dynamically, optimising the
 environment for the application in use and the task performed.
 .P
@@ -29,13 +29,13 @@ color. The tags of the focused window are indicated with a filled square in the
 top left corner.  The tags which are applied to one or more windows are
 indicated with an empty square in the top left corner.
 .P
-instawm draws a small border around windows to indicate the focus state.
+repowm draws a small border around windows to indicate the focus state.
 .P
-On start, instawm can start additional programs that may be specified in two special
+On start, repowm can start additional programs that may be specified in two special
 shell scripts (see the FILES section below), autostart.sh.
-The former is executed first and instawm will wait for its
+The former is executed first and repowm will wait for its
 termination before starting.  The latter is executed in the background before
-instawm enters its handler loop.
+repowm enters its handler loop.
 .P
 Either of these files may be omitted.
 .SH OPTIONS
@@ -149,7 +149,7 @@ View all windows with any tag.
 Add/remove all windows with nth tag to/from the view.
 .TP
 .B Mod1\-Shift\-q
-Quit instawm.
+Quit repowm.
 .SS Mouse commands
 .TP
 .B Mod1\-Button1
@@ -161,19 +161,19 @@ Toggles focused window between floating and tiled state.
 .B Mod1\-Button3
 Resize focused window while dragging. Tiled windows will be toggled to the floating state.
 .SH FILES
-The files containing programs to be started along with instawm are searched for in
+The files containing programs to be started along with repowm are searched for in
 the following directories:
-.IP "1. $XDG_DATA_HOME/instawm"
-.IP "2. $HOME/.local/share/instawm"
-.IP "3. $HOME/.instawm"
+.IP "1. $XDG_DATA_HOME/repowm"
+.IP "2. $HOME/.local/share/repowm"
+.IP "3. $HOME/.repowm"
 .P
 The first existing directory is scanned for any of the autostart files below.
 .TP 15
 autostart.sh
-This file is started as a shell background process before instawm enters its handler
+This file is started as a shell background process before repowm enters its handler
 loop.
 .SH CUSTOMIZATION
-instawm is customized by creating a custom config.h and (re)compiling the source
+repowm is customized by creating a custom config.h and (re)compiling the source
 code. This keeps it fast, secure and simple.
 .SH SEE ALSO
 .BR dmenu (1),

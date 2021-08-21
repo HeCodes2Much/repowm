@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# path:       /usr/bin/instabar
+# path:       /usr/bin/repobar
 # author:     The-Repo-Club [wayne6324@gmail.com]
-# github:     https://github.com/The-Repo-Club/instawm
+# github:     https://github.com/The-Repo-Club/repowm
 # date:       2021-04-10 12:34:47.440579
 
 main() {
@@ -10,7 +10,7 @@ main() {
         top="$(bar_ram)$(bar_sep)$(bar_cpu)$(bar_sep)$(bar_keyboard)$(bar_sep)$(bar_updates)$(bar_sep)$(bar_network)$(bar_sep)$(bar_volume)$(bar_sep)$(bar_clock)"
         bottom="$(bar_weather)$(bar_sep)$(bar_distro)$(bar_sep)$(bar_kernel)$(bar_sep)$(bar_disk)$(bar_sep)$(bar_desktop)$(bar_sep)$(bar_shell)$(bar_sep)$(bar_uptime)$(bar_sep)$(bar_packages)"
 
-        instawm -s "$top;$bottom"
+        repowm -s "$top;$bottom"
         sleep 0.5s
     done
 }

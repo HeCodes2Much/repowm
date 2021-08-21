@@ -1,22 +1,22 @@
 <div align="center">
-    <h1>instawm</h1>
+    <h1>repowm</h1>
     <p>Window manager for linux</p>
 </div>
 
-![instawm the window manager for linux.](https://raw.githubusercontent.com/The-Repo-Club/instawm/main/screenshot.png)
+![repowm the window manager for linux.](https://raw.githubusercontent.com/The-Repo-Club/repowm/main/screenshot.png)
 
 ## Installation
 
-**For Arch** it can be founded in [AUR](https://aur.archlinux.org/packages/instawm) \
+**For Arch** it can be founded in [AUR](https://aur.archlinux.org/packages/repowm) \
 **For Gentoo** refer to the [XDream's Repository](https://github.com/XDream8/dreamsrepo) \
 **Recommended Method**
 ```sh
-$ git clone https://github.com/The-Repo-Club/instawm.git
-$ cd instawm
+$ git clone https://github.com/The-Repo-Club/repowm.git
+$ cd repowm
 # make install
 ```
 
-[Download latest release](https://github.com/The-Repo-Club/instawm/releases/)
+[Download latest release](https://github.com/The-Repo-Club/repowm/releases/)
 
 ## Features
 

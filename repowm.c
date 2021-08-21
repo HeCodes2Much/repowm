@@ -6,7 +6,7 @@
  * events about window (dis-)appearance. Only one X connection at a time is
  * allowed to select for this event mask.
  *
- * The event handlers of instawm are organized in an array which is accessed
+ * The event handlers of repowm are organized in an array which is accessed
  * whenever a new event has been fetched. This allows event dispatching
  * in O(1) time.
  *
@@ -317,7 +317,7 @@ static Systray *systray =  NULL;
 static const char autostartsh[] = "autostart.sh";
 static const char broken[] = "broken";
 static const char configdir[] = ".config";
-static const char instawmdir[] = "instawm";
+static const char repowmdir[] = "repowm";
 static const char localshare[] = ".local/share";
 static char stext[256];
 static char estext[256];
@@ -380,7 +380,7 @@ static unsigned int scratchtag = 1 << LENGTH(tags);
 /* compile-time check if all tags fit into an unsigned int bit array. */
 struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
 
-/* instawm will keep pid's of processes from autostart array and kill them at quit */
+/* repowm will keep pid's of processes from autostart array and kill them at quit */
 static pid_t *autostart_pids;
 static size_t autostart_len;
 
@@ -399,7 +399,7 @@ autostart_exec() {
         if ((autostart_pids[i] = fork()) == 0) {
             setsid();
             execvp(*p, (char *const *)p);
-            fprintf(stderr, "instawm: execvp %s\n", *p);
+            fprintf(stderr, "repowm: execvp %s\n", *p);
             perror(" failed");
             _exit(EXIT_FAILURE);
         }
@@ -1901,7 +1901,7 @@ run(void)
 
 void
 runAutostart(void) {
-    system("command -v instawm-schemas || { sleep 4 && notify-send 'instawm-schemas missing, please install instawm-schemas!!!'; } &");
+    system("command -v repowm-schemas || { sleep 4 && notify-send 'repowm-schemas missing, please install repowm-schemas!!!'; } &");
     if (useinstabar) {
         system("command -v instabar || { sleep 4 && notify-send 'instabar script is missing'; } &");
         if (system("pgrep -f instabar")) {
@@ -1910,9 +1910,9 @@ runAutostart(void) {
     }
 
     /* For Information Fetchers */
-    setenv("XDG_CURRENT_DESKTOP","instawm",1);
-    setenv("XDG_SESSION_DESKTOP","instawm",1);
-    setenv("DESKTOP_SESSION","instawm",1);
+    setenv("XDG_CURRENT_DESKTOP","repowm",1);
+    setenv("XDG_SESSION_DESKTOP","repowm",1);
+    setenv("DESKTOP_SESSION","repowm",1);
 
     char *pathpfx;
     char *path;
@@ -1924,23 +1924,23 @@ runAutostart(void) {
         /* this is almost impossible */
         return;
 
-    /* if $XDG_DATA_HOME is set and not empty, use $XDG_DATA_HOME/instawm,
-     * otherwise use ~/.local/share/instawm as autostart script directory
+    /* if $XDG_DATA_HOME is set and not empty, use $XDG_DATA_HOME/repowm,
+     * otherwise use ~/.local/share/repowm as autostart script directory
      */
     xdgdatahome = getenv("XDG_DATA_HOME");
     if (xdgdatahome != NULL && *xdgdatahome != '\0') {
         /* space for path segments, separators and nul */
-        pathpfx = ecalloc(1, strlen(home) + strlen(configdir) + strlen(instawmdir) + 3);
+        pathpfx = ecalloc(1, strlen(home) + strlen(configdir) + strlen(repowmdir) + 3);
 
-        if (sprintf(pathpfx, "%s/%s/%s", home, configdir, instawmdir) < 0) {
+        if (sprintf(pathpfx, "%s/%s/%s", home, configdir, repowmdir) < 0) {
             free(pathpfx);
             return;
         }
     } else {
         /* space for path segments, separators and nul */
-        pathpfx = ecalloc(1, strlen(home) + strlen(localshare) + strlen(instawmdir) + 3);
+        pathpfx = ecalloc(1, strlen(home) + strlen(localshare) + strlen(repowmdir) + 3);
 
-        if (sprintf(pathpfx, "%s/%s/%s", home, localshare, instawmdir) < 0) {
+        if (sprintf(pathpfx, "%s/%s/%s", home, localshare, repowmdir) < 0) {
             free(pathpfx);
             return;
         }
@@ -1949,16 +1949,16 @@ runAutostart(void) {
     /* check if the autostart script directory exists */
     if (! (stat(pathpfx, &sb) == 0 && S_ISDIR(sb.st_mode))) {
         /* the XDG conformant path does not exist or is no directory
-         * so we try ~/.instawm instead
+         * so we try ~/.repowm instead
          */
-        char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(configdir)  + strlen(instawmdir) + 4);
+        char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(configdir)  + strlen(repowmdir) + 4);
         if(pathpfx_new == NULL) {
             free(pathpfx);
             return;
         }
         pathpfx = pathpfx_new;
 
-        if (sprintf(pathpfx, "%s/%s/%s", home, configdir, instawmdir) <= 0) {
+        if (sprintf(pathpfx, "%s/%s/%s", home, configdir, repowmdir) <= 0) {
             free(pathpfx);
             return;
         }
@@ -2203,7 +2203,7 @@ setup(void)
     XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
             PropModeReplace, (unsigned char *) &wmcheckwin, 1);
     XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8,
-            PropModeReplace, (unsigned char *) "instawm", 7);
+            PropModeReplace, (unsigned char *) "repowm", 7);
     XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32,
             PropModeReplace, (unsigned char *) &wmcheckwin, 1);
     /* EWMH support per view */
@@ -2302,7 +2302,7 @@ spawn(const Arg *arg)
             close(ConnectionNumber(dpy));
         setsid();
         execvp(((char **)arg->v)[0], (char **)arg->v);
-        fprintf(stderr, "instawm: execvp %s", ((char **)arg->v)[0]);
+        fprintf(stderr, "repowm: execvp %s", ((char **)arg->v)[0]);
         perror(" failed");
         exit(EXIT_SUCCESS);
     }
@@ -2540,7 +2540,7 @@ updatebars(void)
         .background_pixmap = ParentRelative,
         .event_mask = ButtonPressMask|ExposureMask
     };
-    XClassHint ch = {"instawm", "instawm"};
+    XClassHint ch = {"repowm", "repowm"};
     for (m = mons; m; m = m->next) {
         if (m->barwin)
             continue;
@@ -2755,7 +2755,7 @@ updatestatus(void)
     Monitor* m;
     char text[512];
     if (!gettextprop(root, XA_WM_NAME, text, sizeof(text))) {
-        strcpy(stext, "instawm-"VERSION);
+        strcpy(stext, "repowm-"VERSION);
         estext[0] = '\0';
     } else {
         char *e = strchr(text, statussep);
@@ -2866,7 +2866,7 @@ updatesystray(void)
             XSync(dpy, False);
         }
         else {
-            fprintf(stderr, "instawm: unable to obtain system tray.\n");
+            fprintf(stderr, "repowm: unable to obtain system tray.\n");
             free(systray);
             systray = NULL;
             return;
@@ -3170,7 +3170,7 @@ xerror(Display *dpy, XErrorEvent *ee)
             || (ee->request_code == X_GrabKey && ee->error_code == BadAccess)
             || (ee->request_code == X_CopyArea && ee->error_code == BadDrawable))
         return 0;
-    fprintf(stderr, "instawm: fatal error: request code=%d, error code=%d\n",
+    fprintf(stderr, "repowm: fatal error: request code=%d, error code=%d\n",
             ee->request_code, ee->error_code);
     return xerrorxlib(dpy, ee); /* may call exit */
 }
@@ -3186,7 +3186,7 @@ xerrordummy(Display *dpy, XErrorEvent *ee)
     int
 xerrorstart(Display *dpy, XErrorEvent *ee)
 {
-    die("instawm: another window manager is already running");
+    die("repowm: another window manager is already running");
     return -1;
 }
 
@@ -3224,20 +3224,20 @@ zoom(const Arg *arg)
 main(int argc, char *argv[])
 {
     if (argc == 2 && !strcmp("-v", argv[1]))
-        die("instawm-"VERSION);
+        die("repowm-"VERSION);
     else if (argc != 1 && strcmp("-s", argv[1]))
-        die("usage: instawm [-v]");
+        die("usage: repowm [-v]");
     if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
         fputs("warning: no locale support\n", stderr);
     if (!(dpy = XOpenDisplay(NULL)))
-        die("instawm: cannot open display");
+        die("repowm: cannot open display");
     if (argc > 1 && !strcmp("-s", argv[1])) {
         XStoreName(dpy, RootWindow(dpy, DefaultScreen(dpy)), argv[2]);
         XCloseDisplay(dpy);
         return 0;
     }
     if (!(xcon = XGetXCBConnection(dpy)))
-        die("instawm: cannot get xcb connection\n");
+        die("repowm: cannot get xcb connection\n");
     checkotherwm();
     autostart_exec();
     setup();
