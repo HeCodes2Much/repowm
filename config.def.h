@@ -99,33 +99,33 @@ static const Rule rules[] = {
     { "Nemo", 		  	            NULL,     	    NULL,         	    1 << 2,         0,          	    1,              	0,          	0,          	-1,        	    	0},
 
     //Workspace 4 Monitor 0
-    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	0}, // Inkscape
-    { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
+    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	1}, // Inkscape
+    { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        1},
 
-    //Workspace 0 Monitor 0
-    { "PkgBrowser", 		  	    NULL,     	    NULL,         	    1 << 9,         0,          	    1,              	0,          	0,          	-1,        	    	0},
-
-    //Workspace 6 Monitor 1
+        //Workspace 6 Monitor 0
     { "Firefox", 		            NULL,     	    NULL,         	    1 << 5,        	0,          	    1,                  0,          	0,          	-1,        	    	1},
     { "Vivaldi-stable",		        NULL, 	        NULL,         	    1 << 5,        	0,              	1,              	0,          	0,          	-1,        	    	1},
 
-    //Workspace 7 Monitor 1
+    //Workspace 7 Monitor 0
 
-    //Workspace 8 Monitor 1
-    { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
-    { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
-    { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
+    //Workspace 8 Monitor 0
+    { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	2},
+    { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	2},
+    { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	2},
 
-    //Workspace 9 Monitor 1
-    { "TelegramDesktop",	        NULL,   	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
-    { "Element",		            NULL,     	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
+    //Workspace 9 Monitor 0
+    { "TelegramDesktop",	        NULL,   	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	2},
+    { "Element",		            NULL,     	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	2},
 
-    //Workspace 10 Monitor
-    { "Virt-manager",		        NULL,     	    NULL,         	    1 << 9,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
-    { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* xev */
-    { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* lazygit */
-    { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* bpytop */
-    { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* gotop */
+    //Workspace 0 Monitor 0
+    { "PkgBrowser", 		  	    NULL,     	    NULL,         	    1 << 9,         0,          	    1,              	0,          	0,          	-1,        	    	3},
+
+    //Workspace 10 Monitor 1
+    { "Virt-manager",		        NULL,     	    NULL,         	    1 << 9,    	    0,          	    1,              	0,          	0,          	-1,        	    	4},
+    { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* xev */
+    { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* lazygit */
+    { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* bpytop */
+    { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* gotop */
 };
 
 
@@ -228,6 +228,7 @@ static Key keys[] = {
     { 0,                            	    -1,         		XF86XK_AudioNext,         			    spawn,   		    	{.v = playernext}},
     { 0,                            	    -1,         		XF86XK_AudioPrev,         			    spawn,   		    	{.v = playerprevious}},
     //TheRepoClub Custom Keybinds.
+    { ControlMask|Mod1Mask,				    -1,         		XK_v,					                spawn,       			SHCMD("fourmon") },
     { MODKEY,				                -1,         		XK_o,						            spawn,       			{.v = systemmonitorcmd } },
     { MODKEY,				                -1,         		XK_F1,					                spawn,       			{.v = smartcmd } },
     { MODKEY,				                -1,         		XK_F2,			                        spawn,       			{.v = clipmenucmd } },
