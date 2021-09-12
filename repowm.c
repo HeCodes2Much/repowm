@@ -1084,13 +1084,13 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 			while (text[++i] != '^') {
 				if (text[i] == 'c') {
 					char buf[8];
-					memcpy(buf, (char*)text+i+1, 7);
+					memcpy(buf, (char*)text + i + 1, 7);
 					buf[7] = '\0';
 					drw_clr_create(drw, &drw->scheme[ColFg], buf);
 					i += 7;
 				} else if (text[i] == 'b') {
 					char buf[8];
-					memcpy(buf, (char*)text+i+1, 7);
+					memcpy(buf, (char*)text + i + 1, 7);
 					buf[7] = '\0';
 					drw_clr_create(drw, &drw->scheme[ColBg], buf);
 					i += 7;
