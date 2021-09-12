@@ -46,6 +46,7 @@ dist: clean
 install: all
 	install -d ${DESTDIR}{${PREFIX}/bin,/usr/share/xsessions,${MANPREFIX}/man1}
 	install -m  755 -s repowm ${DESTDIR}${PREFIX}/bin/
+	install -Dm  755 layoutmenu ${DESTDIR}${PREFIX}/bin/layoutmenu
 	install -Dm  755 repoopen ${DESTDIR}${PREFIX}/bin/repoopen
 	install -Dm  755 repobar ${DESTDIR}${PREFIX}/bin/repobar
 	install -m  644 repowm.1 ${DESTDIR}${MANPREFIX}/man1/
@@ -55,6 +56,7 @@ install: all
 .PHONY: uninstall
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/repowm\
+		${DESTDIR}${PREFIX}/bin/layoutmenu\
 		${DESTDIR}${PREFIX}/bin/repoopen\
 		${DESTDIR}${PREFIX}/bin/repobar\
 		${DESTDIR}${MANPREFIX}/man1/repowm.1\

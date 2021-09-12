@@ -7,10 +7,10 @@
 
 main() {
     while true; do
-        top="$(bar_ram)$(bar_sep)$(bar_cpu)$(bar_sep)$(bar_keyboard)$(bar_sep)$(bar_updates)$(bar_sep)$(bar_network)$(bar_sep)$(bar_volume)$(bar_sep)$(bar_clock)"
+        top="$(bar_battery)$(bar_sep)$(bar_ram)$(bar_sep)$(bar_cpu)$(bar_sep)$(bar_keyboard)$(bar_sep)$(bar_updates)$(bar_sep)$(bar_network)$(bar_sep)$(bar_volume)$(bar_sep)$(bar_clock)"
         bottom="$(bar_weather)$(bar_sep)$(bar_distro)$(bar_sep)$(bar_kernel)$(bar_sep)$(bar_disk)$(bar_sep)$(bar_desktop)$(bar_sep)$(bar_shell)$(bar_sep)$(bar_uptime)$(bar_sep)$(bar_packages)"
 
-        repowm -s "$top;$bottom"
+        repowm -s "$top"
         sleep 0.5s
     done
 }

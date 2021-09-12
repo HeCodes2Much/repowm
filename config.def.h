@@ -12,13 +12,11 @@ static const unsigned int systraypinning 	    = 2;   		        /* 0: sloppy syst
 static const unsigned int systrayonleft 	    = 0;   		        /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing 	    = 2;   		        /* systray spacing */
 static const unsigned int iconsizes 	        = 30;		        /* snap pixel */
-static const char statussep                     = ';';              /* separator between status bars */
 static const int swallowfloating    		    = 0;        	    /* 1 means swallow floating windows by default */
 static const int smartgaps          		    = 0;        	    /* 1 means no outer gap when there is only one window */
 static const int systraypinningfailfirst 	    = 1;   		        /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        		    = 1;     	        /* 0 means no systray */
 static const int showbar            		    = 1;        	    /* 0 means no bar */
-static const int showebar            		    = 1;        	    /* 0 means no ebar */
 static const int topbar             		    = 1;        	    /* 0 means bottom bar */
 static const int vertpad                        = 10;               /* vertical padding of bar */
 static const int sidepad                        = 10;               /* horizontal padding of bar */
@@ -99,33 +97,33 @@ static const Rule rules[] = {
     { "Nemo", 		  	            NULL,     	    NULL,         	    1 << 2,         0,          	    1,              	0,          	0,          	-1,        	    	0},
 
     //Workspace 4 Monitor 0
-    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	1}, // Inkscape
-    { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        1},
+    { "Ld-linux-x86-64.so.2",	    NULL,           NULL,   		    1 << 3,    	    0,          	    1,              	0,          	0,          	-1,        	    	0}, // Inkscape
+    { "Gimp",    		            NULL,	        NULL,         	    1 << 3,    	    0,          	    1,                  0,          	0,          	-1,        	        0},
 
-        //Workspace 6 Monitor 0
+    //Workspace 0 Monitor 0
+    { "PkgBrowser", 		  	    NULL,     	    NULL,         	    1 << 9,         0,          	    1,              	0,          	0,          	-1,        	    	0},
+
+    //Workspace 6 Monitor 1
     { "Firefox", 		            NULL,     	    NULL,         	    1 << 5,        	0,          	    1,                  0,          	0,          	-1,        	    	1},
     { "Vivaldi-stable",		        NULL, 	        NULL,         	    1 << 5,        	0,              	1,              	0,          	0,          	-1,        	    	1},
 
-    //Workspace 7 Monitor 0
+    //Workspace 7 Monitor 1
 
-    //Workspace 8 Monitor 0
-    { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	2},
-    { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	2},
-    { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	2},
+    //Workspace 8 Monitor 1
+    { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
+    { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
+    { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
 
-    //Workspace 9 Monitor 0
-    { "TelegramDesktop",	        NULL,   	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	2},
-    { "Element",		            NULL,     	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	2},
+    //Workspace 9 Monitor 1
+    { "TelegramDesktop",	        NULL,   	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
+    { "Element",		            NULL,     	    NULL,         	    1 << 8,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
 
-    //Workspace 0 Monitor 0
-    { "PkgBrowser", 		  	    NULL,     	    NULL,         	    1 << 9,         0,          	    1,              	0,          	0,          	-1,        	    	3},
-
-    //Workspace 10 Monitor 1
-    { "Virt-manager",		        NULL,     	    NULL,         	    1 << 9,    	    0,          	    1,              	0,          	0,          	-1,        	    	4},
-    { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* xev */
-    { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* lazygit */
-    { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* bpytop */
-    { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	4}, /* gotop */
+    //Workspace 10 Monitor
+    { "Vmplayer",		            NULL,     	    NULL,         	    1 << 9,    	    0,          	    1,              	0,          	0,          	-1,        	    	1},
+    { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* xev */
+    { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* lazygit */
+    { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* bpytop */
+    { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* gotop */
 };
 
 
@@ -179,6 +177,7 @@ static const Taglayout taglayouts[] = {
 
 /* repowm commands */
 static char repomenumon[2] = "0"; /* component of repomenucmd, manipulated in spawn() */
+static const char *layoutmenu_cmd = "layoutmenu";
 static const char *repomenucmd[] = {"repomenu_run", NULL};
 static const char *systemmonitorcmd[] = { "repowm-schemas", "systemmonitorcmd", NULL};
 static const char *instasettings[] = { "repowm-schemas", "instasettingscmd", NULL};
@@ -253,11 +252,10 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            XK_g,         		XK_r,					            	spawn,       			SHCMD("prime-run runescape-launcher") },
     { MODKEY|ControlMask,	                -1,         		XK_e,					            	spawn,       			SHCMD("element-desktop") },
     { MODKEY|ControlMask,		            -1,         		XK_t,					            	spawn,       			SHCMD("telegram-desktop") },
-    { MODKEY|ControlMask,		            -1,         		XK_p,					            	spawn,       			SHCMD("piper") },
+    { MODKEY|ControlMask,		            -1,         		XK_p,					            	spawn,       			SHCMD("pkgbrowser") },
     { MODKEY|ControlMask,		            -1,         		XK_u,					            	spawn,       			SHCMD("pavucontrol") },
     { MODKEY|ShiftMask,			            -1,         		XK_z,					            	spawn,       		    SHCMD("multimonitorlock-gui") },
-    { MODKEY|Mod1Mask,			            -1,         		XK_p,					            	spawn,       			SHCMD("pamac-manager") },
-
+    { MODKEY|Mod1Mask,			            -1,         		XK_p,					            	spawn,       			SHCMD("piper") },
     { MODKEY,				                XK_Print,           XK_w,						            spawn,       			SHCMD("wm-maim -w" ) },
     { MODKEY,				                XK_Print,           XK_s,						            spawn,       			SHCMD("wm-maim -s" ) },
     { MODKEY,				                XK_Print,           XK_f,						            spawn,       			SHCMD("wm-maim -f" ) },
@@ -325,7 +323,7 @@ static Button buttons[] = {
     /* click               	event mask      button          function        	    argument */
     { ClkStartMenu,		    0,		        Button1,	    spawn,			        {.v = startmenucmd } },
     { ClkLtSymbol,    		0,		        Button1, 	    cyclelayout,       	    {.i = -1 } },
-    { ClkLtSymbol,    		0,		        Button3, 	    cyclelayout,       	    {.i = +1 } },
+    { ClkLtSymbol,          0,              Button3,        layoutmenu,             {0} },
     { ClkLtSymbol,    		0,		        Button2, 	    setlayout,              {.v = &layouts[0]} },
     { ClkWinTitle,          0,              Button2,        zoom,           	    {0} },
     { ClkStatusText,        0,              Button2,        spawn,          	    {.v = terminalcmd } },
