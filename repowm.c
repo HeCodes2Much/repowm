@@ -275,6 +275,7 @@ static Monitor *systraytomon(Monitor *m);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
+static void togglesystray();
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void togglefullscr(const Arg *arg);
@@ -666,7 +667,7 @@ buttonpress(XEvent *e)
             click = ClkLtSymbol;
         else if (!selmon->sel && ev->x > x + blw &&  ev->x < x + blw + bh)
             click = ClkShutDown;
-        else if (ev->x > selmon->ww - getsystraywidth() - statuswidth)
+        else if (ev->x > selmon->ww - getsystraywidth() - statuswidth + lrpad - 2)
             click = ClkStatusText;
         else
             click = ClkWinTitle;
@@ -1065,8 +1066,8 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	drw_setscheme(drw, scheme[LENGTH(colors)]);
 	drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
 	drw->scheme[ColBg] = scheme[SchemeNorm][ColBg];
-	drw_rect(drw, x, borderpx, w, bh, 1, 1);
-	x += sidepad / 2;
+	drw_rect(drw, x, 0, w, bh, 1, 1);
+	x++;
 
 	/* process status text */
 	i = -1;
@@ -1076,7 +1077,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 			text[i] = '\0';
 			w = TEXTW(text) - lrpad;
-			drw_text(drw, x, borderpx + vertpad / 2, w, bh - vertpad, 0, text, 0);
+			drw_text(drw, x, 0, w, bh, 0, text, 0);
 
 			x += w;
 
@@ -1084,13 +1085,13 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 			while (text[++i] != '^') {
 				if (text[i] == 'c') {
 					char buf[8];
-					memcpy(buf, (char*)text + i + 1, 7);
+					memcpy(buf, (char*)text+i+1, 7);
 					buf[7] = '\0';
 					drw_clr_create(drw, &drw->scheme[ColFg], buf);
 					i += 7;
 				} else if (text[i] == 'b') {
 					char buf[8];
-					memcpy(buf, (char*)text + i + 1, 7);
+					memcpy(buf, (char*)text+i+1, 7);
 					buf[7] = '\0';
 					drw_clr_create(drw, &drw->scheme[ColBg], buf);
 					i += 7;
@@ -1106,7 +1107,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 					while (text[++i] != ',');
 					int rh = atoi(text + ++i);
 
-					drw_rect(drw, rx + x, ry + borderpx + vertpad / 2, rw, rh, 1, 0);
+					drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
 				} else if (text[i] == 'f') {
 					x += atoi(text + ++i);
 				}
@@ -1120,7 +1121,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 	if (!isCode) {
 		w = TEXTW(text) - lrpad;
-		drw_text(drw, x, borderpx + vertpad / 2, w, bh - vertpad, 0, text, 0);
+		drw_text(drw, x, 0, w, bh, 0, text, 0);
 	}
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
@@ -2468,6 +2469,16 @@ togglebar(const Arg *arg)
         XConfigureWindow(dpy, systray->win, CWY, &wc);
     }
     arrange(selmon);
+}
+
+    void
+togglesystray()
+{
+	if (showsystray)
+		XUnmapWindow(dpy, systray->win);
+	showsystray = !showsystray;
+	updatesystray();
+	drawbar(selmon);
 }
 
     void
