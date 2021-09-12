@@ -666,7 +666,7 @@ buttonpress(XEvent *e)
             click = ClkLtSymbol;
         else if (!selmon->sel && ev->x > x + blw &&  ev->x < x + blw + bh)
             click = ClkShutDown;
-        else if (ev->x > selmon->ww - getsystraywidth() - statuswidth + lrpad - 2)
+        else if (ev->x > selmon->ww - getsystraywidth() - statuswidth)
             click = ClkStatusText;
         else
             click = ClkWinTitle;
@@ -1065,8 +1065,8 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	drw_setscheme(drw, scheme[LENGTH(colors)]);
 	drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];
 	drw->scheme[ColBg] = scheme[SchemeNorm][ColBg];
-	drw_rect(drw, x, 0, w, bh, 1, 1);
-	x++;
+	drw_rect(drw, x, borderpx, w, bh, 1, 1);
+	x += sidepad / 2;
 
 	/* process status text */
 	i = -1;
@@ -1076,7 +1076,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 			text[i] = '\0';
 			w = TEXTW(text) - lrpad;
-			drw_text(drw, x, 0, w, bh, 0, text, 0);
+			drw_text(drw, x, borderpx + vertpad / 2, w, bh - vertpad, 0, text, 0);
 
 			x += w;
 
@@ -1106,7 +1106,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 					while (text[++i] != ',');
 					int rh = atoi(text + ++i);
 
-					drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
+					drw_rect(drw, rx + x, ry + borderpx + vertpad / 2, rw, rh, 1, 0);
 				} else if (text[i] == 'f') {
 					x += atoi(text + ++i);
 				}
@@ -1120,7 +1120,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 	if (!isCode) {
 		w = TEXTW(text) - lrpad;
-		drw_text(drw, x, 0, w, bh, 0, text, 0);
+		drw_text(drw, x, borderpx + vertpad / 2, w, bh - vertpad, 0, text, 0);
 	}
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
