@@ -2478,7 +2478,7 @@ togglesystray()
 		XUnmapWindow(dpy, systray->win);
 	showsystray = !showsystray;
 	updatesystray();
-	drawbar(selmon);
+	updatestatus();
 }
 
     void
