@@ -26,8 +26,9 @@ please refer to the documentation.
 - General
   * hybrid-wm: tiling and floating mode
   * Keyboard and Mouse based workflows
-  * start menu
+  * start menu (remomenu)
   * full multi monitor support
+  * status2d color status
   * tag system
   * repobar script
   * indicators
