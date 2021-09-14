@@ -176,7 +176,7 @@ static const Taglayout taglayouts[] = {
 
 /* repowm commands */
 static char repomenumon[2] = "0"; /* component of repomenucmd, manipulated in spawn() */
-static const char *layoutmenu_cmd = "layoutmenu";
+static const char *layoutmenucmd = "layoutmenu";
 static const char *repomenucmd[] = {"repomenu_run", NULL};
 static const char *systemmonitorcmd[] = { "repowm-schemas", "systemmonitorcmd", NULL};
 static const char *instasettings[] = { "repowm-schemas", "instasettingscmd", NULL};
