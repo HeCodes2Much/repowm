@@ -82,6 +82,7 @@ static const Rule rules[] = {
     { "floatmenu",		            NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
     { "Yad",		                NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
     { "Timeshift-gtk",              NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	0,          	-1,			        -1},
+    { "Snapper",                    NULL,     	    NULL,  		        0,         	    1,          	    1,          	    1,          	1,          	-1,			        -1},
 
     //Workspace 1 Monitor 0
     { "Alacritty", 		  	        NULL,     	    NULL,         	    1 << 0,         0,          	    1,          	    0,          	1,          	-1,        	    	0},
