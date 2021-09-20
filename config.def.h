@@ -58,6 +58,7 @@ static const char *const autostart[] = {
     "polkit-dumb-agent", NULL,
     "touchpad-indicator", NULL,
     "blueman-applet", NULL,
+    "firewall-applet", NULL,
     "numlockx", "on", NULL,
     "xsettingsd", NULL,
     "nm-applet", NULL,
@@ -68,6 +69,19 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
+
+static const char *tagsel[][2] = {
+	{ "#282a36", "#ff5555" },
+	{ "#282a36", "#8be9fd" },
+	{ "#282a36", "#ff79c6" },
+	{ "#282a36", "#bd93f9" },
+	{ "#282a36", "#f1fa8c" },
+	{ "#282a36", "#ffb86c" },
+	{ "#282a36", "#50fa7b" },
+	{ "#282a36", "#ff5555" },
+	{ "#282a36", "#8be9fd" },
+    { "#282a36", "#ff79c6" },
+};
 
 static const Rule rules[] = {
     /* xprop(1):
