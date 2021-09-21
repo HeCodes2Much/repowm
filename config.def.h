@@ -24,10 +24,10 @@ static const int userepobar 			        = 1;  		        /* 0 means don't use repo
 static const int user_bh            		    = 28;               /* 0 means that repowm will calculate bar height, >= 1 means repowm will user_bh as bar height */
 static const char *fonts[] = {
     "Source Code Pro:size=10",
+    "FiraCode Nerd Font:size=12",
     "remixicon:size=12",
     "Siji:size=12",
     "MaterialIcons:size=10",
-    "FiraCode Nerd Font:size=12",
     "SourceCodePro Nerd Font:size=10",};
 
 
@@ -124,7 +124,7 @@ static const Rule rules[] = {
     //Workspace 7 Monitor 1
 
     //Workspace 8 Monitor 1
-    { "Minecraft",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
+    { "gdlauncher",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
     { "RuneScape",	                NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
     { "Steam",			            NULL,     	    NULL,         	    1 << 7,    	    0,              	1,              	0,          	0,          	-1,        	    	1},
 
@@ -262,7 +262,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            -1,         		XK_k,					            	spawn,       			SHCMD("krita") },
     { MODKEY|ControlMask,		            -1,         		XK_v,					            	spawn,       			SHCMD("vlc") },
     { MODKEY|ControlMask,	                XK_g,         		XK_s,					            	spawn,       			SHCMD("prime-run steam") },
-    { MODKEY|ControlMask,		            XK_g,         		XK_m,					            	spawn,       			SHCMD("prime-run minecraft-launcher") },
+    { MODKEY|ControlMask,		            XK_g,         		XK_m,					            	spawn,       			SHCMD("prime-run gdlauncher") },
     { MODKEY|ControlMask,		            XK_g,         		XK_r,					            	spawn,       			SHCMD("prime-run runescape-launcher") },
     { MODKEY|ControlMask,	                -1,         		XK_e,					            	spawn,       			SHCMD("element-desktop") },
     { MODKEY|ControlMask,		            -1,         		XK_t,					            	spawn,       			SHCMD("telegram-desktop") },
