@@ -30,7 +30,6 @@ static const char *fonts[] = {
     "MaterialIcons:size=10",
     "SourceCodePro Nerd Font:size=10",};
 
-
 // repowm bar colors
 static const char col_bg[]          = "#282a36";
 static const char col_fg[]          = "#f8f8f2";
@@ -55,20 +54,19 @@ static const char *const autostart[] = {
     "setxkbmap", "-option", "caps:escape", NULL,
     "repomenue_youtube_subs", "-d", NULL,
     "ckb-next", "--background", NULL,
-    "polkit-dumb-agent", NULL,
     "touchpad-indicator", NULL,
+    "clipmenu-daemon", NULL,
     "blueman-applet", NULL,
-    "firewall-applet", NULL,
     "numlockx", "on", NULL,
     "xsettingsd", NULL,
+    "volumeicon", NULL,
     "nm-applet", NULL,
-    "pasystray", NULL,
-    "clipmenud", NULL,
+    "audiolock", NULL,
     NULL
 };
 
 /* tagging */
-static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
+static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
 
 static const char *tagsel[][2] = {
 	{ "#282a36", "#ff5555" },
@@ -140,12 +138,10 @@ static const Rule rules[] = {
     { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* gotop */
 };
 
-
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
-
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
