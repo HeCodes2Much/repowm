@@ -51,7 +51,9 @@ install: all
 	install -Dm  755 repobar ${DESTDIR}${PREFIX}/bin/repobar
 	install -m  644 repowm.1 ${DESTDIR}${MANPREFIX}/man1/
 	sed -i 's/VERSION/${VERSION}/g' ${DESTDIR}${MANPREFIX}/man1/repowm.1
-	install -m  644 repowm.desktop ${DESTDIR}/usr/share/xsessions
+	install -m  644 repowm.desktop ${DESTDIR}${SHAREPREFIX}/xsessions
+	mkdir -p $(DESTDIR)$(SHAREPREFIX)/repoclub
+	install -m  644 configs/wm.ini ${DESTDIR}${SHAREPREFIX}/repoclub
 
 .PHONY: uninstall
 uninstall:
@@ -60,4 +62,5 @@ uninstall:
 		${DESTDIR}${PREFIX}/bin/repoopen\
 		${DESTDIR}${PREFIX}/bin/repobar\
 		${DESTDIR}${MANPREFIX}/man1/repowm.1\
-		${DESTDIR}/usr/share/xsessions/repowm.desktop\
+		${DESTDIR}${SHAREPREFIX}/xsessions/repowm.desktop\
+		${DESTDIR}${SHAREPREFIX}/repoclub/wm.ini

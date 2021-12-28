@@ -1,7 +1,6 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=repowm
-Comment=repowm window manager
-Icon=repowm
+Comment=repowm Session
 Exec=repowm
-Type=XSession
+Type=Application
+Keywords=wm;tiling

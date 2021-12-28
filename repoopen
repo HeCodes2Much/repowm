@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
 repoopen () {
-    TERMINAL=$(gsettings get org.therepoclub.repomenu.preferences terminal | sed s/\'//g)
+    REPOMENU=/usr/share/repoclub/menu.ini
 
-    $TERMINAL --title $1 --class $1,$1 -e $@
+    while IFS= read -r Line; do
+	    Get=$(gsettings get org.therepoclub.repomenu.preferences "$Line")
+	    printf -v "REPOMENU_${Line^^}" '%s' "${Get//\'}"
+    done < $REPOMENU
+
+    $REPOMENU_TERMINAL --title $1 --class $1,$1 -e $@
 }
 
 repoopen $@

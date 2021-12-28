@@ -2,7 +2,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static int showsystray        		            = 0;     	        /* 0 means no systray */
+static int showsystray        		            = 1;     	        /* 0 means no systray */
 static const unsigned int borderpx  		    = 1;        	    /* border pixel of windows */
 static const unsigned int snap      		    = 32;       	    /* snap pixel */
 static const unsigned int gappih    		    = 10;       	    /* horiz inner gap between windows */
@@ -66,7 +66,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
+static const char *tags[] = { " 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings" };
 
 static const char *tagsel[][2] = {
 	{ "#282a36", "#ff5555" },
@@ -116,8 +116,7 @@ static const Rule rules[] = {
     { "PkgBrowser", 		  	    NULL,     	    NULL,         	    1 << 9,         0,          	    1,              	0,          	0,          	-1,        	    	0},
 
     //Workspace 6 Monitor 1
-    { "Firefox", 		            NULL,     	    NULL,         	    1 << 5,        	0,          	    1,                  0,          	0,          	-1,        	    	1},
-    { "Vivaldi-stable",		        NULL, 	        NULL,         	    1 << 5,        	0,              	1,              	0,          	0,          	-1,        	    	1},
+    { "Google-chrome",		        NULL, 	        NULL,         	    1 << 5,        	0,              	1,              	0,          	0,          	-1,        	    	1},
 
     //Workspace 7 Monitor 1
 
@@ -135,7 +134,7 @@ static const Rule rules[] = {
     { NULL,      		            NULL,           "Event Tester", 	1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* xev */
     { NULL,      		            NULL,           "lazygit", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* lazygit */
     { NULL,      		            NULL,           "bpytop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* bpytop */
-    { NULL,      		            NULL,           "gotop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* gotop */
+    { NULL,      		            NULL,           "btop", 	        1 << 9,        	0,          	    1,              	0,          	1,          	-1,        	    	1}, /* btop */
 };
 
 /* layout(s) */
@@ -253,12 +252,12 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            -1,         		XK_c,						            spawn,       			{.v = editorcmd } },
     { MODKEY|ControlMask,		            -1,         		XK_m,						            spawn,       			{.v = mailcmd } },
     { MODKEY|ControlMask,		            -1,         		XK_g,						            spawn,       			{.v = gitcmd } },
-    { MODKEY|ShiftMask,          	        -1,         		XK_e,  					                spawn,       			SHCMD("qt-logout") },
+    { MODKEY|ShiftMask,          	        -1,         		XK_e,  					                spawn,       			SHCMD("repomenue_powermenu") },
     { MODKEY|ControlMask,		            -1,         		XK_i,					            	spawn,       			SHCMD("inkscape") },
     { MODKEY|ControlMask,		            -1,         		XK_k,					            	spawn,       			SHCMD("krita") },
     { MODKEY|ControlMask,		            -1,         		XK_v,					            	spawn,       			SHCMD("vlc") },
     { MODKEY|ControlMask,	                XK_g,         		XK_s,					            	spawn,       			SHCMD("prime-run steam") },
-    { MODKEY|ControlMask,		            XK_g,         		XK_m,					            	spawn,       			SHCMD("prime-run gdlauncher") },
+    { MODKEY|ControlMask,		            XK_g,         		XK_m,					            	spawn,       			SHCMD("prime-run minecraft-launcher") },
     { MODKEY|ControlMask,		            XK_g,         		XK_r,					            	spawn,       			SHCMD("prime-run runescape-launcher") },
     { MODKEY|ControlMask,	                -1,         		XK_e,					            	spawn,       			SHCMD("element-desktop") },
     { MODKEY|ControlMask,		            -1,         		XK_t,					            	spawn,       			SHCMD("telegram-desktop") },
@@ -266,9 +265,9 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            -1,         		XK_u,					            	spawn,       			SHCMD("pavucontrol") },
     { MODKEY|ShiftMask,			            -1,         		XK_z,					            	spawn,       		    SHCMD("multimonitorlock-gui") },
     { MODKEY|Mod1Mask,			            -1,         		XK_p,					            	spawn,       			SHCMD("piper") },
-    { MODKEY,				                XK_Print,           XK_w,						            spawn,       			SHCMD("wm-maim -w" ) },
-    { MODKEY,				                XK_Print,           XK_s,						            spawn,       			SHCMD("wm-maim -s" ) },
-    { MODKEY,				                XK_Print,           XK_f,						            spawn,       			SHCMD("wm-maim -f" ) },
+    { MODKEY,				                XK_Print,           XK_w,						            spawn,       			SHCMD("win-shot -w" ) },
+    { MODKEY,				                XK_Print,           XK_s,						            spawn,       			SHCMD("win-shot -s" ) },
+    { MODKEY,				                XK_Print,           XK_f,						            spawn,       			SHCMD("win-shot -f" ) },
 
     //Keybinds you may need to customise.
     { Mod1Mask,          		            -1,         		XK_space,  			                    spawn,       			{.v = repomenucmd } },
