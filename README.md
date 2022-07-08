@@ -49,6 +49,7 @@ This is just a quick list of some features. For a full list and explanation,
 please refer to the documentation.
 
 - General
+
   - hybrid-wm: tiling and floating mode
   - Keyboard and Mouse based workflows
   - start menu (remomenu)
@@ -62,24 +63,24 @@ please refer to the documentation.
   - window gaps
   - restart function
 
-# Patches
+- Patches
 
-- barpadding
-- bottomstack
-- cfacts
-- dragmfact
-- dragcfact
-- fibonacii
-- gaplessgrid
-- horizgrid
-- movestack
-- vanity gaps
-- colorful tags
-- statuspadding
-- status2d
-- underline tags
-- notitle
-- preserveonrestart
+  - barpadding
+  - bottomstack
+  - cfacts
+  - dragmfact
+  - dragcfact
+  - fibonacii
+  - gaplessgrid
+  - horizgrid
+  - movestack
+  - vanity gaps
+  - colorful tags
+  - statuspadding
+  - status2d
+  - underline tags
+  - notitle
+  - preserveonrestart
 
 # Change themes
 

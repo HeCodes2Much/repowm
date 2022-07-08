@@ -3,7 +3,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int default_border = 0;   /* to switch back to default border after dynamic border resizing via keybinds */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
@@ -116,7 +116,6 @@ static const Rule rules[] = {
     { "Peek",                       NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
     { "Snapper",                    NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
     { "scratchpad_terminal",        NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       'S' },
-
 
     //Workspace 1 Monitor 0
     { "Alacritty",                  NULL,         NULL,                 1 << 0,         1,                0,               0,           0,       0 },
@@ -301,7 +300,6 @@ static Key keys[] = {
     { MODKEY|ControlMask,		            -1,         		XK_u,					            	      spawn,       			SHCMD("pavucontrol") },
     { MODKEY|ShiftMask,			            -1,         		XK_z,					            	      spawn,       		  SHCMD("multimonitorlock-gui") },
     { MODKEY|Mod1Mask,			            -1,         		XK_p,					            	      spawn,       			SHCMD("piper") },
-
 
     // screenshot fullscreen and cropped
     { MODKEY,				                    XK_Print,       XK_w,						                  spawn,       			SHCMD("win-shot -w" ) },
