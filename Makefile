@@ -37,7 +37,7 @@ dist: clean
 	rm -rf repowm-${VERSION}
 
 install: all
-	install -d ${DESTDIR}{${PREFIX}/bin,${DESTDIR}${SHAREPREFIX}/xsessions,${DESTDIR}${MANPREFIX}/man1}
+	install -d ${DESTDIR}{${PREFIX}/bin,${SHAREPREFIX}/xsessions,${MANPREFIX}/man1}
 	install -m 755 -s repowm ${DESTDIR}${PREFIX}/bin/
 	install -m 755 repobar ${DESTDIR}${PREFIX}/bin/
 	install -m 755 repoopen ${DESTDIR}${PREFIX}/bin/
