@@ -13,11 +13,6 @@
 
 - NOTE: This is vanilla dwm bar (status2d patch for setting colors) not dwmblocks or polybar.
   <img src="https://github.com/The-Repo-Club/repowm/blob/screenshots/screenshots/repowm.png">
-- The small widget on the top right is an eww widget and thats old! I've improved the eww widget.
-  <img src='https://i.redd.it/t1pvmqlq3oc81.png'>
-  (catppuccin theme)
-  <img src="https://github.com/The-Repo-Club/repowm/blob/screenshots/screenshots/gruvchad.png">
-  (gruvbox material dark)
 
 # Requirements
 
@@ -36,7 +31,7 @@
 
 # Installation
 
-**For Arch** it can be founded in [AUR](https://aur.archlinux.org/packages/repowm) \
+**For Arch** it can be founded in [RepoClub Repository](https://arch.therepo.club/) \
 **For Gentoo** refer to the [XDream's Repository](https://github.com/XDream8/dreamsrepo) \
 **Recommended Method**
 

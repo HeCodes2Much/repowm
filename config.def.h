@@ -141,10 +141,11 @@ static const Rule rules[] = {
     //Workspace 7 Monitor 1
 
     //Workspace 8 Monitor 1
-    { "Steam",                      NULL,         NULL,                 1 << 6,         1,                0,               0,           1,       0 },
-    { "RuneScape",                  NULL,         NULL,                 1 << 6,         1,                0,               0,           1,       0 },
+    { "Steam",                      NULL,         NULL,                 1 << 7,         1,                0,               0,           1,       0 },
+    { "RuneScape",                  NULL,         NULL,                 1 << 7,         1,                0,               0,           1,       0 },
 
     //Workspace 9 Monitor 1
+    { "discord",                    NULL,         NULL,                 1 << 8,         1,                0,               0,           1,       0 },
 
     //Workspace 10 Monitor 1
     { "PkgBrowser",                 NULL,         NULL,                 1 << 9,         1,                0,               0,           1,       0 },
@@ -281,7 +282,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,          	      -1,         	  XK_Return,  		                  spawn,       			{.v = filemanagercmd} },
     { MODKEY|ControlMask,		            -1,         		XK_h,						                  spawn,       			{.v = hypervisorcmd} },
     { MODKEY|ControlMask,		            -1,         		XK_f,						                  spawn,       			{.v = browsercmd} },
-    { MODKEY|ControlMask,		            -1,         		XK_c,						                  spawn,       			{.v = editorcmd} },
+    { MODKEY|ControlMask,		            -1,         		XK_e,						                  spawn,       			{.v = editorcmd} },
     { MODKEY|ControlMask,		            -1,         		XK_m,						                  spawn,       			{.v = mailcmd} },
     { MODKEY|ControlMask,		            -1,         		XK_g,						                  spawn,       			{.v = gitcmd} },
     { MODKEY,                           -1,             XK_p,                             spawn,            {.v = passmenucmd} },
@@ -289,7 +290,7 @@ static Key keys[] = {
     { MODKEY,                           -1,             XK_Return,                        spawn,            {.v = terminalcmd} },
     { ControlMask,                  	  -1,             XK_Return,                        togglescratch,    {.v = scratchpadcmd} },
     { MODKEY|ShiftMask,          	      -1,             XK_e,  					                  spawn,       		  {.v = powermenucmd} },
-    { MODKEY|ShiftMask,          	      -1,         		XK_e,  					                  spawn,       			SHCMD("repomenue_powermenu") },
+    { MODKEY|ControlMask,			          -1,         		XK_c,					            	      spawn,       			SHCMD("discord") },
     { MODKEY|ControlMask,		            -1,         		XK_i,					            	      spawn,       			SHCMD("inkscape") },
     { MODKEY|ControlMask,		            -1,         		XK_k,					            	      spawn,       			SHCMD("krita") },
     { MODKEY|ControlMask,		            -1,         		XK_v,					            	      spawn,       			SHCMD("vlc") },
