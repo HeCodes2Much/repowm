@@ -6,7 +6,7 @@
  * events about window (dis-)appearance. Only one X connection at a time is
  * allowed to select for this event mask.
  *
- * The event handlers of dwm are organized in an array which is accessed
+ * The event handlers of repowm are organized in an array which is accessed
  * whenever a new event has been fetched. This allows event dispatching
  * in O(1) time.
  *
@@ -409,7 +409,7 @@ static Systray *systray = NULL;
 static const char autostartsh[] = "autostart.sh";
 static const char broken[] = "broken";
 static const char configdir[] = ".config";
-static const char dwmdir[] = "dwm";
+static const char repowmdir[] = "repowm";
 static const char localshare[] = ".local/share";
 static char stext[1024];
 static int screen;
@@ -512,7 +512,7 @@ struct NumTags
   char limitexceeded[LENGTH(tags) > 31 ? -1 : 1];
 };
 
-/* dwm will keep pid's of processes from autostart array and kill them at quit */
+/* repowm will keep pid's of processes from autostart array and kill them at quit */
 static pid_t *autostart_pids;
 static size_t autostart_len;
 
@@ -535,7 +535,7 @@ autostart_exec()
     {
       setsid();
       execvp(*p, (char *const *)p);
-      fprintf(stderr, "dwm: execvp %s\n", *p);
+      fprintf(stderr, "repowm: execvp %s\n", *p);
       perror(" failed");
       _exit(EXIT_FAILURE);
     }
@@ -3058,17 +3058,17 @@ void runAutostart(void)
   system("command -v repowm-schemas || { sleep 4 && notify-send 'repowm-schemas missing, please install repowm-schemas!!!'; } &");
   if (usedbar)
   {
-    system("command -v dbar || { sleep 4 && notify-send 'dbar script is missing'; } &");
-    if (system("pgrep -f dbar"))
+    system("command -v repobar || { sleep 4 && notify-send 'repobar script is missing'; } &");
+    if (system("pgrep -f repobar"))
     {
-      system("dbar &");
+      system("repobar &");
     }
   }
 
   /* For Information Fetchers */
-  setenv("XDG_CURRENT_DESKTOP", "dwm", 1);
-  setenv("XDG_SESSION_DESKTOP", "dwm", 1);
-  setenv("DESKTOP_SESSION", "dwm", 1);
+  setenv("XDG_CURRENT_DESKTOP", "repowm", 1);
+  setenv("XDG_SESSION_DESKTOP", "repowm", 1);
+  setenv("DESKTOP_SESSION", "repowm", 1);
 
   char *pathpfx;
   char *path;
@@ -3080,16 +3080,16 @@ void runAutostart(void)
     /* this is almost impossible */
     return;
 
-  /* if $XDG_DATA_HOME is set and not empty, use $XDG_DATA_HOME/dwm,
-   * otherwise use ~/.local/share/dwm as autostart script directory
+  /* if $XDG_DATA_HOME is set and not empty, use $XDG_DATA_HOME/repowm,
+   * otherwise use ~/.local/share/repowm as autostart script directory
    */
   xdgdatahome = getenv("XDG_DATA_HOME");
   if (xdgdatahome != NULL && *xdgdatahome != '\0')
   {
     /* space for path segments, separators and nul */
-    pathpfx = ecalloc(1, strlen(home) + strlen(configdir) + strlen(dwmdir) + 3);
+    pathpfx = ecalloc(1, strlen(home) + strlen(configdir) + strlen(repowmdir) + 3);
 
-    if (sprintf(pathpfx, "%s/%s/%s", home, configdir, dwmdir) < 0)
+    if (sprintf(pathpfx, "%s/%s/%s", home, configdir, repowmdir) < 0)
     {
       free(pathpfx);
       return;
@@ -3098,9 +3098,9 @@ void runAutostart(void)
   else
   {
     /* space for path segments, separators and nul */
-    pathpfx = ecalloc(1, strlen(home) + strlen(localshare) + strlen(dwmdir) + 3);
+    pathpfx = ecalloc(1, strlen(home) + strlen(localshare) + strlen(repowmdir) + 3);
 
-    if (sprintf(pathpfx, "%s/%s/%s", home, localshare, dwmdir) < 0)
+    if (sprintf(pathpfx, "%s/%s/%s", home, localshare, repowmdir) < 0)
     {
       free(pathpfx);
       return;
@@ -3111,9 +3111,9 @@ void runAutostart(void)
   if (!(stat(pathpfx, &sb) == 0 && S_ISDIR(sb.st_mode)))
   {
     /* the XDG conformant path does not exist or is no directory
-     * so we try ~/.dwm instead
+     * so we try ~/.repowm instead
      */
-    char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(configdir) + strlen(dwmdir) + 4);
+    char *pathpfx_new = realloc(pathpfx, strlen(home) + strlen(configdir) + strlen(repowmdir) + 4);
     if (pathpfx_new == NULL)
     {
       free(pathpfx);
@@ -3121,7 +3121,7 @@ void runAutostart(void)
     }
     pathpfx = pathpfx_new;
 
-    if (sprintf(pathpfx, "%s/%s/%s", home, configdir, dwmdir) <= 0)
+    if (sprintf(pathpfx, "%s/%s/%s", home, configdir, repowmdir) <= 0)
     {
       free(pathpfx);
       return;
@@ -3484,7 +3484,7 @@ void setup(void)
   XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
                   PropModeReplace, (unsigned char *)&wmcheckwin, 1);
   XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8,
-                  PropModeReplace, (unsigned char *)"dwm", 3);
+                  PropModeReplace, (unsigned char *)"repowm", 3);
   XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32,
                   PropModeReplace, (unsigned char *)&wmcheckwin, 1);
   /* EWMH support per view */
@@ -3605,7 +3605,7 @@ void spawn(const Arg *arg)
       close(ConnectionNumber(dpy));
     setsid();
     execvp(((char **)arg->v)[0], (char **)arg->v);
-    fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
+    fprintf(stderr, "repowm: execvp %s", ((char **)arg->v)[0]);
     perror(" failed");
     exit(EXIT_SUCCESS);
   }
@@ -3922,7 +3922,7 @@ void updatebars(void)
                              .background_pixmap = ParentRelative,
                              .event_mask = ButtonPressMask | ExposureMask | PointerMotionMask};
 
-  XClassHint ch = {"dwm", "dwm"};
+  XClassHint ch = {"repowm", "repowm"};
   for (m = mons; m; m = m->next)
   {
     if (m->barwin)
@@ -4211,7 +4211,7 @@ void updatestatus(void)
 {
   Monitor *m;
   if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-    strcpy(stext, "dwm-" VERSION);
+    strcpy(stext, "repowm-" VERSION);
   for (m = mons; m; m = m->next)
     drawbar(m);
   if (showsystray)
@@ -4310,7 +4310,7 @@ void updatesystray(void)
     }
     else
     {
-      fprintf(stderr, "dwm: unable to obtain system tray.\n");
+      fprintf(stderr, "repowm: unable to obtain system tray.\n");
       free(systray);
       systray = NULL;
       return;
@@ -4493,7 +4493,7 @@ int xerror(Display *dpy, XErrorEvent *ee)
       (ee->request_code == X_GrabKey && ee->error_code == BadAccess) ||
       (ee->request_code == X_CopyArea && ee->error_code == BadDrawable))
     return 0;
-  fprintf(stderr, "dwm: fatal error: request code=%d, error code=%d\n",
+  fprintf(stderr, "repowm: fatal error: request code=%d, error code=%d\n",
           ee->request_code, ee->error_code);
   return xerrorxlib(dpy, ee); /* may call exit */
 }
@@ -4504,7 +4504,7 @@ int xerrordummy(Display *dpy, XErrorEvent *ee) { return 0; }
  * is already running. */
 int xerrorstart(Display *dpy, XErrorEvent *ee)
 {
-  die("dwm: another window manager is already running");
+  die("repowm: another window manager is already running");
   return -1;
 }
 
@@ -4543,13 +4543,13 @@ void zoom(const Arg *arg)
 int main(int argc, char *argv[])
 {
   if (argc == 2 && !strcmp("-v", argv[1]))
-    die("dwm-" VERSION);
+    die("repowm-" VERSION);
   else if (argc != 1 && strcmp("-s", argv[1]))
-    die("usage: dwm [-v]");
+    die("usage: repowm [-v]");
   if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())
     fputs("warning: no locale support\n", stderr);
   if (!(dpy = XOpenDisplay(NULL)))
-    die("dwm: cannot open display");
+    die("repowm: cannot open display");
   if (argc > 1 && !strcmp("-s", argv[1]))
   {
     XStoreName(dpy, RootWindow(dpy, DefaultScreen(dpy)), argv[2]);

@@ -1,4 +1,4 @@
-# dwm version
+# repowm version
 VERSION = 2022.07.08
 
 # Customize below to fit your system

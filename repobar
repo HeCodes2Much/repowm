@@ -13,7 +13,7 @@ main() {
     interval=$((interval + 1))
     top="$(bar_battery)$(bar_sep)$(bar_ram)$(bar_sep)$(bar_cpu)$(bar_sep)$(bar_keyboard)$(bar_sep)$bar_updates$(bar_sep)$(bar_network)$(bar_sep)$(bar_volume)$(bar_sep)$(bar_clock)"
 
-    dwm -s "$top"
+    repowm -s "$top"
     sleep 0.5s
   done
 }
