@@ -2,12 +2,14 @@
 
 cat <<EOF | xmenu
 []= Tiled Layout	0
-TTT Stack Layout	1
+[M] Monocle Layout	1
 [@] Spiral Layout	2
-[\] Dwindle Layout	3
-[D] Deck Layout	4
-[M] Monocle Layout	5
-|M| Centered Master Layout	6
->M> Centered Floating Layout	7
-><> NULL Layout	8
+[D] Dwindle Layout	3
+H[] Deck Layout	4
+TTT Stack Layout	5
+=== Stack Horz Layout	6
+HHH Grid Layout	7
+### Narrow Grid Layout	8
+--- Grid Horz Layout	9
+><> NULL Layout	10
 EOF

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-repoopen () {
-    REPOMENU=/usr/share/repoclub/menu.ini
+repoopen() {
+  REPOMENU=/usr/share/repoclub/menu.ini
 
-    while IFS= read -r Line; do
-	    Get=$(gsettings get org.therepoclub.repomenu.preferences "$Line")
-	    printf -v "REPOMENU_${Line^^}" '%s' "${Get//\'}"
-    done < $REPOMENU
+  while IFS= read -r Line; do
+    Get=$(gsettings get org.therepoclub.repomenu.preferences "$Line")
+    printf -v "REPOMENU_${Line^^}" '%s' "${Get//\'/}"
+  done <$REPOMENU
 
-    $REPOMENU_TERMINAL --title $1 --class $1,$1 -e $@
+  $REPOMENU_TERMINAL --title=$1 --class=$1 --name=$1 -e $@
 }
 
 repoopen $@
