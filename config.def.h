@@ -107,48 +107,50 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title
      */
-    /* class                        instance      title                 tags mask       switchtotag       iscentered       isfloating   monitor */
+    /* class                        instance      title                 tags mask       switchtotag       iscentered       isfloating   monitor   scratch key */
     //All workspaces
-    { "Multimonitorlock-gui.py",	  NULL,     	  NULL,  		            0,         	    1,          	    1,          	   1,          	-1 },
-    { "Pavucontrol",		            NULL,         NULL,  		            0,         	    1,          	    1,          	   1,          	-1 },
-    { "floatmenu",		              NULL,     	  NULL,  		            0,         	    1,          	    1,          	   1,          	-1 },
-    { "Yad",		                    NULL,     	  NULL,  		            0,         	    1,          	    1,          	   1,          	-1 },
-    { "Peek",                       NULL,     	  NULL,  		            0,         	    1,          	    1,          	   1,          	-1 },
-    { "Snapper",                    NULL,     	  NULL,  		            0,         	    1,          	    1,          	   1,          	-1 },
+    { "Multimonitorlock-gui.py",	  NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
+    { "Pavucontrol",		            NULL,         NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
+    { "floatmenu",		              NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
+    { "Yad",		                    NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
+    { "Peek",                       NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
+    { "Snapper",                    NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       0 },
+    { "scratchpad_terminal",        NULL,     	  NULL,  		            0,         	    0,          	    1,          	   1,          	-1,       'S' },
+
 
     //Workspace 1 Monitor 0
-    { "Alacritty",                  NULL,         NULL,                 1 << 0,         1,                0,               0,           0 },
-    { "kitty",                      NULL,         NULL,                 1 << 0,         1,                0,               0,           0 },
+    { "Alacritty",                  NULL,         NULL,                 1 << 0,         1,                0,               0,           0,       0 },
+    { "kitty",                      NULL,         NULL,                 1 << 0,         1,                0,               0,           0,       0 },
 
     //Workspace 2 Monitor 0
-    { "Code",                       NULL,         NULL,                 1 << 1,         1,                0,               0,           0 },
-    { "nvim",                       NULL,         NULL,                 1 << 1,         1,                0,               0,           0 },
+    { "Code",                       NULL,         NULL,                 1 << 1,         1,                0,               0,           0,       0 },
+    { "nvim",                       NULL,         NULL,                 1 << 1,         1,                0,               0,           0,       0 },
 
     //Workspace 3 Monitor 0
-    { "Nemo",                       NULL,         NULL,                 1 << 2,         1,                0,               0,           0 },
+    { "Nemo",                       NULL,         NULL,                 1 << 2,         1,                0,               0,           0,       0 },
 
     //Workspace 4 Monitor 0
-    { "Ld-linux-x86-64.so.2",       NULL,         NULL,                 1 << 3,         1,                0,               0,           0 }, // inkscape
-    { "Gimp",                       NULL,         NULL,                 1 << 3,         1,                0,               0,           0 },
+    { "Ld-linux-x86-64.so.2",       NULL,         NULL,                 1 << 3,         1,                0,               0,           0,       0 }, // inkscape
+    { "Gimp",                       NULL,         NULL,                 1 << 3,         1,                0,               0,           0,       0 },
 
     //Workspace 5 Monitor 0
 
     //Workspace 6 Monitor 1
-    { "firefox",                    NULL,         NULL,                 1 << 5,         1,                0,               0,           1 },
+    { "firefox",                    NULL,         NULL,                 1 << 5,         1,                0,               0,           1,       0 },
 
     //Workspace 7 Monitor 1
 
     //Workspace 8 Monitor 1
-    { "Steam",                      NULL,         NULL,                 1 << 6,         1,                0,               0,           1 },
-    { "RuneScape",                  NULL,         NULL,                 1 << 6,         1,                0,               0,           1 },
+    { "Steam",                      NULL,         NULL,                 1 << 6,         1,                0,               0,           1,       0 },
+    { "RuneScape",                  NULL,         NULL,                 1 << 6,         1,                0,               0,           1,       0 },
 
     //Workspace 9 Monitor 1
 
     //Workspace 10 Monitor 1
-    { "PkgBrowser",                 NULL,         NULL,                 1 << 9,         1,                0,               0,           1 },
-    { NULL,                         NULL,         "Event Tester",       1 << 9,         1,                0,               0,           1 }, // xev
-    { NULL,                         NULL,         "lazygit",            1 << 9,         1,                0,               0,           1 }, // lazygit
-    { NULL,                         NULL,         "btop",               1 << 9,         1,                0,               0,           1 }, // btop
+    { "PkgBrowser",                 NULL,         NULL,                 1 << 9,         1,                0,               0,           1,       0 },
+    { NULL,                         NULL,         "Event Tester",       1 << 9,         1,                0,               0,           1,       0 }, // xev
+    { NULL,                         NULL,         "lazygit",            1 << 9,         1,                0,               0,           1,       0 }, // lazygit
+    { NULL,                         NULL,         "btop",               1 << 9,         1,                0,               0,           1,       0 }, // btop
 
 };
 
@@ -241,7 +243,8 @@ static const char *mutevol[] = {"amixer", "set", "Master", "toggle", NULL};
 static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
-static const char *scratchpadcmd[] = { "kitty", "--title=dropdown_kitty", "--class=dropdown_kitty","--name=dropdown_kitty", NULL };
+/*First arg only serves to match against key in rules*/
+static const char *scratchpadcmd[] = { "S", "kitty", "--title=scratchpad_terminal", "--class=scratchpad_terminal","--name=scratchpad_terminal", NULL };
 
 static const Launcher launchers[] = {
     /* command     name to display */
