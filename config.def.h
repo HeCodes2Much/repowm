@@ -269,7 +269,7 @@ static Key keys[] = {
 	{ 0,                                -1,           XF86XK_AudioPrev,         			    spawn,   		    	{.v = playerprevious}},
 
 	//TheRepoClub Custom Keybinds.
-	{ ControlMask|Mod1Mask,				      -1,         		XK_v,					                    spawn,       			SHCMD("fourmon") },
+	{ ControlMask|Mod1Mask,				 -1,         		XK_v,					                    spawn,       			SHCMD("fourmon") },
 	{ MODKEY,				                    -1,         		XK_o,						                  spawn,       			{.v = systemmonitorcmd} },
 	{ MODKEY,				                    -1,         		XK_F1,					                  spawn,       			{.v = smartcmd} },
 	{ MODKEY,				                    -1,         		XK_F2,			                      spawn,       			{.v = clipmenucmd} },
