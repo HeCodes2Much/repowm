@@ -212,25 +212,25 @@ static const Taglayout taglayouts[] = {
 /* repowm commands */
 static char repomenumon[2] = "0"; /* component of repomenucmd, manipulated in spawn() */
 static const char *layoutmenucmd = "layoutmenu";
-static const char *repomenucmd[] = { "repowm-schemas", "repomenucmd", NULL};
-static const char *systemmonitorcmd[] = { "repowm-schemas", "systemmonitorcmd", NULL};
-static const char *instasettings[] = { "repowm-schemas", "instasettingscmd", NULL};
-static const char *startmenucmd[] = { "repowm-schemas", "startmenucmd", NULL};
-static const char *passmenucmd[] = { "repowm-schemas", "passmenucmd", NULL};
-static const char *clipmenucmd[] = { "repowm-schemas", "clipmenucmd", NULL};
-static const char *smartcmd[] = { "repowm-schemas", "smartmenucmd", NULL};
+static const char *repomenucmd[] = { "repo-exec", "repomenucmd", NULL};
+static const char *systemmonitorcmd[] = { "repo-exec", "systemmonitorcmd", NULL};
+static const char *instasettings[] = { "repo-exec", "instasettingscmd", NULL};
+static const char *startmenucmd[] = { "repo-exec", "startmenucmd", NULL};
+static const char *passmenucmd[] = { "repo-exec", "passmenucmd", NULL};
+static const char *clipmenucmd[] = { "repo-exec", "clipmenucmd", NULL};
+static const char *smartcmd[] = { "repo-exec", "smartmenucmd", NULL};
 
 /* Do not remove */
-static const char *powermenucmd[] = { "repowm-schemas", "powermenucmd", NULL};
+static const char *powermenucmd[] = { "repo-exec", "powermenucmd", NULL};
 
 /* repomenu commands */
-static const char *filemanagercmd[] = { "repowm-schemas", "filemanager", NULL};
-static const char *hypervisorcmd[] = { "repowm-schemas", "hypervisor", NULL};
-static const char *terminalcmd[] = { "repowm-schemas", "terminal", NULL};
-static const char *browsercmd[] = { "repowm-schemas", "webbrowser", NULL};
-static const char *editorcmd[] = { "repowm-schemas", "texteditor", NULL};
-static const char *mailcmd[] = { "repowm-schemas", "mailreader", NULL};
-static const char *gitcmd[] = { "repowm-schemas", "gitbrowser", NULL};
+static const char *filemanagercmd[] = { "repo-exec", "filemanager", NULL};
+static const char *hypervisorcmd[] = { "repo-exec", "hypervisor", NULL};
+static const char *terminalcmd[] = { "repo-exec", "terminal", NULL};
+static const char *browsercmd[] = { "repo-exec", "webbrowser", NULL};
+static const char *editorcmd[] = { "repo-exec", "texteditor", NULL};
+static const char *mailcmd[] = { "repo-exec", "mailreader", NULL};
+static const char *gitcmd[] = { "repo-exec", "gitbrowser", NULL};
 
 /* genreal commands*/
 static const char *playernext[] = { "playerctl", "next", NULL};
