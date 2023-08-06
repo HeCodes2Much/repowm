@@ -78,11 +78,15 @@ static const char *const autostart[] = {
     "nm-applet", NULL,
     "cbatticon", NULL,
     "dunst", NULL,
+    "alacritty", NULL,
+    "firefox", NULL,
+    "nemo", NULL,
+    "code", NULL,
     NULL
 };
 
 /* tagging */
-static char *tags[] = {" 1: Terminal", " 2: Editor", " 3: Files", " 4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", " 9: Chat" , " 10: Settings"};
+static char *tags[] = {"  1: Terminal", " 2: Editor", " 3: Files", "  4: Graphics", " 5: Music", " 6: WebBrowser", " 7: Mail", " 8: Games", "󰭻 9: Chat" , " 10: Settings"};
 
 static const int tagschemes[] = {
     SchemeTag1,
@@ -239,7 +243,7 @@ static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = { "S", "kitty", "--title=scratchpad_terminal", "--class=scratchpad_terminal","--name=scratchpad_terminal", NULL };
+static const char *scratchpadcmd[] = { "S", "alacritty", "--title=scratchpad_terminal", "--class=scratchpad_terminal,scratchpad_terminal", NULL };
 
 static const Launcher launchers[] = {
     /* command              name to display */
@@ -249,136 +253,136 @@ static const Launcher launchers[] = {
 
 /* commands */
 static Key keys[] = {
-    /* modifier                         chain         key                                   function           argument */
+    /* modifier                         chain           key                                   function           argument */
 
     // Keybinds for XFKeys
-    { 0,                                -1,           XF86XK_MonBrightnessUp,               spawn,                   {.v = upbright}},
-    { 0,                                -1,           XF86XK_MonBrightnessDown,             spawn,                   {.v = downbright}},
-    { 0,                                -1,           XF86XK_AudioLowerVolume,              spawn,                   {.v = downvol}},
-    { 0,                                -1,           XF86XK_AudioMute,                     spawn,                   {.v = mutevol}},
-    { 0,                                -1,           XF86XK_AudioRaiseVolume,              spawn,                   {.v = upvol}},
-    { 0,                                -1,           XF86XK_AudioPlay,                     spawn,                   {.v = playerpause}},
-    { 0,                                -1,           XF86XK_AudioPause,                    spawn,                   {.v = playerpause}},
-    { 0,                                -1,           XF86XK_AudioNext,                     spawn,                   {.v = playernext}},
-    { 0,                                -1,           XF86XK_AudioPrev,                     spawn,                   {.v = playerprevious}},
+    { 0,                                -1,             XF86XK_MonBrightnessUp,               spawn,                   {.v = upbright}},
+    { 0,                                -1,             XF86XK_MonBrightnessDown,             spawn,                   {.v = downbright}},
+    { 0,                                -1,             XF86XK_AudioLowerVolume,              spawn,                   {.v = downvol}},
+    { 0,                                -1,             XF86XK_AudioMute,                     spawn,                   {.v = mutevol}},
+    { 0,                                -1,             XF86XK_AudioRaiseVolume,              spawn,                   {.v = upvol}},
+    { 0,                                -1,             XF86XK_AudioPlay,                     spawn,                   {.v = playerpause}},
+    { 0,                                -1,             XF86XK_AudioPause,                    spawn,                   {.v = playerpause}},
+    { 0,                                -1,             XF86XK_AudioNext,                     spawn,                   {.v = playernext}},
+    { 0,                                -1,             XF86XK_AudioPrev,                     spawn,                   {.v = playerprevious}},
 
     //TheRepoClub Custom Keybinds.
-    { MODKEY,                            -1,             XK_F2,                                  spawn,                   {.v = clipmenucmd} },
-    { MODKEY,                            -1,             XK_F7,                                      spawn,                   SHCMD("youtube_subs") },
-    { MODKEY|ShiftMask,                  -1,               XK_Return,                            spawn,                   {.v = filemanagercmd} },
-    { MODKEY|ControlMask,                -1,             XK_h,                                          spawn,                   {.v = hypervisorcmd} },
-    { MODKEY|ControlMask,                -1,             XK_f,                                          spawn,                   {.v = browsercmd} },
-    { MODKEY|ControlMask,                -1,             XK_e,                                          spawn,                   {.v = editorcmd} },
-    { MODKEY,                           -1,             XK_p,                             spawn,            {.v = passmenucmd} },
-    { MODKEY,                           -1,             XK_m,                             spawn,            {.v = startmenucmd} },
-    { MODKEY,                           -1,             XK_Return,                        spawn,            {.v = terminalcmd} },
-    { ControlMask,                      -1,             XK_Return,                        togglescratch,    {.v = scratchpadcmd} },
-    { MODKEY|ShiftMask,                  -1,             XK_e,                                        spawn,                 {.v = powermenucmd} },
-    { MODKEY|ControlMask,                -1,             XK_d,                                          spawn,                   SHCMD("discord") },
-    { MODKEY|ControlMask,                -1,             XK_c,                                          spawn,                   SHCMD("hexchat") },
-    { MODKEY|ControlMask,                -1,             XK_i,                                          spawn,                   SHCMD("inkscape") },
-    { MODKEY|ControlMask,                -1,             XK_k,                                          spawn,                   SHCMD("krita") },
-    { MODKEY|ControlMask,                -1,             XK_v,                                          spawn,                   SHCMD("vlc") },
-    { MODKEY|ControlMask,                XK_g,           XK_s,                                          spawn,                   SHCMD("prime-run steam") },
-    { MODKEY|ControlMask,                XK_g,             XK_m,                                          spawn,                   SHCMD("prime-run minecraft-launcher") },
-    { MODKEY|ControlMask,                XK_g,             XK_r,                                          spawn,                   SHCMD("prime-run runescape-launcher") },
-    { MODKEY|ControlMask,                -1,             XK_p,                                          spawn,                   SHCMD("pkgbrowser") },
-    { MODKEY|ControlMask,                -1,             XK_u,                                          spawn,                   SHCMD("pavucontrol") },
-    { MODKEY|ShiftMask,                    -1,             XK_z,                                          spawn,                 SHCMD("multimonitorlock-gui") },
-    { MODKEY|Mod1Mask,                    -1,             XK_p,                                          spawn,                   SHCMD("piper") },
+    { MODKEY,                            -1,             XK_F2,                               spawn,                   {.v = clipmenucmd} },
+    { MODKEY,                            -1,             XK_F7,                               spawn,                   SHCMD("youtube_subs") },
+    { MODKEY|ShiftMask,                  -1,             XK_Return,                           spawn,                   {.v = filemanagercmd} },
+    { MODKEY|ControlMask,                -1,             XK_h,                                spawn,                   {.v = hypervisorcmd} },
+    { MODKEY|ControlMask,                -1,             XK_f,                                spawn,                   {.v = browsercmd} },
+    { MODKEY|ControlMask,                -1,             XK_e,                                spawn,                   {.v = editorcmd} },
+    { MODKEY,                            -1,             XK_p,                                spawn,                   {.v = passmenucmd} },
+    { MODKEY,                            -1,             XK_m,                                spawn,                   {.v = startmenucmd} },
+    { MODKEY,                            -1,             XK_Return,                           spawn,                   {.v = terminalcmd} },
+    { ControlMask,                       -1,             XK_Return,                           togglescratch,           {.v = scratchpadcmd} },
+    { MODKEY|ShiftMask,                  -1,             XK_e,                                spawn,                   {.v = powermenucmd} },
+    { MODKEY|ControlMask,                -1,             XK_d,                                spawn,                   SHCMD("discord") },
+    { MODKEY|ControlMask,                -1,             XK_c,                                spawn,                   SHCMD("hexchat") },
+    { MODKEY|ControlMask,                -1,             XK_i,                                spawn,                   SHCMD("inkscape") },
+    { MODKEY|ControlMask,                -1,             XK_k,                                spawn,                   SHCMD("krita") },
+    { MODKEY|ControlMask,                -1,             XK_v,                                spawn,                   SHCMD("vlc") },
+    { MODKEY|ControlMask,                XK_g,           XK_s,                                spawn,                   SHCMD("prime-run steam") },
+    { MODKEY|ControlMask,                XK_g,           XK_m,                                spawn,                   SHCMD("prime-run minecraft-launcher") },
+    { MODKEY|ControlMask,                XK_g,           XK_r,                                spawn,                   SHCMD("prime-run runescape-launcher") },
+    { MODKEY|ControlMask,                -1,             XK_p,                                spawn,                   SHCMD("pkgbrowser") },
+    { MODKEY|ControlMask,                -1,             XK_u,                                spawn,                   SHCMD("pavucontrol") },
+    { MODKEY|ShiftMask,                  -1,             XK_z,                                spawn,                   SHCMD("multimonitorlock-gui") },
+    { MODKEY|Mod1Mask,                   -1,             XK_p,                                spawn,                   SHCMD("piper") },
 
     // screenshot fullscreen and cropped
-    { MODKEY,                            XK_Print,       XK_w,                                          spawn,                   SHCMD("win-shot -w" ) },
-    { MODKEY,                            XK_Print,       XK_s,                                          spawn,                   SHCMD("win-shot -s" ) },
-    { MODKEY,                            XK_Print,       XK_f,                                          spawn,                   SHCMD("win-shot -f" ) },
+    { MODKEY,                            XK_Print,       XK_w,                                spawn,                   SHCMD("win-shot -w" ) },
+    { MODKEY,                            XK_Print,       XK_s,                                spawn,                   SHCMD("win-shot -s" ) },
+    { MODKEY,                            XK_Print,       XK_f,                                spawn,                   SHCMD("win-shot -f" ) },
 
     // toggle stuff
-    { MODKEY,                           -1,             XK_b,                             togglebar,        {0} },
-    { MODKEY,                           -1,             XK_s,                             togglesystray,    {0} },
-    { MODKEY|ControlMask,               -1,             XK_t,                             togglegaps,       {0} },
+    { MODKEY,                           -1,             XK_b,                                 togglebar,              {0} },
+    { MODKEY,                           -1,             XK_s,                                 togglesystray,          {0} },
+    { MODKEY|ControlMask,               -1,             XK_t,                                 togglegaps,             {0} },
 
-    { MODKEY|ShiftMask,                 -1,             XK_space,                         togglefloating,   {0} },
-    { MODKEY,                           -1,             XK_f,                             togglefullscr,    {0} },
+    { MODKEY|ShiftMask,                 -1,             XK_space,                             togglefloating,         {0} },
+    { MODKEY,                           -1,             XK_f,                                 togglefullscr,          {0} },
 
-    { MODKEY|ControlMask,               -1,             XK_w,                             tabmode,          {-1} },
-    { MODKEY,                           -1,             XK_j,                             focusstack,       {.i = +1} },
-    { MODKEY,                           -1,             XK_k,                             focusstack,       {.i = -1} },
-    { MODKEY,                           -1,             XK_i,                             incnmaster,       {.i = +1} },
-    { MODKEY,                           -1,             XK_u,                             incnmaster,       {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_w,                                 tabmode,                {-1} },
+    { MODKEY,                           -1,             XK_j,                                 focusstack,             {.i = +1} },
+    { MODKEY,                           -1,             XK_k,                                 focusstack,             {.i = -1} },
+    { MODKEY,                           -1,             XK_i,                                 incnmaster,             {.i = +1} },
+    { MODKEY,                           -1,             XK_u,                                 incnmaster,             {.i = -1} },
 
     // change m,cfact sizes
-    { MODKEY,                           -1,             XK_h,                             setmfact,         {.f = -0.05} },
-    { MODKEY,                           -1,             XK_l,                             setmfact,         {.f = +0.05} },
-    { MODKEY|ShiftMask,                 -1,             XK_h,                             setcfact,         {.f = +0.25} },
-    { MODKEY|ShiftMask,                 -1,             XK_l,                             setcfact,         {.f = -0.25} },
-    { MODKEY|ShiftMask,                 -1,             XK_o,                             setcfact,         {.f =  0.00} },
+    { MODKEY,                           -1,             XK_h,                                 setmfact,               {.f = -0.05} },
+    { MODKEY,                           -1,             XK_l,                                 setmfact,               {.f = +0.05} },
+    { MODKEY|ShiftMask,                 -1,             XK_h,                                 setcfact,               {.f = +0.25} },
+    { MODKEY|ShiftMask,                 -1,             XK_l,                                 setcfact,               {.f = -0.25} },
+    { MODKEY|ShiftMask,                 -1,             XK_o,                                 setcfact,               {.f =  0.00} },
 
-    { MODKEY|ShiftMask,                 -1,             XK_j,                             movestack,        {.i = +1} },
-    { MODKEY|ShiftMask,                 -1,             XK_k,                             movestack,        {.i = -1} },
-    { MODKEY|ShiftMask,                 -1,             XK_Return,                        zoom,             {0} },
-    { MODKEY,                           -1,             XK_Tab,                           view,             {0} },
+    { MODKEY|ShiftMask,                 -1,             XK_j,                                 movestack,              {.i = +1} },
+    { MODKEY|ShiftMask,                 -1,             XK_k,                                 movestack,              {.i = -1} },
+    { MODKEY|ShiftMask,                 -1,             XK_Return,                            zoom,                   {0} },
+    { MODKEY,                           -1,             XK_Tab,                               view,                   {0} },
 
     // overall gaps
-    { MODKEY|ControlMask,               -1,             XK_i,                             incrgaps,         {.i = +1} },
-    { MODKEY|ControlMask,               -1,             XK_d,                             incrgaps,         {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_i,                                 incrgaps,               {.i = +1} },
+    { MODKEY|ControlMask,               -1,             XK_d,                                 incrgaps,               {.i = -1} },
 
     // inner gaps
-    { MODKEY|ShiftMask,                 -1,             XK_i,                             incrigaps,        {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_i,                             incrigaps,        {.i = -1} },
+    { MODKEY|ShiftMask,                 -1,             XK_i,                                 incrigaps,              {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_i,                                 incrigaps,              {.i = -1} },
 
     // outer gaps
-    { MODKEY|ControlMask,               -1,             XK_o,                             incrogaps,        {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_o,                             incrogaps,        {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_o,                                 incrogaps,              {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_o,                                 incrogaps,              {.i = -1} },
 
     // inner+outer hori, vert gaps
-    { MODKEY|ControlMask,               -1,             XK_6,                             incrihgaps,       {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_6,                             incrihgaps,       {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_7,                             incrivgaps,       {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_7,                             incrivgaps,       {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_8,                             incrohgaps,       {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_8,                             incrohgaps,       {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_9,                             incrovgaps,       {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_9,                             incrovgaps,       {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_6,                                 incrihgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_6,                                 incrihgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_7,                                 incrivgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_7,                                 incrivgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_8,                                 incrohgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_8,                                 incrohgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_9,                                 incrovgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_9,                                 incrovgaps,             {.i = -1} },
 
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_d,                             defaultgaps,      {0} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_d,                                 defaultgaps,            {0} },
 
     // layout
-    { MODKEY,                           -1,             XK_space,                         setlayout,        {0} },
-    { MODKEY|ControlMask,               -1,             XK_comma,                         cyclelayout,      {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_period,                        cyclelayout,      {.i = +1} },
-    { MODKEY,                           -1,             XK_0,                             view,             {.ui = ~0} },
-    { MODKEY|ShiftMask,                 -1,             XK_0,                             tag,              {.ui = ~0} },
-    { MODKEY,                           -1,             XK_comma,                         focusmon,         {.i = -1} },
-    { MODKEY,                           -1,             XK_period,                        focusmon,         {.i = +1} },
-    { MODKEY|ShiftMask,                 -1,             XK_comma,                         tagmon,           {.i = -1} },
-    { MODKEY|ShiftMask,                 -1,             XK_period,                        tagmon,           {.i = +1} },
+    { MODKEY,                           -1,             XK_space,                             setlayout,              {0} },
+    { MODKEY|ControlMask,               -1,             XK_comma,                             cyclelayout,            {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_period,                            cyclelayout,            {.i = +1} },
+    { MODKEY,                           -1,             XK_0,                                 view,                   {.ui = ~0} },
+    { MODKEY|ShiftMask,                 -1,             XK_0,                                 tag,                    {.ui = ~0} },
+    { MODKEY,                           -1,             XK_comma,                             focusmon,               {.i = -1} },
+    { MODKEY,                           -1,             XK_period,                            focusmon,               {.i = +1} },
+    { MODKEY|ShiftMask,                 -1,             XK_comma,                             tagmon,                 {.i = -1} },
+    { MODKEY|ShiftMask,                 -1,             XK_period,                            tagmon,                 {.i = +1} },
 
     // change border size
-    { MODKEY|ShiftMask,                 -1,             XK_minus,                         setborderpx,      {.i = -1} },
-    { MODKEY|ShiftMask,                 -1,             XK_p,                             setborderpx,      {.i = +1} },
-    { MODKEY|ShiftMask,                 -1,             XK_d,                             setborderpx,      {.i = default_border} },
+    { MODKEY|ShiftMask,                 -1,             XK_minus,                             setborderpx,            {.i = -1} },
+    { MODKEY|ShiftMask,                 -1,             XK_p,                                 setborderpx,            {.i = +1} },
+    { MODKEY|ShiftMask,                 -1,             XK_d,                                 setborderpx,            {.i = default_border} },
 
     // kill window
-    { MODKEY,                           -1,             XK_q,                             killclient,       {0} },
+    { MODKEY,                           -1,             XK_q,                                 killclient,             {0} },
 
     // restart
-    { MODKEY|ShiftMask,                 -1,             XK_r,                                quit,                   {1} },
-    { MODKEY|ShiftMask,                 -1,             XK_q,                               quit,             {0} },
+    { MODKEY|ShiftMask,                 -1,             XK_r,                                 quit,                   {1} },
+    { MODKEY|ShiftMask,                 -1,             XK_q,                                 quit,                   {0} },
 
     // hide & restore windows
-    { MODKEY,                           -1,             XK_w,                             hidewin,          {0} },
-    { MODKEY|ShiftMask,                 -1,             XK_w,                             restorewin,       {0} },
+    { MODKEY,                           -1,             XK_w,                                 hidewin,                {0} },
+    { MODKEY|ShiftMask,                 -1,             XK_w,                                 restorewin,             {0} },
 
-    TAGKEYS(                            -1,             XK_1,                             0)
-    TAGKEYS(                            -1,             XK_2,                             1)
-    TAGKEYS(                            -1,             XK_3,                             2)
-    TAGKEYS(                            -1,             XK_4,                             3)
-    TAGKEYS(                            -1,             XK_5,                             4)
-    TAGKEYS(                            -1,             XK_6,                             5)
-    TAGKEYS(                            -1,             XK_7,                             6)
-    TAGKEYS(                            -1,             XK_8,                             7)
-    TAGKEYS(                            -1,             XK_9,                             8)
-    TAGKEYS(                            -1,             XK_0,                             9)
+    TAGKEYS(                            -1,             XK_1,                                 0)
+    TAGKEYS(                            -1,             XK_2,                                 1)
+    TAGKEYS(                            -1,             XK_3,                                 2)
+    TAGKEYS(                            -1,             XK_4,                                 3)
+    TAGKEYS(                            -1,             XK_5,                                 4)
+    TAGKEYS(                            -1,             XK_6,                                 5)
+    TAGKEYS(                            -1,             XK_7,                                 6)
+    TAGKEYS(                            -1,             XK_8,                                 7)
+    TAGKEYS(                            -1,             XK_9,                                 8)
+    TAGKEYS(                            -1,             XK_0,                                 9)
 };
 
 /* button definitions */
