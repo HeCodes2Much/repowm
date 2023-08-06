@@ -988,6 +988,7 @@ void clientmessage(XEvent *e)
     XClientMessageEvent *cme = &e->xclient;
     Client *c = wintoclient(cme->window);
 
+
     if (showsystray && cme->window == systray->win && cme->message_type == netatom[NetSystemTrayOP])
     {
         /* add systray icons */
@@ -1022,6 +1023,8 @@ void clientmessage(XEvent *e)
             updatesystrayicongeom(c, wa.width, wa.height);
             XAddToSaveSet(dpy, c->win);
             XSelectInput(dpy, c->win, StructureNotifyMask | PropertyChangeMask | ResizeRedirectMask);
+            XClassHint ch = {"repowmsystray", "repowmsystray"};
+            XSetClassHint(dpy, c->win, &ch);
             XReparentWindow(dpy, c->win, systray->win, 0, 0);
             /* use parents background color */
             swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
