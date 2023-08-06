@@ -244,8 +244,8 @@ static const char *scratchpadcmd[] = { "S", "alacritty", "--title=scratchpad_ter
 
 static const Launcher launchers[] = {
     /* command              name to display */
-    { startmenucmd,         "" },
-    { powermenucmd,         "⏻" },
+    { startmenucmd,         "󰹯" },
+    { powermenucmd,         "" },
 };
 
 /* commands */
@@ -264,8 +264,8 @@ static Key keys[] = {
     { 0,                                -1,             XF86XK_AudioPrev,                     spawn,                   {.v = playerprevious}},
 
     //TheRepoClub Custom Keybinds.
-    { MODKEY,                            -1,             XK_F2,                               spawn,                   {.v = clipmenucmd} },
-    { MODKEY,                            -1,             XK_F7,                               spawn,                   SHCMD("youtube_subs") },
+    { MODKEY,                            -1,             XK_F1,                               spawn,                   {.v = clipmenucmd} },
+    { MODKEY,                            -1,             XK_F2,                               spawn,                   SHCMD("youtube_subs") },
     { MODKEY|ShiftMask,                  -1,             XK_Return,                           spawn,                   {.v = filemanagercmd} },
     { MODKEY|ControlMask,                -1,             XK_h,                                spawn,                   {.v = hypervisorcmd} },
     { MODKEY|ControlMask,                -1,             XK_f,                                spawn,                   {.v = browsercmd} },
