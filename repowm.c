@@ -3062,7 +3062,7 @@ void run(void)
 
 void runAutostart(void)
 {
-    system("command -v repo-exec || { sleep 4 && notify-send 'repo-exec missing, please install repo-exec!!!'; } &");
+    // system("command -v repo-exec || { sleep 4 && notify-send 'repo-exec missing, please install repo-exec!!!'; } &");
     if (usedbar)
     {
         system("command -v repobar || { sleep 4 && notify-send 'repobar script is missing'; } &");
