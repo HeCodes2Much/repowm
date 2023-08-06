@@ -69,11 +69,12 @@ static const char *const autostart[] = {
     "ckb-next", "--background", NULL,
     "touchpad-indicator", NULL,
     "clipmenu-daemon", NULL,
-    "blueman-applet", NULL,
     "numlockx", "on", NULL,
-    "volumeicon", NULL,
+    "blueman-applet", NULL,
+    "pasystray", NULL,
     "nm-applet", NULL,
     "cbatticon", NULL,
+    "gufwicon", NULL,
     "dunst", NULL,
     "alacritty", NULL,
     "firefox", NULL,
@@ -125,6 +126,7 @@ static const Rule rules[] = {
     //Workspace 2 Monitor 0
     { "Code",                       NULL,         NULL,                 1 << 1,         1,                0,                0,           0,       0 },
     { "nvim",                       NULL,         NULL,                 1 << 1,         1,                0,                0,           0,       0 },
+    { "jetbrains-studio",           NULL,         NULL,                 1 << 1,         1,                0,                0,           0,       0 },
 
     //Workspace 3 Monitor 0
     { "Nemo",                       NULL,         NULL,                 1 << 2,         1,                0,                0,           0,       0 },
@@ -332,14 +334,14 @@ static Key keys[] = {
     { MODKEY|ControlMask|ShiftMask,     -1,             XK_o,                                 incrogaps,              {.i = -1} },
 
     // inner+outer hori, vert gaps
-    { MODKEY|ControlMask,               -1,             XK_6,                                 incrihgaps,             {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_6,                                 incrihgaps,             {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_7,                                 incrivgaps,             {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_7,                                 incrivgaps,             {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_8,                                 incrohgaps,             {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_8,                                 incrohgaps,             {.i = -1} },
-    { MODKEY|ControlMask,               -1,             XK_9,                                 incrovgaps,             {.i = +1} },
-    { MODKEY|ControlMask|ShiftMask,     -1,             XK_9,                                 incrovgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_KP_Up,                             incrihgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_KP_Up,                             incrihgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_KP_Right,                          incrivgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_KP_Right,                          incrivgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_KP_Down,                           incrohgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_KP_Down,                           incrohgaps,             {.i = -1} },
+    { MODKEY|ControlMask,               -1,             XK_KP_Left,                           incrovgaps,             {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_KP_Left,                           incrovgaps,             {.i = -1} },
 
     { MODKEY|ControlMask|ShiftMask,     -1,             XK_d,                                 defaultgaps,            {0} },
 
@@ -347,8 +349,7 @@ static Key keys[] = {
     { MODKEY,                           -1,             XK_space,                             setlayout,              {0} },
     { MODKEY|ControlMask,               -1,             XK_comma,                             cyclelayout,            {.i = -1} },
     { MODKEY|ControlMask,               -1,             XK_period,                            cyclelayout,            {.i = +1} },
-    { MODKEY,                           -1,             XK_0,                                 view,                   {.ui = ~0} },
-    { MODKEY|ShiftMask,                 -1,             XK_0,                                 tag,                    {.ui = ~0} },
+
     { MODKEY,                           -1,             XK_comma,                             focusmon,               {.i = -1} },
     { MODKEY,                           -1,             XK_period,                            focusmon,               {.i = +1} },
     { MODKEY|ShiftMask,                 -1,             XK_comma,                             tagmon,                 {.i = -1} },
@@ -356,7 +357,7 @@ static Key keys[] = {
 
     // change border size
     { MODKEY|ShiftMask,                 -1,             XK_minus,                             setborderpx,            {.i = -1} },
-    { MODKEY|ShiftMask,                 -1,             XK_p,                                 setborderpx,            {.i = +1} },
+    { MODKEY|ShiftMask,                 -1,             XK_equal,                             setborderpx,            {.i = +1} },
     { MODKEY|ShiftMask,                 -1,             XK_d,                                 setborderpx,            {.i = default_border} },
 
     // kill window
