@@ -31,11 +31,8 @@ static const int colorfultag                    = 1;        /* 0 means use Schem
 
 static const char *fonts[] = {
     "Source Code Pro:size=10",
-    "FiraCode Nerd Font:size=12",
-    "remixicon:size=12",
+    "Hack Nerd Font:size=12",
     "Siji:size=12",
-    "MaterialIcons:size=10",
-    "SourceCodePro Nerd Font:size=10",
 };
 
 // theme
