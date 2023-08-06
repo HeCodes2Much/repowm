@@ -1,10 +1,10 @@
 # repowm version
-VERSION = 2022.07.08
+VERSION = 2023.08.06
 
 # Customize below to fit your system
 
 # paths
-PREFIX = /usr/local
+PREFIX = /usr
 SHAREPREFIX = /usr/share
 MANPREFIX = ${PREFIX}/share/man
 
