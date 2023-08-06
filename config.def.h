@@ -242,7 +242,7 @@ static const char *upbright[] = {"xbacklight", "+10", NULL};
 static const char *downbright[] = {"xbacklight", "-10", NULL};
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = { "S", "alacritty", "--title=scratchpad_terminal", "--class=scratchpad_terminal,scratchpad_terminal", NULL };
+static const char *termscratchpadcmd[] = { "S", "alacritty", "--title=scratchpad_terminal", "--class=scratchpad_terminal,scratchpad_terminal", NULL };
 
 static const Launcher launchers[] = {
     /* command              name to display */
@@ -265,35 +265,38 @@ static Key keys[] = {
     { 0,                                -1,             XF86XK_AudioNext,                     spawn,                   {.v = playernext}},
     { 0,                                -1,             XF86XK_AudioPrev,                     spawn,                   {.v = playerprevious}},
 
-    //TheRepoClub Custom Keybinds.
-    { MODKEY,                            -1,             XK_F1,                               spawn,                   {.v = clipmenucmd} },
-    { MODKEY,                            -1,             XK_F2,                               spawn,                   SHCMD("youtube_subs") },
-    { MODKEY|ShiftMask,                  -1,             XK_Return,                           spawn,                   {.v = filemanagercmd} },
-    { MODKEY|ControlMask,                -1,             XK_h,                                spawn,                   {.v = hypervisorcmd} },
-    { MODKEY|ControlMask,                -1,             XK_f,                                spawn,                   {.v = browsercmd} },
-    { MODKEY|ControlMask,                -1,             XK_e,                                spawn,                   {.v = editorcmd} },
-    { MODKEY,                            -1,             XK_p,                                spawn,                   {.v = passmenucmd} },
-    { MODKEY,                            -1,             XK_m,                                spawn,                   {.v = startmenucmd} },
-    { MODKEY,                            -1,             XK_Return,                           spawn,                   {.v = terminalcmd} },
-    { ControlMask,                       -1,             XK_Return,                           togglescratch,           {.v = scratchpadcmd} },
-    { MODKEY|ShiftMask,                  -1,             XK_e,                                spawn,                   {.v = powermenucmd} },
-    { MODKEY|ControlMask,                -1,             XK_d,                                spawn,                   SHCMD("discord") },
-    { MODKEY|ControlMask,                -1,             XK_c,                                spawn,                   SHCMD("hexchat") },
-    { MODKEY|ControlMask,                -1,             XK_i,                                spawn,                   SHCMD("inkscape") },
-    { MODKEY|ControlMask,                -1,             XK_k,                                spawn,                   SHCMD("krita") },
-    { MODKEY|ControlMask,                -1,             XK_v,                                spawn,                   SHCMD("vlc") },
-    { MODKEY|ControlMask,                XK_g,           XK_s,                                spawn,                   SHCMD("prime-run steam") },
-    { MODKEY|ControlMask,                XK_g,           XK_m,                                spawn,                   SHCMD("prime-run minecraft-launcher") },
-    { MODKEY|ControlMask,                XK_g,           XK_r,                                spawn,                   SHCMD("prime-run runescape-launcher") },
-    { MODKEY|ControlMask,                -1,             XK_p,                                spawn,                   SHCMD("pkgbrowser") },
-    { MODKEY|ControlMask,                -1,             XK_u,                                spawn,                   SHCMD("pavucontrol") },
-    { MODKEY|ShiftMask,                  -1,             XK_z,                                spawn,                   SHCMD("multimonitorlock-gui") },
-    { MODKEY|Mod1Mask,                   -1,             XK_p,                                spawn,                   SHCMD("piper") },
+    // TheRepoClub Custom Keybinds.
+    // Scratch Pads.
+    { ControlMask,                       -1,            XK_Return,                           togglescratch,           {.v = termscratchpadcmd} },
+
+    // Spawns.
+    { MODKEY,                            -1,            XK_F1,                               spawn,                   {.v = clipmenucmd} },
+    { MODKEY,                            -1,            XK_F2,                               spawn,                   SHCMD("youtube_subs") },
+    { MODKEY|ShiftMask,                  -1,            XK_Return,                           spawn,                   {.v = filemanagercmd} },
+    { MODKEY|ControlMask,                -1,            XK_h,                                spawn,                   {.v = hypervisorcmd} },
+    { MODKEY|ControlMask,                -1,            XK_f,                                spawn,                   {.v = browsercmd} },
+    { MODKEY|ControlMask,                -1,            XK_e,                                spawn,                   {.v = editorcmd} },
+    { MODKEY,                            -1,            XK_p,                                spawn,                   {.v = passmenucmd} },
+    { MODKEY,                            -1,            XK_m,                                spawn,                   {.v = startmenucmd} },
+    { MODKEY,                            -1,            XK_Return,                           spawn,                   {.v = terminalcmd} },
+    { MODKEY|ShiftMask,                  -1,            XK_e,                                spawn,                   {.v = powermenucmd} },
+    { MODKEY|ControlMask,                -1,            XK_d,                                spawn,                   SHCMD("discord") },
+    { MODKEY|ControlMask,                -1,            XK_x,                                spawn,                   SHCMD("hexchat") },
+    { MODKEY|ControlMask,                -1,            XK_i,                                spawn,                   SHCMD("inkscape") },
+    { MODKEY|ControlMask,                -1,            XK_k,                                spawn,                   SHCMD("krita") },
+    { MODKEY|ControlMask,                -1,            XK_v,                                spawn,                   SHCMD("vlc") },
+    { MODKEY|ControlMask,                XK_g,          XK_s,                                spawn,                   SHCMD("prime-run steam") },
+    { MODKEY|ControlMask,                XK_g,          XK_m,                                spawn,                   SHCMD("prime-run minecraft-launcher") },
+    { MODKEY|ControlMask,                XK_g,          XK_r,                                spawn,                   SHCMD("prime-run runescape-launcher") },
+    { MODKEY|ControlMask,                -1,            XK_p,                                spawn,                   SHCMD("pkgbrowser") },
+    { MODKEY|ControlMask,                -1,            XK_c,                                spawn,                   SHCMD("pavucontrol") },
+    { MODKEY|ShiftMask,                  -1,            XK_z,                                spawn,                   SHCMD("multimonitorlock-gui") },
+    { MODKEY|Mod1Mask,                   -1,            XK_p,                                spawn,                   SHCMD("piper") },
 
     // screenshot fullscreen and cropped
-    { MODKEY,                            XK_Print,       XK_w,                                spawn,                   SHCMD("win-shot -w" ) },
-    { MODKEY,                            XK_Print,       XK_s,                                spawn,                   SHCMD("win-shot -s" ) },
-    { MODKEY,                            XK_Print,       XK_f,                                spawn,                   SHCMD("win-shot -f" ) },
+    { MODKEY,                            XK_Print,      XK_w,                                spawn,                   SHCMD("win-shot -w" ) },
+    { MODKEY,                            XK_Print,      XK_s,                                spawn,                   SHCMD("win-shot -s" ) },
+    { MODKEY,                            XK_Print,      XK_f,                                spawn,                   SHCMD("win-shot -f" ) },
 
     // toggle stuff
     { MODKEY,                           -1,             XK_b,                                 togglebar,              {0} },
@@ -322,8 +325,8 @@ static Key keys[] = {
     { MODKEY,                           -1,             XK_Tab,                               view,                   {0} },
 
     // overall gaps
-    { MODKEY|ControlMask,               -1,             XK_i,                                 incrgaps,               {.i = +1} },
-    { MODKEY|ControlMask,               -1,             XK_d,                                 incrgaps,               {.i = -1} },
+    { MODKEY|ShiftMask,                 -1,             XK_u,                                 incrgaps,               {.i = +1} },
+    { MODKEY|ControlMask|ShiftMask,     -1,             XK_u,                                 incrgaps,               {.i = -1} },
 
     // inner gaps
     { MODKEY|ShiftMask,                 -1,             XK_i,                                 incrigaps,              {.i = +1} },
@@ -394,7 +397,7 @@ static Button buttons[] = {
     { ClkStatusText,        0,              Button2,        spawn,          {.v = terminalcmd} },
 
     /* Keep movemouse? */
-    /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */
+    { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 
     /* placemouse options, choose which feels more natural:
     *    0 - tiled position is relative to mouse cursor

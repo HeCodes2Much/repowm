@@ -18,8 +18,6 @@
 
 - imlib2
 - xsetroot package (status2d uses this to add colors on dwmbar)
-- FiraCode Nerd Font or any nerd font but dont forget to set it in config.def.h
-- Material Design Icons Font - [link](https://github.com/Templarian/MaterialDesign-Font/blob/master/MaterialDesignIconsDesktop.ttf)
 - Make sure to setup your terminal's theme accordingly do repowm's theme such as nord, onedark etc...
 
 ## Other requirements
@@ -27,7 +25,7 @@
 - picom
 - feh
 - acpi
-- repomenu
+- rofi
 
 # Installation
 
@@ -52,13 +50,13 @@ please refer to the documentation.
 
   - hybrid-wm: tiling and floating mode
   - Keyboard and Mouse based workflows
-  - start menu (remomenu)
+  - start menu (rofi)
   - full multi monitor support
   - status2d color status
   - tag system
   - repobar script
   - indicators
-  - shutdown menu
+  - shutdown menu (rofi)
   - system tray
   - window gaps
   - restart function
