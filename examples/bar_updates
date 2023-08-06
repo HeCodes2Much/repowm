@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+get_updates() {
+  configFile=$HOME/.config/repowm/repobar/bar_updates.ini
+
+  # load colors
+  . $HOME/.config/repobar/bar_themes/minimal-mistakes
+
+  updates=$(yay -Pn)
+  timestamp=$(date +%s)
+  icon=" "
+
+  if [ -z "$updates" ]; then
+    updatecount="Fully Updated"
+  elif [ "$updates" -ge "1" ]; then
+    updatecount="$updates Update"
+  else
+    updatecount="$updates Updates"
+  fi
+  [[ -f $configFile ]] && . $configFile
+  if [ -z "$LastUsed" ] || [ -z "$Message" ]; then
+    printf " %s %s \n" "^c$Foreground^^b$Red^$icon" "^c$Foreground^^b$Red_Bright^$updatecount"
+    newtime=$(expr $timestamp + 900)
+    echo -e "LastUsed=${newtime}\nMessage='${updatecount}'" >$configFile
+  else
+    if [[ "$timestamp" -ge "$LastUsed" ]]; then
+      printf " %s %s \n" "^c$Foreground^^b$Red^$icon" "^c$Foreground^^b$Red_Bright^$updatecount"
+      newtime=$(expr $timestamp + 900)
+      echo -e "LastUsed=${newtime}\nMessage='${updatecount}'" >$configFile
+    else
+      updatecount=" $Message"
+      printf " %s %s \n" "^c$Foreground^^b$Red^$icon" "^c$Foreground^^b$Red_Bright^$updatecount"
+    fi
+  fi
+}
+
+get_updates
