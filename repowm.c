@@ -3503,7 +3503,7 @@ void showhide(Client *c)
 
 void showtagpreview(int tag)
 {
-    if (!selmon->previewshow || !tag_preview)
+    if (!selmon->previewshow || !tagpreview)
     {
         XUnmapWindow(dpy, selmon->tagwin);
         return;
@@ -3516,8 +3516,9 @@ void showtagpreview(int tag)
         XSync(dpy, False);
         XMapWindow(dpy, selmon->tagwin);
     }
-    else
+    else {
         XUnmapWindow(dpy, selmon->tagwin);
+    }
 }
 
 void sigchld(int unused)
@@ -3582,19 +3583,22 @@ void switchtag(void)
                 XFreePixmap(dpy, selmon->tagmap[i]);
                 selmon->tagmap[i] = 0;
             }
-            if (occ & 1 << i && tag_preview)
-            {
-                image = imlib_create_image(sw, sh);
-                imlib_context_set_image(image);
-                imlib_context_set_display(dpy);
-                imlib_context_set_visual(DefaultVisual(dpy, screen));
-                imlib_context_set_drawable(RootWindow(dpy, screen));
-                imlib_copy_drawable_to_image(0, selmon->mx, selmon->my, selmon->mw, selmon->mh, 0, 0, 1);
-                selmon->tagmap[i] = XCreatePixmap(dpy, selmon->tagwin, selmon->mw / scalepreview, selmon->mh / scalepreview, DefaultDepth(dpy, screen));
-                imlib_context_set_drawable(selmon->tagmap[i]);
-                imlib_render_image_part_on_drawable_at_size(0, 0, selmon->mw, selmon->mh, 0, 0, selmon->mw / scalepreview, selmon->mh / scalepreview);
-                imlib_free_image();
-            }
+            if (occ & 1 << i && tagpreview) {
+				image = imlib_create_image(sw, sh);
+				imlib_context_set_image(image);
+				imlib_context_set_display(dpy);
+				imlib_context_set_visual(DefaultVisual(dpy, screen));
+				imlib_context_set_drawable(RootWindow(dpy, screen));
+                if (showbarpreview) {
+                    imlib_copy_drawable_to_image(0, selmon->mx, selmon->my, selmon->mw, selmon->mh, 0, 0, 1);
+                } else {
+                    imlib_copy_drawable_to_image(0, selmon->wx, selmon->wy, selmon->ww, selmon->wh, 0, 0, 1);
+                }
+				selmon->tagmap[i] = XCreatePixmap(dpy, selmon->tagwin, selmon->mw / scalepreview, selmon->mh / scalepreview, DefaultDepth(dpy, screen));
+				imlib_context_set_drawable(selmon->tagmap[i]);
+				imlib_render_image_part_on_drawable_at_size(0, 0, selmon->mw, selmon->mh, 0, 0, selmon->mw / scalepreview, selmon->mh / scalepreview);
+				imlib_free_image();
+			}
         }
     }
 }
