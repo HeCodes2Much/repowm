@@ -822,47 +822,49 @@ void buttonpress(XEvent *e)
         unsigned int occ = 0;
         for (c = m->clients; c; c = c->next)
             occ |= c->tags;
-        do
-        {
-            /* Do not reserve space for vacant tags */
-            if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
-                continue;
-            x += TEXTW(tags[i]);
-        } while (ev->x >= x && ++i < LENGTH(tags));
-
-        if (ev->x < x)
+	x += TEXTW(buttonbar);
+        if(ev->x < x) {
           click = ClkMenuButton;
-        else if (i < LENGTH(tags))
-        {
-            click = ClkTagBar;
-            arg.ui = 1 << i;
-            goto execute_handler;
+        } else {
+          do
+          {
+              /* Do not reserve space for vacant tags */
+              if (!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
+                  continue;
+              x += TEXTW(tags[i]);
+          } while (ev->x >= x && ++i < LENGTH(tags));
+          if (i < LENGTH(tags))
+          {
+              click = ClkTagBar;
+              arg.ui = 1 << i;
+              goto execute_handler;
+          }
+          else if (ev->x < x + blw)
+          {
+              click = ClkLtSymbol;
+              goto execute_handler;
+          }
+
+          x += blw;
+
+          for (i = 0; i < LENGTH(launchers); i++)
+          {
+              x += TEXTW(launchers[i].name);
+
+              if (ev->x < x)
+              {
+                  Arg a;
+                  a.v = launchers[i].command;
+                  spawn(&a);
+                  return;
+              }
+          }
+
+          if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth())
+              click = ClkStatusText;
+          else
+              click = ClkWinTitle;
         }
-        else if (ev->x < x + blw)
-        {
-            click = ClkLtSymbol;
-            goto execute_handler;
-        }
-
-        x += blw;
-
-        for (i = 0; i < LENGTH(launchers); i++)
-        {
-            x += TEXTW(launchers[i].name);
-
-            if (ev->x < x)
-            {
-                Arg a;
-                a.v = launchers[i].command;
-                spawn(&a);
-                return;
-            }
-        }
-
-        if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth())
-            click = ClkStatusText;
-        else
-            click = ClkWinTitle;
     }
     if (ev->window == selmon->tabwin)
     {
