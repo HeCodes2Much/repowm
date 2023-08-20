@@ -22,6 +22,7 @@ static const int usedbar                        = 1;        /* 0 means don't use
 static const int showtab                        = showtab_auto;
 static const int toptab                         = 0;        /* 0 means bottom tab */
 static const int topbar                         = 1;        /* 0 means bottom bar */
+static const char buttonbar[]                   = "󰹯";
 static const int horizpadbar                    = 5;
 static const int vertpadbar                     = 11;
 static const int vertpadtab                     = 33;
@@ -393,6 +394,7 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
     /* click                event mask      button          function        argument */
+    { ClkMenuButton,        0,              Button1,        spawn,          {.v = startmenucmd } },
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkLtSymbol,          0,              Button2,        layoutmenu,     {0} },
